@@ -43,42 +43,58 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="">Contact</a>
                             </li>
-
-                            <!-- <li class="nav-item">
-                        <a class="nav-link" href="">Home</a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="">Log out</a>
-                    </li> -->
                         </ul>
                     </div>
                 </nav>
+            </header>
 
-                <!-- Title -->
-                <div class="row">
-                    <div class="col-lg-6">
-                        <h1 class="big-heading">Achieving Your<br>Financial Goals</h1>
+            <hr class="dividing-line">
+
+            <!-- Title -->
+            <div class="row">
+                <div class="col-lg-6">
+                    <h1 class="big-heading">Achieving Your<br>Financial Goals</h1>
+                    <h3 class="title-description">Take your finances to the next level. Learn to make a budget that
+                        works for you, save for things that matter most, and invest with confidence.</h3>
+                    <div class="form-floating floating-label">
+                        <input type="email" class="form-control text-on-button" id="floatingInput"
+                            placeholder="name@example.com">
+                        <label for="floatingInput">Email address</label>
                     </div>
-                    <div class="col-lg-6 parent">
-                        <img class="title-image clipped-image" src="images/budget-bg.png" alt="title-img">
-                    </div>
-                    <svg style="visibility: hidden; position: absolute;" width="0" height="0"
-                        xmlns="http://www.w3.org/2000/svg" version="1.1">
-                        <defs>
-                            <filter id="goo">
-                                <feGaussianBlur in="SourceGraphic" stdDeviation="20" result="blur" />
-                                <feColorMatrix in="blur" mode="matrix"
-                                    values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 19 -9" result="goo" />
-                                <feComposite in="SourceGraphic" in2="goo" operator="atop" />
-                            </filter>
-                        </defs>
-                    </svg>
+                    <div class="form-floating floating-label">
+                        <input type="password" class="form-control text-on-button" id="floatingPassword"
+                            placeholder="Password">
+                        <label for="floatingPassword">Password</label>
+                    </div> <br>
+                    <button type="button" class="btn btn-lg btn-warning login-button" href="">
+                        <i class="fa-solid fa-right-to-bracket sign-icon"></i> Sign in
+                    </button>
+                    <a class="password-question" href="#">Don't remember<br>your password?</a>
+                    <h2 class="account-question">Don't have an account yet?</h2>
+                    <button type="button" class="btn btn-lg btn-primary register-button">
+                        <i class="fa-solid fa-registered register-icon"></i><a class="register-text" href="register.html">Register</a>
+                    </button>
 
                 </div>
-            </header>
+                <div class="col-lg-6 parent">
+                    <img class="title-image clipped-image" src="images/budget-bg.png" alt="title-img">
+                </div>
+                <svg style="visibility: hidden; position: absolute;" width="0" height="0"
+                    xmlns="http://www.w3.org/2000/svg" version="1.1">
+                    <defs>
+                        <filter id="goo">
+                            <feGaussianBlur in="SourceGraphic" stdDeviation="20" result="blur" />
+                            <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 19 -9"
+                                result="goo" />
+                            <feComposite in="SourceGraphic" in2="goo" operator="atop" />
+                        </filter>
+                    </defs>
+                </svg>
+
+            </div>
         </section>
     </main>
+
     <footer>
         <section class="footer-section">
             <p>© Copyright 2023 Paweł Bochacik</p>
