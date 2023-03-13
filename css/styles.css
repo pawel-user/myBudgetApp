@@ -4,22 +4,43 @@ body {
   font-family: "Montserrat";
 }
 
+h1 {
+  font-size: 4.5rem;
+  font-weight: 900;
+}
+
+h2 {
+  font-size: 1.5rem;
+}
+
+h3 {
+  font-size: 1.5rem;
+}
+
 p {
   color: #7c7c82;
+}
+
+hr {
+  border: none;
+  border-top: solid rgba(255, 255, 255, 0.55) 0.5px;
+  opacity: 1;
 }
 
 /* Headings */
 
 .big-heading {
-  font-size: 4.5rem;
-  font-weight: 900;
   line-height: 1.5;
   padding-bottom: 20px;
 }
 
-/* Sections */
-.template-section {
-  padding: 0 5% 8%;
+.title-description {
+  color: #c6d0ed;
+  font-weight: 100;
+  line-height: 1.5;
+  padding-bottom: 5%;
+  padding-right: 25%;
+  text-align: justify;
 }
 
 /* Navigation Bar */
@@ -40,12 +61,91 @@ p {
   font-weight: 300;
 }
 
-/* Title Section*/
-/* -- Empty -- */
+/* Buttons */
+
+.floating-label {
+  position: relative;
+  display: inline-block;
+  color: #7c7c82;
+  margin: 0 4% 0 0;
+  width: 45%;
+}
+
+.text-on-button {
+  background-color: #c6d0ed;
+  border-radius: 20px;
+  color: black;
+  opacity: 1;
+}
+
+.login-button {
+  position: relative;
+  display: inline-block;
+  background-color: #ffea9e;
+  border-radius: 20px;
+  color: #7c7c82;
+  font-size: 25px;
+  font-weight: 700;
+  margin: 4% 4% 0 0;
+  width: 45%;
+}
+
+.sign-icon, .register-icon {
+  margin-right: 5%;
+}
+
+.register-button {
+  background-color: #7a92d9;
+  border-radius: 20px;
+  font-size: 25px;
+  font-weight: 700;
+  margin-bottom: 5%;
+  width: 45%;
+}
+
+.register-text {
+  color: #edebeb;
+  text-decoration-line: none;
+}
+
+/* Template Section */
+
+.template-section, .register-section {
+  padding: 0 5% 5%;
+}
+
+.dividing-line {
+  position: relative;
+  bottom: 75px;
+}
+
+.password-question {
+  position: relative;
+  display: inline-block;
+  color: #c6d0ed;
+  margin-top: 4%;
+  text-align: center;
+  text-decoration-line: none;
+  vertical-align: middle;
+  width: 45%;
+}
+
+.password-question:hover {
+  color: #fff;
+}
+
+.account-question {
+  color: #edebeb;
+  margin: 10% 0 3%;
+}
 
 /* Title Image */
 
 .title-image {
+  position: relative;
+  left: 18%;
+  top: 3%;
+  width: 100%;
   /* clip-path: polygon( 10% 0%,
                         82% 0%,
                         82% 55%,
@@ -54,22 +154,29 @@ p {
                         25% 50%,
                         10% 50% ); */
   /* clip-path: path("M80 0 H694 V300 L480 490 H250 V180 L0 200 80 200 Z");*/
- 
-  position: relative;
-  left: 18%;
-  top: 5%;
-  width: 100%;
 }
 
 .clipped-image {
   background-color: #8c52ff;
   color: #565556;
-  clip-path: polygon(10% 0%, 82% 0%, 82% 55%, 60% 100%, 25% 100%, 25% 58%, 24.5% 56%, 24% 54%, 23.5% 52%, 21% 50%, 10% 50%);
+  clip-path: polygon(
+    10% 0%,
+    82% 0%,
+    82% 55%,
+    60% 100%,
+    25% 100%,
+    25% 58%,
+    24.5% 56%,
+    24% 54%,
+    23.5% 52%,
+    21% 50%,
+    10% 50%
+  );
   width: 100%;
 }
 
 .parent {
-  filter: url('#goo');
+  filter: url("#goo");
 }
 
 .app-title {
@@ -81,14 +188,34 @@ p {
 }
 
 @media (max-width: 991px) {
-
   .template-section {
-      text-align: center;
+    text-align: center;
   }
 
-      .title-image {
-      position: center;
-      left: 3%;
+  .title-description {
+    padding-right: 0;
+  }
+
+  .title-image {
+    position: static;
+    margin: auto;
+    margin-left: 4%;
+  }
+
+  .login-button {
+    margin: 4% 0 0 -4%;
+  }
+
+  .password-question {
+    margin-left: 4%;
+  }
+}
+
+@media (min-width: 992px) and (max-width: 1354px) {
+  .title-image {
+    top: 4%;
+    left: 11%;
+    transform: scale(1.2);
   }
 }
 
