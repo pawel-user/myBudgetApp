@@ -2,6 +2,7 @@ body {
   background: radial-gradient(40rem at left bottom, #bec3fc, #8c52ff);
   color: #fff;
   font-family: "Montserrat";
+  opacity: 1;
 }
 
 h1 {
@@ -10,7 +11,7 @@ h1 {
 }
 
 h2 {
-  font-size: 1.5rem;
+  font-size: 2.5rem;
 }
 
 h3 {
@@ -43,10 +44,16 @@ hr {
   text-align: justify;
 }
 
+/* Containers */
+
+.container-fluid {
+  padding: 7% 15%;
+}
+
 /* Navigation Bar */
 
 .navbar {
-  margin: 0 0 4.5rem;
+  margin: 0;
 }
 
 .navbar-brand {
@@ -62,6 +69,15 @@ hr {
 }
 
 /* Buttons */
+
+.search-button, .search-form {
+  margin-left: 4%;
+}
+
+.search-button:hover {
+  background-color: green;
+  color: white;
+}
 
 .floating-label {
   position: relative;
@@ -90,8 +106,8 @@ hr {
   width: 45%;
 }
 
-.sign-icon, .register-icon {
-  margin-right: 5%;
+.icon {
+  margin-right: 10%;
 }
 
 .register-button {
@@ -103,20 +119,43 @@ hr {
   width: 45%;
 }
 
-.register-text {
-  color: #edebeb;
-  text-decoration-line: none;
+.sign-up-button {
+  font-size: 1.2rem;
+  width: 100%;
+}
+
+/* Sections */
+
+.navbar-section {
+  position: relative;
+  padding: 0 5%;
+  margin: 0;
+}
+
+.template-section {
+  position: relative;
+  padding: 0 5% 5%;
+  margin: 0;
+}
+
+.register-section {
+  /* background-image: url("../images/budget-bg.png"); */
+  background: radial-gradient(40rem at left bottom, rgba(190,195,252,0.5), rgba(140,82,255,0.5)), url('../images/budget-bg.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  border: solid rgba(255, 255, 255, 0.55) 1px;
+  border-radius: 50px;
+  background-color: radial-gradient(40rem at left bottom, #bec3fc, #8c52ff);
+  position: relative;
+  margin: 0;
+  padding: 8% 35% 15%;
 }
 
 /* Template Section */
 
-.template-section, .register-section {
-  padding: 0 5% 5%;
-}
-
 .dividing-line {
   position: relative;
-  bottom: 75px;
+  bottom: 10px;
 }
 
 .password-question {
@@ -139,6 +178,36 @@ hr {
   margin: 10% 0 3%;
 }
 
+/* Register Section */
+
+.image-border {
+  margin: 0;
+  padding: 3% 10% 6%;
+}
+
+.register-title {
+  margin: 0 auto 10%;
+  text-align: center;
+}
+
+.register-container {
+  margin: 0 auto;
+  opacity: 1;
+  width: 100%;
+  z-index: 1;
+}
+
+.register-form {
+  background-color: #ffea9e;
+}
+
+.button-container {
+  position: relative;
+  display: inline-block;
+  margin: 5% auto 0;
+  width: 35%;
+}
+
 /* Title Image */
 
 .title-image {
@@ -146,14 +215,6 @@ hr {
   left: 18%;
   top: 3%;
   width: 100%;
-  /* clip-path: polygon( 10% 0%,
-                        82% 0%,
-                        82% 55%,
-                        60% 100%,
-                        25% 100%,
-                        25% 50%,
-                        10% 50% ); */
-  /* clip-path: path("M80 0 H694 V300 L480 490 H250 V180 L0 200 80 200 Z");*/
 }
 
 .clipped-image {
@@ -187,9 +248,23 @@ hr {
   color: #fff;
 }
 
+@media (max-width: 680px) {
+  .register-section {
+    padding: 0 20% 0%;
+  }
+
+  .button-container {
+    width: 45%;
+  }
+}
+
 @media (max-width: 991px) {
   .template-section {
     text-align: center;
+  }
+
+  .register-section {
+    padding: 10% 10% 23%;
   }
 
   .title-description {
@@ -198,7 +273,6 @@ hr {
 
   .title-image {
     position: static;
-    margin: auto;
     margin-left: 4%;
   }
 
@@ -208,14 +282,34 @@ hr {
 
   .password-question {
     margin-left: 4%;
+  } 
+
+  .nav-item {
+    margin: 0 3% 0 0;
+  }
+
+  .icon {
+    margin: 0 3% 0 0;
+  }
+
+  .search-form {
+    margin-left: 0;
   }
 }
 
 @media (min-width: 992px) and (max-width: 1354px) {
+  .register-section {
+    padding: 5% 15% 20%;
+  }
+
   .title-image {
     top: 4%;
     left: 11%;
     transform: scale(1.2);
+  }
+
+  .sign-up-button {
+    font-size: 1rem;
   }
 }
 
