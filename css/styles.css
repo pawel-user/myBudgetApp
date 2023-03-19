@@ -2,6 +2,7 @@ body {
   background: radial-gradient(40rem at left bottom, #bec3fc, #8c52ff);
   color: #fff;
   font-family: "Montserrat";
+  opacity: 1;
 }
 
 h1 {
@@ -10,7 +11,6 @@ h1 {
 }
 
 h2 {
-  font-size: 2.5rem;
   font-size: 2.5rem;
 }
 
@@ -74,6 +74,16 @@ hr {
 
 /* Buttons */
 
+.search-button,
+.search-form {
+  margin-left: 4%;
+}
+
+.search-button:hover {
+  background-color: green;
+  color: white;
+}
+
 .floating-label {
   position: relative;
   display: inline-block;
@@ -101,8 +111,8 @@ hr {
   width: 45%;
 }
 
-.sign-icon, .register-icon {
-  margin-right: 5%;
+.icon {
+  margin-right: 6%;
 }
 
 .register-button {
@@ -114,9 +124,52 @@ hr {
   width: 45%;
 }
 
-.register-text {
-  color: #edebeb;
-  text-decoration-line: none;
+.sign-up-button {
+  font-size: 1.2rem;
+  width: 100%;
+}
+
+/* Sections */
+
+.navbar-section {
+  position: relative;
+  padding: 0 5%;
+  margin: 0;
+}
+
+.template-section,
+.welcome-section {
+  position: relative;
+  padding: 0 5% 5%;
+  margin: 0;
+}
+
+.welcome-section {
+  text-align: center;
+}
+
+/* .welcome-section {
+  position: relative;
+  padding: 5% 5%;
+  margin: 0;
+} */
+
+.register-section {
+  /* background-image: url("../images/budget-bg.png"); */
+  background: radial-gradient(
+      40rem at left bottom,
+      rgba(190, 195, 252, 0.5),
+      rgba(140, 82, 255, 0.5)
+    ),
+    url("../images/budget-bg.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  border: solid rgba(255, 255, 255, 0.55) 1px;
+  border-radius: 50px;
+  background-color: radial-gradient(40rem at left bottom, #bec3fc, #8c52ff);
+  position: relative;
+  margin: 0;
+  padding: 8% 35% 15%;
 }
 
 /* Template Section */
@@ -180,10 +233,9 @@ hr {
 .active-account {
   background-color: #fff;
   border: solid 1px;
-  border-radius: 20px;
+  border-radius: 15px;
   color: #545454 !important;
   display: inline-block;
-  /* line-height: 1.5; */
   margin-left: 2px;
   padding: 0.5rem;
   text-align: left !important;
@@ -211,7 +263,6 @@ hr {
   margin-bottom: 20px;
   margin-right: 5px;
   text-align: left;
-  /* width: 25%; */
 }
 
 .welcome-banner {
@@ -239,7 +290,7 @@ hr {
 }
 
 .action-button {
-  background-image: url("/images/golden-coin.png");
+  background-image: url('/images/golden-coin.png');
   background-repeat: no-repeat;
   border: none;
   border-radius: 50%;
@@ -267,9 +318,7 @@ hr {
   vertical-align: bottom;
 }
 
-.income-icon,
-.expense-icon,
-.balance-icon {
+.income-icon, .expense-icon, .balance-icon {
   position: relative;
   bottom: 50%;
   color: #545454;
@@ -358,8 +407,7 @@ hr {
     margin-left: 4%;
   }
 
-  .nav-item,
-  .icon {
+  .nav-item, .icon {
     margin: 0 3% 0 0;
   }
 
@@ -381,6 +429,14 @@ hr {
     top: 4%;
     left: 11%;
     transform: scale(1.2);
+  }
+
+  .sign-up-button {
+    font-size: 1rem;
+  }
+
+  .account-icon {
+    margin-right: 3%;
   }
 }
 
