@@ -293,7 +293,7 @@ hr {
 }
 
 .action-button {
-  background-image: url('/images/golden-coin.png');
+  background-image: url("/images/golden-coin.png");
   background-repeat: no-repeat;
   border: none;
   border-radius: 50%;
@@ -321,7 +321,9 @@ hr {
   vertical-align: bottom;
 }
 
-.income-icon, .expense-icon, .balance-icon {
+.income-icon,
+.expense-icon,
+.balance-icon {
   position: relative;
   bottom: 50%;
   color: #545454;
@@ -410,7 +412,8 @@ hr {
     margin-left: 4%;
   }
 
-  .nav-item, .icon {
+  .nav-item,
+  .icon {
     margin: 0 3% 0 0;
   }
 
