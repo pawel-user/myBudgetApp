@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Account registration</title>
+
+  <!-- Favicon -->
+  <link rel="icon" href="favicon.ico" />
+
+  <!-- CSS Stylesheets -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous" />
+  <link rel="stylesheet" href="css/styles.css" />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;300;400;900&family=Ubuntu:wght@700&display=swap"
+    rel="stylesheet" />
+
+  <!-- Font Awesome -->
+  <script src="https://kit.fontawesome.com/a0c8ddef9e.js" crossorigin="anonymous"></script>
+
+  <!-- Bootstrap Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+    crossorigin="anonymous"></script>
+</head>
+
+<body>
+  <section class="navbar-section">
+    <!-- Nav Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+      <a class="navbar-brand app-title" href="">MyBudget</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01"
+        aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+        <ul class="navbar-nav d-flex flex-row ms-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="#"><i class="fa-solid fa-envelope"></i> Contact</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="#"><i class="fa-solid fa-gear"></i> Settings</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="index.html"><i class="fa-solid fa-right-from-bracket"></i> Log out</a>
+          </li>
+
+        </ul>
+        <form class="d-flex">
+          <input class="form-control me-2 search-form" type="search" placeholder="Search" aria-label="Search" />
+          <button class="btn btn-outline-light search-button" type="submit">
+            Search
+          </button>
+        </form>
+      </div>
+    </nav>
+    <hr class="dividing-line" />
+  </section>
+
+  <main>
+    <section class="welcome-section">
+      <div class="account-container">
+        <h4 class="active-account"> <i class="fa-solid fa-check account-icon"></i>
+          ACCOUNT<br><i class="fa-solid fa-user icon"></i> Username Username</h4>
+      </div>
+      <header>
+        <div class="welcome-banner">
+          <h3 class="welcome-text">Welcome to the MyBudget app!</h3>
+        </div>
+      </header>
+      <h3 class="action-question">What do you want to do now?</h3>
+      <h4>Click one of the following options.</h4>
+      <div class="row">
+        <div class="col-lg-4">
+          <form class="coins-container" action="index.html">
+            <h3 class="action-title">Add income</h3>
+            <button class="action-button"> <img class="coin-image" src="images/golden-coin.png" />
+              <i class="income-icon fa-solid fa-piggy-bank"></i>
+            </button>
+          </form>
+        </div>
+        <div class="col-lg-4">
+          <form class="coins-container" action="index.html">
+            <h3 class="action-title">Add expense</h3>
+            <button class="action-button"> <img class="coin-image" src="images/golden-coin.png" />
+              <i class="expense-icon fa-solid fa-sack-xmark"></i>
+            </button>
+          </form>
+        </div>
+        <div class="col-lg-4">
+          <form class="coins-container" action="index.html">
+            <h3 class="action-title">View balance</h3>
+            <button class="action-button"> <img class="coin-image" src="images/golden-coin.png" />
+              <i class="balance-icon fa-solid fa-scale-balanced"></i>
+            </button>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <section class="footer-section">
+      <p>© Copyright 2023 Paweł Bochacik</p>
+    </section>
+  </footer>
+</body>
+
+</html>

@@ -2,6 +2,7 @@ body {
   background: radial-gradient(40rem at left bottom, #bec3fc, #8c52ff);
   color: #fff;
   font-family: "Montserrat";
+  opacity: 1;
 }
 
 h1 {
@@ -10,11 +11,15 @@ h1 {
 }
 
 h2 {
-  font-size: 1.5rem;
+  font-size: 2.5rem;
 }
 
 h3 {
   font-size: 1.5rem;
+}
+
+h4 {
+  font-size: 1.2rem;
 }
 
 p {
@@ -43,10 +48,16 @@ hr {
   text-align: justify;
 }
 
+/* Containers */
+
+.container-fluid {
+  padding: 7% 15%;
+}
+
 /* Navigation Bar */
 
 .navbar {
-  margin: 0 0 4.5rem;
+  margin: 0;
 }
 
 .navbar-brand {
@@ -62,6 +73,16 @@ hr {
 }
 
 /* Buttons */
+
+.search-button,
+.search-form {
+  margin-left: 4%;
+}
+
+.search-button:hover {
+  background-color: green;
+  color: white;
+}
 
 .floating-label {
   position: relative;
@@ -90,7 +111,7 @@ hr {
   width: 45%;
 }
 
-.sign-icon, .register-icon {
+.icon {
   margin-right: 5%;
 }
 
@@ -103,20 +124,59 @@ hr {
   width: 45%;
 }
 
-.register-text {
-  color: #edebeb;
-  text-decoration-line: none;
+.sign-up-button {
+  font-size: 1.2rem;
+  width: 100%;
+}
+
+/* Sections */
+
+.navbar-section {
+  position: relative;
+  padding: 0 5%;
+  margin: 0;
+}
+
+.template-section,
+.welcome-section {
+  position: relative;
+  padding: 0 5% 5%;
+  margin: 0;
+}
+
+.welcome-section {
+  text-align: center;
+}
+
+/* .welcome-section {
+  position: relative;
+  padding: 5% 5%;
+  margin: 0;
+} */
+
+.register-section {
+  /* background-image: url("../images/budget-bg.png"); */
+  background: radial-gradient(
+      40rem at left bottom,
+      rgba(190, 195, 252, 0.5),
+      rgba(140, 82, 255, 0.5)
+    ),
+    url("../images/budget-bg.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  border: solid rgba(255, 255, 255, 0.55) 1px;
+  border-radius: 50px;
+  background-color: radial-gradient(40rem at left bottom, #bec3fc, #8c52ff);
+  position: relative;
+  margin: 0;
+  padding: 8% 35% 15%;
 }
 
 /* Template Section */
 
-.template-section, .register-section {
-  padding: 0 5% 5%;
-}
-
 .dividing-line {
   position: relative;
-  bottom: 75px;
+  bottom: 10px;
 }
 
 .password-question {
@@ -139,6 +199,137 @@ hr {
   margin: 10% 0 3%;
 }
 
+/* Register Section */
+
+.image-border {
+  margin: 0;
+  padding: 3% 5% 6%;
+}
+
+.register-title {
+  margin: 0 auto 10%;
+  text-align: center;
+}
+
+.register-container {
+  margin: 0 auto;
+  width: 100%;
+  z-index: 1;
+}
+
+.register-form {
+  background-color: #ffea9e;
+}
+
+.button-container {
+  position: relative;
+  display: inline-block;
+  margin: 5% auto 0;
+  width: 35%;
+}
+
+/* Welcome Section */
+
+.active-account {
+  background-color: #fff;
+  border: solid 1px;
+  border-radius: 20px;
+  color: #545454 !important;
+  display: inline-block;
+  /* line-height: 1.5; */
+  margin-left: 2px;
+  padding: 0.5rem;
+  /* position: relative; */
+  text-align: left !important;
+}
+
+.active-account .icon {
+  color: #545454;
+  margin-right: 10px;
+}
+
+.account-icon {
+  color: lightgreen;
+  margin-left: 2%;
+  margin-right: 2%;
+  padding-bottom: 1%;
+  right: 50%;
+  transform: scale(2);
+}
+
+.account-container {
+  position: relative;
+  display: block;
+  height: 80px;
+  padding: 0;
+  margin-bottom: 20px;
+  margin-right: 5px;
+  text-align: left;
+  /* width: 25%; */
+}
+
+.welcome-banner {
+  background-color: #c6d0ed;
+  border-radius: 25px;
+  margin: 0 25% 5%;
+}
+
+/* Second method to center text in a div */
+/* display: flex;
+  align-items: center;
+  justify-content: center;   */
+
+.welcome-text {
+  color: black;
+  line-height: 60px;
+  text-align: center;
+}
+
+.welcome-section h4 {
+  color: #fff;
+  line-height: 1.5;
+  margin-bottom: 5%;
+  text-align: center;
+}
+
+.action-button {
+  background-image: url('/images/golden-coin.png');
+  background-repeat: no-repeat;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  height: 300px;
+  width: 300px;
+}
+
+.action-question {
+  margin-bottom: 2%;
+}
+
+.action-title {
+  margin-bottom: 15%;
+}
+
+.coin-image {
+  transform: scale(1.1);
+  width: 100%;
+}
+
+.coins-container {
+  display: inline-block;
+  margin: 5%;
+  vertical-align: bottom;
+}
+
+.income-icon, .expense-icon, .balance-icon {
+  position: relative;
+  bottom: 50%;
+  color: #545454;
+  display: block;
+  transform: scale(7);
+  z-index: 1;
+}
+
 /* Title Image */
 
 .title-image {
@@ -146,14 +337,6 @@ hr {
   left: 18%;
   top: 3%;
   width: 100%;
-  /* clip-path: polygon( 10% 0%,
-                        82% 0%,
-                        82% 55%,
-                        60% 100%,
-                        25% 100%,
-                        25% 50%,
-                        10% 50% ); */
-  /* clip-path: path("M80 0 H694 V300 L480 490 H250 V180 L0 200 80 200 Z");*/
 }
 
 .clipped-image {
@@ -187,9 +370,27 @@ hr {
   color: #fff;
 }
 
+@media (max-width: 680px) {
+  .register-section {
+    padding: 0 20% 0%;
+  }
+
+  .button-container {
+    width: 45%;
+  }
+
+  .welcome-banner {
+    margin: 2% 5% 5%;
+  }
+}
+
 @media (max-width: 991px) {
   .template-section {
     text-align: center;
+  }
+
+  .register-section {
+    padding: 10% 10% 23%;
   }
 
   .title-description {
@@ -198,7 +399,6 @@ hr {
 
   .title-image {
     position: static;
-    margin: auto;
     margin-left: 4%;
   }
 
@@ -209,13 +409,37 @@ hr {
   .password-question {
     margin-left: 4%;
   }
+
+  .nav-item, .icon {
+    margin: 0 3% 0 0;
+  }
+
+  .search-form {
+    margin-left: 0;
+  }
+
+  .account-icon {
+    margin-right: 4%;
+  }
 }
 
 @media (min-width: 992px) and (max-width: 1354px) {
+  .register-section {
+    padding: 5% 15% 20%;
+  }
+
   .title-image {
     top: 4%;
     left: 11%;
     transform: scale(1.2);
+  }
+
+  .sign-up-button {
+    font-size: 1rem;
+  }
+
+  .account-icon {
+    margin-right: 3%;
   }
 }
 
