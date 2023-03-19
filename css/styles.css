@@ -146,6 +146,139 @@ hr {
   margin: 10% 0 3%;
 }
 
+/* Register Section */
+
+.image-border {
+  margin: 0;
+  padding: 3% 5% 6%;
+}
+
+.register-title {
+  margin: 0 auto 10%;
+  text-align: center;
+}
+
+.register-container {
+  margin: 0 auto;
+  width: 100%;
+  z-index: 1;
+}
+
+.register-form {
+  background-color: #ffea9e;
+}
+
+.button-container {
+  position: relative;
+  display: inline-block;
+  margin: 5% auto 0;
+  width: 35%;
+}
+
+/* Welcome Section */
+
+.active-account {
+  background-color: #fff;
+  border: solid 1px;
+  border-radius: 20px;
+  color: #545454 !important;
+  display: inline-block;
+  /* line-height: 1.5; */
+  margin-left: 2px;
+  padding: 0.5rem;
+  /* position: relative; */
+  text-align: left !important;
+}
+
+.active-account .icon {
+  color: #545454;
+  margin-right: 10px;
+}
+
+.account-icon {
+  color: lightgreen;
+  margin-left: 2%;
+  margin-right: 2%;
+  padding-bottom: 1%;
+  right: 50%;
+  transform: scale(2);
+}
+
+.account-container {
+  position: relative;
+  display: block;
+  height: 80px;
+  padding: 0;
+  margin-bottom: 20px;
+  margin-right: 5px;
+  text-align: left;
+  /* width: 25%; */
+}
+
+.welcome-banner {
+  background-color: #c6d0ed;
+  border-radius: 25px;
+  margin: 0 25% 5%;
+}
+
+/* Second method to center text in a div */
+/* display: flex;
+  align-items: center;
+  justify-content: center;   */
+
+.welcome-text {
+  color: black;
+  line-height: 60px;
+  text-align: center;
+}
+
+.welcome-section h4 {
+  color: #fff;
+  line-height: 1.5;
+  margin-bottom: 5%;
+  text-align: center;
+}
+
+.action-button {
+  background-image: url("/images/golden-coin.png");
+  background-repeat: no-repeat;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  height: 300px;
+  width: 300px;
+}
+
+.action-question {
+  margin-bottom: 2%;
+}
+
+.action-title {
+  margin-bottom: 15%;
+}
+
+.coin-image {
+  transform: scale(1.1);
+  width: 100%;
+}
+
+.coins-container {
+  display: inline-block;
+  margin: 5%;
+  vertical-align: bottom;
+}
+
+.income-icon,
+.expense-icon,
+.balance-icon {
+  position: relative;
+  bottom: 50%;
+  color: #545454;
+  display: block;
+  transform: scale(7);
+  z-index: 1;
+}
+
 /* Title Image */
 
 .title-image {
@@ -226,7 +359,8 @@ hr {
     margin-left: 4%;
   }
 
-  .nav-item, .icon {
+  .nav-item,
+  .icon {
     margin: 0 3% 0 0;
   }
 
