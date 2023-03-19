@@ -3,6 +3,7 @@ body {
   color: #fff;
   font-family: "Montserrat";
   opacity: 1;
+  opacity: 1;
 }
 
 h1 {
@@ -12,10 +13,15 @@ h1 {
 
 h2 {
   font-size: 2.5rem;
+  font-size: 2.5rem;
 }
 
 h3 {
   font-size: 1.5rem;
+}
+
+h4 {
+  font-size: 1.2rem;
 }
 
 p {
@@ -70,15 +76,6 @@ hr {
 
 /* Buttons */
 
-.search-button, .search-form {
-  margin-left: 4%;
-}
-
-.search-button:hover {
-  background-color: green;
-  color: white;
-}
-
 .floating-label {
   position: relative;
   display: inline-block;
@@ -106,8 +103,8 @@ hr {
   width: 45%;
 }
 
-.icon {
-  margin-right: 10%;
+.sign-icon, .register-icon {
+  margin-right: 5%;
 }
 
 .register-button {
@@ -119,36 +116,9 @@ hr {
   width: 45%;
 }
 
-.sign-up-button {
-  font-size: 1.2rem;
-  width: 100%;
-}
-
-/* Sections */
-
-.navbar-section {
-  position: relative;
-  padding: 0 5%;
-  margin: 0;
-}
-
-.template-section {
-  position: relative;
-  padding: 0 5% 5%;
-  margin: 0;
-}
-
-.register-section {
-  /* background-image: url("../images/budget-bg.png"); */
-  background: radial-gradient(40rem at left bottom, rgba(190,195,252,0.5), rgba(140,82,255,0.5)), url('../images/budget-bg.png');
-  background-repeat: no-repeat;
-  background-size: cover;
-  border: solid rgba(255, 255, 255, 0.55) 1px;
-  border-radius: 50px;
-  background-color: radial-gradient(40rem at left bottom, #bec3fc, #8c52ff);
-  position: relative;
-  margin: 0;
-  padding: 8% 35% 15%;
+.register-text {
+  color: #edebeb;
+  text-decoration-line: none;
 }
 
 /* Template Section */
@@ -176,36 +146,6 @@ hr {
 .account-question {
   color: #edebeb;
   margin: 10% 0 3%;
-}
-
-/* Register Section */
-
-.image-border {
-  margin: 0;
-  padding: 3% 10% 6%;
-}
-
-.register-title {
-  margin: 0 auto 10%;
-  text-align: center;
-}
-
-.register-container {
-  margin: 0 auto;
-  opacity: 1;
-  width: 100%;
-  z-index: 1;
-}
-
-.register-form {
-  background-color: #ffea9e;
-}
-
-.button-container {
-  position: relative;
-  display: inline-block;
-  margin: 5% auto 0;
-  width: 35%;
 }
 
 /* Title Image */
@@ -256,6 +196,10 @@ hr {
   .button-container {
     width: 45%;
   }
+
+  .welcome-banner {
+    margin: 2% 5% 5%;
+  }
 }
 
 @media (max-width: 991px) {
@@ -282,18 +226,18 @@ hr {
 
   .password-question {
     margin-left: 4%;
-  } 
-
-  .nav-item {
-    margin: 0 3% 0 0;
   }
 
-  .icon {
+  .nav-item, .icon {
     margin: 0 3% 0 0;
   }
 
   .search-form {
     margin-left: 0;
+  }
+
+  .account-icon {
+    margin-right: 4%;
   }
 }
 
@@ -306,10 +250,6 @@ hr {
     top: 4%;
     left: 11%;
     transform: scale(1.2);
-  }
-
-  .sign-up-button {
-    font-size: 1rem;
   }
 }
 
