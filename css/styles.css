@@ -138,7 +138,7 @@ hr {
 }
 
 .template-section,
-.welcome-section {
+.welcome-section, .view-balance-section {
   position: relative;
   padding: 0 5% 5%;
   margin: 0;
@@ -148,11 +148,12 @@ hr {
   text-align: center;
 }
 
-/* .welcome-section {
-  position: relative;
-  padding: 5% 5%;
+.add-income-section, .add-expense-section {
   margin: 0;
-} */
+  position: relative;
+  padding: 0% 35% 15%;
+  text-align: center;
+}
 
 .register-section {
   /* background-image: url("../images/budget-bg.png"); */
@@ -211,13 +212,13 @@ hr {
   text-align: center;
 }
 
-.register-container {
+.data-container {
   margin: 0 auto;
   width: 100%;
   z-index: 1;
 }
 
-.register-form {
+.data-form {
   background-color: #ffea9e;
 }
 
@@ -236,6 +237,7 @@ hr {
   border-radius: 15px;
   color: #545454 !important;
   display: inline-block;
+  line-height: 1.5;
   margin-left: 2px;
   padding: 0.5rem;
   text-align: left !important;
@@ -327,6 +329,12 @@ hr {
   z-index: 1;
 }
 
+/* Add Income Section */
+
+.title-income, .title-expense {
+  margin-bottom: 10%;
+}
+
 /* Title Image */
 
 .title-image {
@@ -368,8 +376,8 @@ hr {
 }
 
 @media (max-width: 680px) {
-  .register-section {
-    padding: 0 20% 0%;
+  .register-section, .add-income-section {
+    padding: 0 20% 0;
   }
 
   .button-container {
@@ -386,7 +394,7 @@ hr {
     text-align: center;
   }
 
-  .register-section {
+  .register-section, .add-income-section {
     padding: 10% 10% 23%;
   }
 
@@ -421,7 +429,7 @@ hr {
 }
 
 @media (min-width: 992px) and (max-width: 1354px) {
-  .register-section {
+  .register-section, .add-income-section {
     padding: 5% 15% 20%;
   }
 
@@ -437,6 +445,20 @@ hr {
 
   .account-icon {
     margin-right: 3%;
+  }
+
+  /* .navbar-nav {
+    float: right;
+    flex-wrap: nowrap;
+    white-space: nowrap;  
+  } */
+
+  .nav-item {
+    display: block;
+  }
+
+  .nav-link {
+    display: block;
   }
 }
 
