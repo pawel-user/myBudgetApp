@@ -50,9 +50,9 @@ hr {
 
 /* Containers */
 
-.container-fluid {
+/* .container-fluid {
   padding: 7% 15%;
-}
+} */
 
 /* Navigation Bar */
 
@@ -70,6 +70,12 @@ hr {
   font-family: "Montserrat";
   font-size: 1.2rem;
   font-weight: 300;
+}
+
+/* Modals */
+
+.modal-body, .modal-header {
+  color: black;
 }
 
 /* Buttons */
@@ -137,17 +143,17 @@ hr {
   position: relative;
 }
 
-.welcome-section {
-  margin: 0;
-  padding: 0 5%;
-  position: relative;
-  text-align: center;;
-}
-
 .template-section {
   margin: 0;
   padding: 0 5% 5%;
   position: relative;
+}
+
+.welcome-section {
+  margin: 0;
+  padding: 0 5%;
+  position: relative;
+  text-align: center;
 }
 
 .view-balance-section, .add-income-section, .add-expense-section {
@@ -307,6 +313,10 @@ hr {
   margin-bottom: 2%;
 }
 
+.action-container {
+  padding-bottom: 5%;
+}
+
 .action-title {
   margin-bottom: 15%;
 }
@@ -331,9 +341,14 @@ hr {
   z-index: 1;
 }
 
+.dropdown-button {
+  text-align: center;
+  padding-right: 4%;
+}
+
 /* Add Income&Section and View Balance Section */
 
-.title-income, .title-expense, .title-balance {
+.title-action {
   margin-bottom: 10%;
 }
 
@@ -398,6 +413,10 @@ hr {
 
   .register-section, .add-income-section, .add-expense-section {
     padding: 10% 10% 23%;
+  }
+
+  .title-balance {
+    padding-top: 5%;
   }
 
   .title-description {

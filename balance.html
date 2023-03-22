@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>View Balance</title>
+
+    <!-- Favicon -->
+    <link
+      rel="icon"
+      href="favicon.ico"
+    >
+
+    <!-- CSS Stylesheets -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
+      crossorigin="anonymous"
+    >
+    <link
+      rel="stylesheet"
+      href="css/styles.css"
+    >
+
+    <!-- Google Fonts -->
+    <link
+      rel="preconnect"
+      href="https://fonts.googleapis.com"
+    >
+    <link
+      rel="preconnect"
+      href="https://fonts.gstatic.com"
+      crossorigin
+    >
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;300;400;900&family=Ubuntu:wght@700&display=swap"
+      rel="stylesheet"
+    >
+
+    <!-- Font Awesome -->
+    <script
+      src="https://kit.fontawesome.com/a0c8ddef9e.js"
+      crossorigin="anonymous"
+    ></script>
+
+    <!-- Bootstrap Scripts -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+
+  <body>
+    <div class="navbar-section">
+      <header>
+        <!-- Nav Bar -->
+        <nav class="navbar navbar-expand-lg navbar-dark">
+          <a
+            class="navbar-brand app-title"
+            href=""
+            >MyBudget</a
+          >
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarTogglerDemo01"
+            aria-controls="navbarTogglerDemo01"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div
+            class="collapse navbar-collapse"
+            id="navbarTogglerDemo01"
+          >
+            <ul class="navbar-nav d-flex flex-row ms-auto">
+              <li class="nav-item">
+                <a
+                  class="nav-link"
+                  href="home.html"
+                  ><i class="fa-solid fa-house"></i> Home</a
+                >
+              </li>
+
+              <li class="nav-item">
+                <a
+                  class="nav-link"
+                  href="incomes.html"
+                  ><i class="fa-solid fa-piggy-bank"></i> Add income</a
+                >
+              </li>
+
+              <li class="nav-item">
+                <a
+                  class="nav-link"
+                  href="expenses.html"
+                  ><i class="fa-solid fa-sack-xmark"></i> Add expense</a
+                >
+              </li>
+
+              <li class="nav-item">
+                <a
+                  class="nav-link"
+                  href="contact.html"
+                  ><i class="fa-solid fa-envelope"></i> Contact</a
+                >
+              </li>
+
+              <li class="nav-item">
+                <a
+                  class="nav-link"
+                  href="#"
+                  ><i class="fa-solid fa-gear"></i> Settings</a
+                >
+              </li>
+
+              <li class="nav-item">
+                <a
+                  class="nav-link"
+                  href="index.html"
+                  ><i class="fa-solid fa-right-from-bracket"></i> Log out</a
+                >
+              </li>
+            </ul>
+
+            <form class="d-flex">
+              <input
+                class="form-control me-2 search-form"
+                type="search"
+                placeholder="Search"
+                aria-label="Search"
+              >
+              <button
+                class="btn btn-outline-light search-button"
+                type="submit"
+              >
+                Search
+              </button>
+            </form>
+          </div>
+        </nav>
+      </header>
+      <hr class="dividing-line">
+    </div>
+
+    <section class="welcome-section">
+      <div class="row">
+        <div class="col-lg-6 account-container">
+          <h4 class="active-account">
+            <i class="fa-solid fa-check account-icon"></i> ACCOUNT<br><i
+              class="fa-solid fa-user icon"
+            ></i>
+            Username Username
+          </h4>
+        </div>
+
+        <div class="col-lg-6 choice-container">
+          <div class="dropdown">
+            <button
+              type="button"
+              class="btn btn-primary dropdown-toggle dropdown-button"
+              data-bs-toggle="dropdown"
+            >
+              <i class="fa-regular fa-calendar icon"></i> Select time period
+            </button>
+            <ul class="dropdown-menu">
+              <li>
+                <a
+                  class="dropdown-item active"
+                  href="#"
+                  >Current month</a
+                >
+              </li>
+              <li>
+                <a
+                  class="dropdown-item"
+                  href="#"
+                  >Previous month</a
+                >
+              </li>
+              <li>
+                <a
+                  class="dropdown-item"
+                  href="#"
+                  >Current year</a
+                >
+              </li>
+              <li><hr class="dropdown-divider"></li>
+              <li>
+                <a
+                  class="dropdown-item"
+                  href="#"
+                  data-bs-toggle="modal"
+                  data-bs-target="#rangeTimeModal"
+                  >Custom</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Modal -->
+    <div
+      class="modal"
+      id="rangeTimeModal"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <!-- Modal Header -->
+          <div class="modal-header">
+            <h4 class="modal-title">Select date range:</h4>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+            ></button>
+          </div>
+
+          <!-- Modal body -->
+          <div class="modal-body">
+            Range from:
+            <input
+              type="date"
+              class="form-control data-form"
+              value=""
+              min="2000-01-01"
+            >
+            To:
+            <input
+              type="date"
+              class="form-control data-form"
+              value=""
+              min="2000-01-01"
+            >
+          </div>
+
+          <!-- Modal footer -->
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-success"
+              data-bs-dismiss="modal"
+            >
+              Confirm
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <main>
+      <section class="view-balance-section">
+        <h3 class="title-action">View balance</h3>
+      </section>
+    </main>
+
+    <footer class="footer-section">
+      <p>© Copyright 2023 Paweł Bochacik</p>
+    </footer>
+  </body>
+</html>
