@@ -358,10 +358,6 @@ hr {
   margin-bottom: 2%;
 }
 
-.action-container {
-  padding-bottom: 5%;
-}
-
 .action-title {
   margin-bottom: 15%;
 }
@@ -394,7 +390,7 @@ hr {
 /* Add Income&Section and View Balance Section */
 
 .title-action {
-  margin-bottom: 10%;
+  margin-bottom: 5%;
 }
 
 .table-description {
