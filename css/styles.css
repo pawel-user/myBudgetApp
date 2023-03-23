@@ -48,12 +48,6 @@ hr {
   text-align: justify;
 }
 
-/* Containers */
-
-/* .container-fluid {
-  padding: 7% 15%;
-} */
-
 /* Navigation Bar */
 
 .navbar {
@@ -156,12 +150,19 @@ hr {
   text-align: center;
 }
 
-.view-balance-section, .add-income-section, .add-expense-section {
+.add-income-section, .add-expense-section {
   margin: 0;
   padding: 2% 35% 10%;
   position: relative;
   text-align: center;
 }
+
+.view-balance-section {
+  margin: 0;
+  padding: 2% 5% 2%;
+  position: relative;
+  text-align: center;
+} 
 
 .register-section {
   /* background-image: url("../images/budget-bg.png"); */
@@ -206,6 +207,49 @@ hr {
 .account-question {
   color: #edebeb;
   margin: 10% 0 3%;
+}
+
+.total-cell, .total-sum {
+  background-color: #ffea9e !important;
+  color: #8c52ff;
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.row-sum {
+  border: solid red 2px;
+}
+
+.piechart-image {
+  width: 100%;
+}
+
+.piechart-container {
+  position: relative;
+  display: flex;
+  justify-content: center;  
+  align-items: center;
+  margin: 0 2% 5%;
+}
+
+.summary-container {
+  background-color: #fff;
+  border: solid 1px;
+  border-radius: 15px;
+  color: #545454 !important;
+  display: block;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.summary-text {
+  color: green;
+  font-weight: bold;
+  text-align: center;
+}
+
+.summary-table {
+  margin-bottom: 3%;
 }
 
 /* Register Section */
@@ -281,7 +325,7 @@ hr {
   margin: 0 25% 5%;
 }
 
-/* Second method to center text in a div */
+/* Second method to center text/element in a div */
 /* display: flex;
   align-items: center;
   justify-content: center;   */
@@ -350,6 +394,15 @@ hr {
 
 .title-action {
   margin-bottom: 10%;
+}
+
+.table-description {
+  color: #c6d0ed;
+  text-align: justify;
+}
+
+.table-title {
+  text-align: center;
 }
 
 /* Title Image */
@@ -447,6 +500,10 @@ hr {
   .account-icon {
     margin-right: 4%;
   }
+
+  .summary-container {
+    margin: 0 5%;
+  }
 }
 
 @media (min-width: 992px) and (max-width: 1354px) {
@@ -468,18 +525,12 @@ hr {
     margin-right: 3%;
   }
 
-  /* .navbar-nav {
-    float: right;
-    flex-wrap: nowrap;
-    white-space: nowrap;  
-  } */
-
-  .nav-item {
+  .nav-item, .nav-link {
     display: block;
   }
 
-  .nav-link {
-    display: block;
+  .view-balance-section {
+    padding: 2% 5% 1%;
   }
 }
 
