@@ -34,7 +34,7 @@
     <header>
       <!-- Nav Bar -->
       <nav class="navbar navbar-expand-lg navbar-dark">
-        <a class="navbar-brand app-title" href="">MyBudget</a>
+        <a class="navbar-brand app-title" href="index.html">MyBudget</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerNav"
           aria-controls="navbarTogglerNav" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -97,7 +97,7 @@
         <span class="input-group-text data-form" id="basic-addon1"><i class="fa-solid fa-coins"
             style="color: #7c7c82;"></i>
         </span>
-        <input type="text" class="form-control data-form" placeholder="Amount (PLN)" aria-label="Amount (PLN)"
+        <input type="number" min="0.01" step="0.01" class="form-control data-form" placeholder="Amount (PLN)" aria-label="Amount (PLN)"
           aria-describedby="basic-addon1">
       </div>
 
@@ -119,16 +119,13 @@
           <option value="bank-interest">Bank interest</option>
           <option value="others">Other incomes</option>
         </select>
-        <!-- <span class="input-group-text data-form" id="basic-addon1"
-            ><i class="fa-solid fa-coins" style="color: #7c7c82;"></i>
-          </span> -->
       </div>
 
       <div class="input-group mb-3 data-container">
-        <label class="input-group-text data-form" id="basic-addon3" for="exampleFormControlTextarea1"><i
+        <label class="input-group-text data-form" id="basic-addon3" for="formControlTextarea1"><i
             class="fa-solid fa-pencil" style="color: #7c7c82;"></i></label>
-        <textarea class="form-control data-form" id="exampleFormControlTextarea1" rows="3"
-          placeholder="Type a comment..."></textarea>
+        <textarea class="form-control data-form" id="formControlTextarea1" rows="3"
+          placeholder="Type a comment..." resize="none"></textarea>
       </div>
       <div class="button-container" style="float: left;">
         <button type="button" class="btn btn-lg btn-danger sign-up-button">
