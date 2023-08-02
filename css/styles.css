@@ -160,7 +160,7 @@ hr {
 
 .contact-section {
   margin: 0;
-  padding: 2% 25% 10%;
+  padding: 2% 5% 10%;
   position: relative;
   text-align: center;
 }
@@ -195,6 +195,16 @@ hr {
 .description-contact-field {
   float: left;
   display: block;
+}
+
+.paper-plane-gif {
+  display: flex;
+  justify-content: center;
+  border: 5px;
+  border-color: #edebeb;
+  border-radius: 5%;
+  border-style: solid;
+  margin: 0 5%;
 }
 
 /* Template Section */
@@ -520,6 +530,11 @@ hr {
   .summary-container {
     margin: 0 5%;
   }
+
+  .paper-plane-gif {
+    margin: 10% 10% 0;
+  }
+
 }
 
 @media (min-width: 992px) and (max-width: 1354px) {
