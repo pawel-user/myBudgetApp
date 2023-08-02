@@ -81,7 +81,17 @@ hr {
 }
 
 .search-button:hover {
+  background-color: darkgreen;
+  color: white;
+}
+
+.change-button:hover {
   background-color: green;
+  color: white;
+}
+
+.cancel-button:hover {
+  background-color: red;
   color: white;
 }
 
@@ -125,7 +135,7 @@ hr {
   width: 45%;
 }
 
-.sign-up-button, .send-button {
+.sign-up-button, .send-button, .cancel-button, .change-button {
   font-size: 1.2rem;
   width: 100%;
 }
@@ -158,11 +168,10 @@ hr {
   text-align: center;
 }
 
-.contact-section {
+.contact-section, .change-section  {
   margin: 0;
-  padding: 2% 5% 10%;
+  padding: 2% 5% 200px;
   position: relative;
-  text-align: center;
 }
 
 .view-balance-section {
@@ -194,10 +203,11 @@ hr {
 
 .description-contact-field {
   float: left;
-  display: block;
+  display: flex;
+  width: 100%;
 }
 
-.paper-plane-gif {
+.enter-gif {
   display: flex;
   justify-content: center;
   border: 5px;
@@ -205,6 +215,16 @@ hr {
   border-radius: 5%;
   border-style: solid;
   margin: 0 5%;
+}
+
+/*Change Section */
+
+.change-description {
+  color: #c6d0ed;
+  display: flex;
+  float: left;
+  padding-bottom: 10px;
+  width: 100%;
 }
 
 /* Template Section */
@@ -275,6 +295,14 @@ hr {
 
 .summary-table {
   margin-bottom: 3%;
+}
+
+.title-change-password {
+  display: flex;
+  float: left;
+  font-weight: bold;
+  margin-bottom: 1%;
+  width: 100%;
 }
 
 /* Register Section */
@@ -472,7 +500,7 @@ hr {
     padding: 0 20% 0;
   }
 
-  .contact-section {
+  .contact-section, .change-section {
     padding: 2% 10% 20%;
   }
 
@@ -531,7 +559,7 @@ hr {
     margin: 0 5%;
   }
 
-  .paper-plane-gif {
+  .enter-gif {
     margin: 10% 10% 0;
   }
 
