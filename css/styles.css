@@ -191,7 +191,7 @@ hr {
 
 .view-balance-section {
   margin: 0;
-  padding: 2% 5% 2%;
+  padding: 0 5% 2%;
   position: relative;
   text-align: center;
 } 
@@ -410,7 +410,7 @@ hr {
 .welcome-section h4 {
   color: #fff;
   line-height: 1.5;
-  margin-bottom: 5%;
+  margin-bottom: 2%;
   text-align: center;
 }
 
@@ -460,7 +460,7 @@ hr {
 /* Add Income&Section and View Balance Section */
 
 .title-action {
-  margin-bottom: 5%;
+  margin-bottom: 2%;
 }
 
 .table-description {
@@ -606,7 +606,7 @@ hr {
   }
 
   .view-balance-section {
-    padding: 2% 5% 1%;
+    padding: 0 5% 1%;
   }
 }
 
