@@ -73,6 +73,21 @@ hr {
   color: black;
 }
 
+.settings-title {
+  color: #1D5D9B;
+  font-weight: 600;
+  text-align: center;
+  width: 100%;
+}
+
+.password-form {
+  background-color: #ffea9e;
+  display: flex;
+  float: left;
+  width: 100%;
+}
+
+
 /* Buttons */
 
 .search-button,
@@ -386,6 +401,8 @@ hr {
 
 .welcome-text {
   color: black;
+  font-family: "Pacifico";
+  font-weight: 600;
   line-height: 60px;
   text-align: center;
 }
