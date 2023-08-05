@@ -9,7 +9,8 @@ use \Twig\Loader\FilesystemLoader;
  *
  * PHP version 7.4
  */
-class View {
+class View
+{
 
     /**
      * Render a view file
@@ -19,7 +20,8 @@ class View {
      *
      * @return void
      */
-    public static function render($view, $args = []) {
+    public static function render($view, $args = [])
+    {
         extract($args, EXTR_SKIP);
 
         $file = "../App/Views/$view";  // relative to Core directory
@@ -41,15 +43,17 @@ class View {
      */
 
 
-    public static function renderTemplate($template, $args = []) {
+    public static function renderTemplate($template, $args = [])
+    {
 
         static $twig = null;
 
         if ($twig === null) {
             $loader = new FilesystemLoader('../App/Views');
+            //var_dump($loader);
             $twig = new \Twig\Environment($loader);
-        }
 
-        echo $twig->render($template, $args);
+            echo $twig->render($template, $args);
+        }
     }
 }

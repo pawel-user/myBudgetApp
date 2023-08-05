@@ -1,9 +1,14 @@
 <?php
 
+require '../Core/Error.php';
+require '../Core/Router.php';
+
+use Twig\Environment;
+
 /**
  * Front controller
  *
- * PHP version 5.4
+ * PHP version 7.4
  */
 
 /**
@@ -11,11 +16,12 @@
  */
 require '../vendor/autoload.php';
 
-
 /**
  * Twig
  */
 //Twig_Autoloader::register();
+//$loader = new Twig_Loader_Filesystem('../app/views');
+
 
 /**
  * Error and Exception handling
@@ -32,7 +38,7 @@ $router = new Core\Router();
 // Add the routes
 $router->add('', ['controller' => 'Home', 'action' => 'index']);
 $router->add('{controller}/{action}');
-$router->add('{controller}/{id:\d+}/{action}');
-$router->add('admin/{controller}/{action}', ['namespace' => 'Admin']);
+//$router->add('{controller}/{id:\d+}/{action}');
+//$router->add('admin/{controller}/{action}', ['namespace' => 'Admin']);
     
 $router->dispatch($_SERVER['QUERY_STRING']);
