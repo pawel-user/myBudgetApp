@@ -9,13 +9,15 @@ use Core\View;
  * 
  * PHP version 7.4
  */
-class Start extends \Core\Controller {
+class Start extends \Core\Controller
+{
     /**
      * Before filter
      * 
      * @return void
      */
-    protected function before() {
+    protected function before()
+    {
         //echo "(before) ";
         //return false;
     }
@@ -25,7 +27,8 @@ class Start extends \Core\Controller {
      * 
      * @return void
      */
-    protected function after() {
+    protected function after()
+    {
         //echo " (after)";
     }
 
@@ -34,7 +37,8 @@ class Start extends \Core\Controller {
      * 
      * @return void
      */
-    public function indexAction() {
+    public function indexAction()
+    {
         View::renderTemplate('Home/index.html');
     }
 
@@ -43,7 +47,18 @@ class Start extends \Core\Controller {
      * 
      * @return void
      */
-    public function homeAction() {
+    public function homeAction()
+    {
         View::renderTemplate('Start/home.html');
+    }
+
+    /**
+     * How the contact page
+     * 
+     * @return void
+     */
+    public function contactAction()
+    {
+        View::renderTemplate('Home/contact.html');
     }
 }

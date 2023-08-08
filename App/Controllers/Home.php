@@ -47,4 +47,12 @@ class Home extends \Core\Controller {
         View::renderTemplate('Home/register.html');
     }
 
+    /**
+     * How the contact page
+     * 
+     * @return void
+     */
+    public function contactAction() {
+        View::renderTemplate('Home/contact.html');
+    }
 }
