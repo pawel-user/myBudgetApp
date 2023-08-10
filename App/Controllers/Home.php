@@ -55,4 +55,14 @@ class Home extends \Core\Controller {
     public function contactAction() {
         View::renderTemplate('Home/contact.html');
     }
+
+        /**
+     * How the change password page
+     * 
+     * @return void
+     */
+    public function newpasswordAction() {
+        View::renderTemplate('Home/newpassword.html');
+    }
+
 }
