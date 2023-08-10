@@ -61,4 +61,15 @@ class Start extends \Core\Controller
     {
         View::renderTemplate('Home/contact.html');
     }
+
+        /**
+     * How the incomes page
+     * 
+     * @return void
+     */
+    public function incomesAction()
+    {
+        View::renderTemplate('Start/incomes.html');
+    }
+
 }
