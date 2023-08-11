@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block title %}Contact{% endblock %}
+
+{% block navigation %}
+<ul class="navbar-nav d-flex flex-row ms-auto">
+    <li class="nav-item">
+        <a class="nav-link" href="index"><i class="fa-solid fa-house"></i> Home</a>
+    </li>
+</ul>
+{% endblock %}
+
+{% block body %}
+<main>
+    <section class="contact-section">
+        <div class="row">
+            <div class="col-lg-6">
+                <h3 class="title-action">Contact with site administrator</h3>
+                <h4 class="description-contact-field">Your email</h4>
+                <div class="input-group mb-3 data-container">
+                    <span class="input-group-text data-form" id="basic-addon2"><i class="fa-solid fa-at"
+                            style="color: #7c7c82"></i></span>
+                    <input type="email" class="form-control data-form" placeholder="Email" aria-label="Email"
+                        aria-describedby="basic-addon2">
+                </div>
+                <h4 class="description-contact-field">Subject</h4>
+                <div class="input-group mb-3 data-container">
+                    <span class="input-group-text data-form" id="basic-addon2"><i class="fa-solid fa-book"
+                            style="color: #7c7c82"></i></span>
+                    <input type="text" class="form-control data-form" placeholder="Subject of your message"
+                        aria-label="Subject" aria-describedby="basic-addon2">
+                </div>
+                <h4 class="description-contact-field">Message</h4>
+                <div class="input-group mb-3 data-container">
+                    <label class="input-group-text data-form" id="basic-addon5" for="formControlTextarea1"><i
+                            class="fa-solid fa-pencil" style="color: #7c7c82;"></i></label>
+                    <textarea class="form-control data-form" id="formControlTextarea1" rows="6"
+                        placeholder="Type a comment..."></textarea>
+                </div>
+                <div class="button-container" style="float: left;">
+                    <button type="button" class="btn btn-lg btn-success send-button">
+                        <i class="fa-solid fa-paper-plane"></i> Send
+                    </button>
+                </div>
+                <div class="button-container" style="float: right;">
+                    <button type="button" class="btn btn-lg btn-danger send-button">
+                        <i class="fa-solid fa-rectangle-xmark icon"></i> Clear
+                    </button>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <img class="enter-gif" height="550" width="600" src="/images/paper-plane.gif" alt="plane-gif">
+            </div>
+        </div>
+    </section>
+</main>
+{% endblock %}
