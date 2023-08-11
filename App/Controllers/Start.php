@@ -81,5 +81,14 @@ class Start extends \Core\Controller
     {
         View::renderTemplate('Start/expenses.html');
     }
-    
+
+    /**
+     * How the balance page
+     * 
+     * @return void
+     */
+    public function balanceAction()
+    {
+        View::renderTemplate('Start/balance.html');
+    }
 }
