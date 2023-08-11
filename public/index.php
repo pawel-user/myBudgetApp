@@ -40,6 +40,7 @@ $router->add('newpassword', ['controller' => 'Home', 'action' => 'newpassword'])
 $router->add('Start', ['controller' => 'Start', 'action' => 'home']);
 $router->add('contact', ['controller' => 'Start', 'action' => 'contact']);
 $router->add('incomes', ['controller' => 'Start', 'action' => 'incomes']);
+$router->add('expenses', ['controller' => 'Start', 'action' => 'expenses']);
 $router->add('{controller}/{action}');
 //$router->add('{controller}/{id:\d+}/{action}');
 //$router->add('admin/{controller}/{action}', ['namespace' => 'Admin']);

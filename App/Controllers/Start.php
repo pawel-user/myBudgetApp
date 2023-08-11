@@ -62,7 +62,7 @@ class Start extends \Core\Controller
         View::renderTemplate('Home/contact.html');
     }
 
-        /**
+    /**
      * How the incomes page
      * 
      * @return void
@@ -72,4 +72,14 @@ class Start extends \Core\Controller
         View::renderTemplate('Start/incomes.html');
     }
 
+    /**
+     * How the expenses page
+     * 
+     * @return void
+     */
+    public function expensesAction()
+    {
+        View::renderTemplate('Start/expenses.html');
+    }
+    
 }
