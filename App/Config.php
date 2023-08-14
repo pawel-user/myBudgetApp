@@ -19,13 +19,13 @@ namespace App;
      * Database name
      * @var string
      */
-    const DB_NAME = 'mvc';
+    const DB_NAME = 'mybudget';
 
     /**
      * Database user
      * @var string
      */
-    const DB_USER = 'root';
+    const DB_USER = 'mybudgetadmin';
 
     /**
      * Database password
