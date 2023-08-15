@@ -34,7 +34,7 @@ $router = new Core\Router();
 // Add the routes
 $router->add('', ['controller' => 'Home', 'action' => 'index']);
 $router->add('index', ['controller' => 'Home', 'action' => 'index']);
-$router->add('register', ['controller' => 'Home', 'action' => 'register']);
+//$router->add('register', ['controller' => 'Signup', 'action' => 'register']);
 $router->add('contact', ['controller' => 'Home', 'action' => 'contact']);
 $router->add('newpassword', ['controller' => 'Home', 'action' => 'newpassword']);
 $router->add('Start', ['controller' => 'Start', 'action' => 'home']);
