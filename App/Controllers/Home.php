@@ -39,15 +39,6 @@ class Home extends \Core\Controller {
     }
 
     /**
-     * How the register page
-     * 
-     * @return void
-     */
-    public function registerAction() {
-        View::renderTemplate('Home/register.html');
-    }
-
-    /**
      * How the contact page
      * 
      * @return void

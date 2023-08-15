@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block title %}Registration message{% endblock %}
+
+
+{% block navigation %}
+<ul class="navbar-nav d-flex flex-row ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="/"><i class="fa-solid fa-user"></i> Log in</a>
+  </li>
+
+  <li class="nav-item">
+    <a class="nav-link" href="contact"><i class="fa-solid fa-envelope"></i> Contact</a>
+  </li>
+</ul>
+{% endblock %}
+
+{% block body %}
+<main>
+  <div class="image-border">
+    <section class="register-section">
+      <header>
+        <h3 class="register-title register-message">You have successfully registered!<br>Thank you for your trust.</h3>
+      </header>
+    </section>
+  </div>
+</main>
+{% endblock %}
