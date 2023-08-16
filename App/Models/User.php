@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use PDO;
-//use PDOException;
 
 /**
  * Post model
@@ -11,7 +10,14 @@ use PDO;
  * PHP version 7.4
  */
 #[\AllowDynamicProperties]
-class User extends \Core\Model {
+class User extends \Core\Model
+{
+    /**
+     * Error messages
+     * 
+     * @var array
+     */
+    public $errors = [];
 
     /**
      * Class constructor
@@ -20,7 +26,8 @@ class User extends \Core\Model {
      * 
      * @return void
      */
-    public function __construct($data) {
+    public function __construct($data)
+    {
         foreach ($data as $key => $value) {
             $this->$key = $value;
         };
@@ -33,18 +40,58 @@ class User extends \Core\Model {
      */
     public function save()
     {
-        $password_hash = password_hash($this->password_hash, PASSWORD_DEFAULT);
+        $this->validate();
 
-        $sql = 'INSERT INTO users (username, email, password_hash)
-                VALUES (:username, :email, :password_hash)';
+        if (empty($this->errors)) {
+            $password_hash = password_hash($this->password, PASSWORD_DEFAULT);
 
-        $db = static::getDB();
-        $stmt = $db->prepare($sql);
+            $sql = 'INSERT INTO users (username, email, password_hash)
+                    VALUES (:username, :email, :password_hash)';
 
-        $stmt->bindValue(':username', $this->username, PDO::PARAM_STR);
-        $stmt->bindValue(':email', $this->email, PDO::PARAM_STR);
-        $stmt->bindValue(':password_hash', $password_hash, PDO::PARAM_STR);
+            $db = static::getDB();
+            $stmt = $db->prepare($sql);
 
-        $stmt->execute();
+            $stmt->bindValue(':username', $this->username, PDO::PARAM_STR);
+            $stmt->bindValue(':email', $this->email, PDO::PARAM_STR);
+            $stmt->bindValue(':password_hash', $password_hash, PDO::PARAM_STR);
+
+            return $stmt->execute();
+        }
+        return false;
+    }
+
+    /**
+     * Validate current property values, adding validation error messages to the errors array property
+     * 
+     * @return void
+     */
+    public function validate()
+    {
+        // Name
+        if ($this->username == '') {
+            $this->errors[] = 'Username is required';
+        }
+
+        // Email address
+        if (filter_var($this->email, FILTER_VALIDATE_EMAIL) === false) {
+            $this->errors[] = 'Invalid email';
+        }
+
+        // Password
+        if ($this->password != $this->password_confirmation) {
+            $this->errors[] = 'Password must match confirmation';
+        }
+
+        if (strlen($this->password) < 6) {
+            $this->errors[] = 'Please enter at least 6 characters for the password';
+        }
+
+        if (preg_match('/.*[a-z]+.*/i', $this->password) == 0) {
+            $this->errors[] = 'Password needs at least one letter';
+        }
+
+        if (preg_match('/.*\d+.*/i', $this->password) == 0) {
+            $this->errors[] = 'Password needs at least one number';
+        }
     }
 }

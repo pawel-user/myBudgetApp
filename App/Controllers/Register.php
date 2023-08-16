@@ -27,11 +27,14 @@ class Register extends \Core\Controller {
      * @return void
      */
     public function createAction() {
-        //var_dump($_POST);
         $user = new User($_POST);
 
-        $user->save();
+        if ($user->save()) {
 
-        View::renderTemplate('Register/success.html');
+            View::renderTemplate('Register/success.html');
+
+        } else {
+            var_dump($user->errors);
+        }
     }
 }
