@@ -27,22 +27,22 @@
         <div class="input-group mb-3 data-container">
           <label class="input-group-text data-form" for="inputUsername"><i class="fa-solid fa-user"
               style="color: #7c7c82;"></i></label>
-          <input id="inputUsername" type="text" name="username" class="form-control data-form" placeholder="Username" aria-label="Username">
+          <input id="inputUsername" type="text" name="username" class="form-control data-form" placeholder="Username" aria-label="Username" required>
         </div>
         <div class="input-group mb-3 data-container">
           <label class="input-group-text data-form" for="inputEmail"><i class="fa-solid fa-at"
               style="color: #7c7c82"></i></label>
-          <input id="inputEmail" type="email" name="email" class="form-control data-form" placeholder="Email" aria-label="Email">
+          <input id="inputEmail" type="email" name="email" class="form-control data-form" placeholder="Email" aria-label="Email" required>
         </div>
         <div class="input-group mb-3 data-container">
           <label class="input-group-text data-form" for="inputPassword"><i class="fa-solid fa-lock"
               style="color: #7c7c82"></i></label>
-          <input id="inputPassword" type="password" name="password" class="form-control data-form" placeholder="Password" aria-label="Password">
+          <input id="inputPassword" type="password" name="password" class="form-control data-form" placeholder="Password" aria-label="Password" required pattern="^(?=.*[A-zA-z])(?=.*\d)[A-Za\d]{6,}$" title="Minimum 6 chars, at least one letter and number">
         </div>
         <div class="input-group mb-3 data-container">
           <label class="input-group-text data-form" for="inputRepeatPassword"><i class="fa-solid fa-lock"
               style="color: #7c7c82"></i></label>
-          <input id="inputRepeatPassword" type="password" name="password_confirmation" class="form-control data-form" placeholder="Repeat password" aria-label="Repeat password">
+          <input id="inputRepeatPassword" type="password" name="password_confirmation" class="form-control data-form" placeholder="Repeat password" aria-label="Repeat password" required>
         </div>
         <div class="button-container" style="float: left;">
           <button type="reset" class="btn btn-lg btn-danger sign-up-button">
