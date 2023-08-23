@@ -50,7 +50,6 @@ class View
 
         if ($twig === null) {
             $loader = new FilesystemLoader('../App/Views');
-            //var_dump($loader);
             $twig = new \Twig\Environment($loader);
 
             echo $twig->render($template, $args);

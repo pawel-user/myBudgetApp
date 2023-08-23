@@ -31,10 +31,20 @@ class Register extends \Core\Controller {
 
         if ($user->save()) {
 
-            View::renderTemplate('Register/success.html');
+            header('Location: http://' . $_SERVER['HTTP_HOST'] . '/register/success', true, 303);
+            exit;
 
         } else {
-            var_dump($user->errors);
+            View::renderTemplate('Register/new.html', ['user' => $user]);
         }
+    }
+    /**
+     * Show the signup success page
+     *
+     * @return void
+     */
+    public function successAction()
+    {
+        View::renderTemplate('Register/success.html');
     }
 }

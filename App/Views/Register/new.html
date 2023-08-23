@@ -3,9 +3,45 @@
 {% block title %}Account registration{% endblock %}
 
 {% block footer %}
-    <script>
-      
-    </script>
+<script>
+  $.validator.addMethod('validPassword',
+    function (value, element, param) {
+      if (value != '') {
+        if (value.match(/.*[a-z]+.*/i) == null) {
+          return false;
+        }
+        if (value.match(/.*\d+.*/) == null) {
+          return false;
+        }
+      }
+      return true;
+    },
+    'Must contain at least one letter and one number'
+  );
+
+  $(document).ready(function () {
+    /**
+    * Validate the form
+    */
+    $('#formSignup').validate({
+      rules: {
+        name: 'required',
+        email: {
+          required: true,
+          email: true
+        },
+        password: {
+          required: true,
+          minlength: 6,
+          validPassword: true
+        },
+        password_confirmation: {
+          equalTo: '#inputPassword'
+        }
+      }
+    });
+  });
+</script>
 {% endblock %}
 
 
@@ -29,26 +65,39 @@
         <h2 class="register-title">Account Registration</h2>
       </header>
 
-      <form method="post" action="/register/create">
+      {% if user.errors is not empty %}
+        <p>Errors:</p>
+        <ul>
+          {% for error in user.errors %}
+            <li>{{ error }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+
+      <form method="post" action="/register/create" id="formSignup">
         <div class="input-group mb-3 data-container">
           <label class="input-group-text data-form" for="inputUsername"><i class="fa-solid fa-user"
               style="color: #7c7c82;"></i></label>
-          <input id="inputUsername" type="text" name="username" class="form-control data-form" placeholder="Username" aria-label="Username" required>
+          <input id="inputUsername" type="text" name="username" class="form-control data-form" placeholder="Username"
+            aria-label="Username" required>
         </div>
         <div class="input-group mb-3 data-container">
           <label class="input-group-text data-form" for="inputEmail"><i class="fa-solid fa-at"
               style="color: #7c7c82"></i></label>
-          <input id="inputEmail" type="email" name="email" class="form-control data-form" placeholder="Email" aria-label="Email" required>
+          <input id="inputEmail" type="email" name="email" class="form-control data-form" placeholder="Email"
+            aria-label="Email" required>
         </div>
         <div class="input-group mb-3 data-container">
           <label class="input-group-text data-form" for="inputPassword"><i class="fa-solid fa-lock"
               style="color: #7c7c82"></i></label>
-          <input id="inputPassword" type="password" name="password" class="form-control data-form" placeholder="Password" aria-label="Password" required pattern="^(?=.*[A-zA-z])(?=.*\d)[A-Za\d]{6,}$" title="Minimum 6 chars, at least one letter and number">
+          <input id="inputPassword" type="password" name="password" class="form-control data-form"
+            placeholder="Password" aria-label="Password" required>
         </div>
         <div class="input-group mb-3 data-container">
           <label class="input-group-text data-form" for="inputRepeatPassword"><i class="fa-solid fa-lock"
               style="color: #7c7c82"></i></label>
-          <input id="inputRepeatPassword" type="password" name="password_confirmation" class="form-control data-form" placeholder="Repeat password" aria-label="Repeat password" required>
+          <input id="inputRepeatPassword" type="password" name="password_confirmation" class="form-control data-form"
+            placeholder="Repeat password" aria-label="Repeat password" required>
         </div>
         <div class="button-container" style="float: left;">
           <button type="reset" class="btn btn-lg btn-danger sign-up-button">
