@@ -15,7 +15,7 @@
   <section class="template-section">
     <!-- Title -->
     <div class="row">
-      <div class="col-lg-6">
+      <form class="col-lg-6">
         <header>
           <h1 class="big-heading">Achieving Your<br>Financial Goals</h1>
         </header>
@@ -24,38 +24,38 @@
           works for you, save for things that matter most, and invest with
           confidence.
         </h3>
-        <div class="form-floating floating-label">
-          <input type="email" class="form-control text-on-button" id="floatingInput" placeholder="name@example.com">
-          <label for="floatingInput">Email address</label>
+        <form action="/login/create" method="post">
+          <div class="form-floating floating-label">
+            <input type="email" class="form-control text-on-button" id="floatingInput" placeholder="name@example.com" autofocus>
+            <label for="floatingInput">Email address</label>
+          </div>
+          <div class="form-floating floating-label">
+            <input type="password" class="form-control text-on-button" id="floatingPassword" placeholder="Password">
+            <label for="floatingPassword">Password</label>
+          </div>
+          <br>
+          <button type="submit" class="btn btn-lg btn-warning login-button">Sign in</button>
+          <a class="password-question" href="newpassword">Don't remember<br>your password?</a>
+          <h3 class="account-question">Don't have an account yet?</h3>
+        <button type="submit" class="btn btn-lg btn-primary register-button"><i
+          class="fa-solid fa-registered icon"></i> Register</button>
+        </form>
+        <div class="col-lg-6 parent">
+          <img class="title-image clipped-image" src="/images/budget-bg.png" alt="title-img">
         </div>
-        <div class="form-floating floating-label">
-          <input type="password" class="form-control text-on-button" id="floatingPassword" placeholder="Password">
-          <label for="floatingPassword">Password</label>
-        </div>
-        <br>
-        <a class="btn btn-lg btn-warning login-button" href="/start/home" role="button"><i
-            class="fa-solid fa-right-to-bracket icon"></i> Sign in</a>
-        <a class="password-question" href="newpassword">Don't remember<br>your password?</a>
-        <h3 class="account-question">Don't have an account yet?</h3>
-        <a class="btn btn-lg btn-primary register-button" href="/register/new" role="button"><i
-            class="fa-solid fa-registered icon"></i> Register</a>
-      </div>
-      <div class="col-lg-6 parent">
-        <img class="title-image clipped-image" src="/images/budget-bg.png" alt="title-img">
-      </div>
-      <svg style="visibility: hidden; position: absolute" width="0" height="0" xmlns="http://www.w3.org/2000/svg"
-        version="1.1">
-        <defs>
-          <filter id="goo">
-            <feGaussianBlur in="SourceGraphic" stdDeviation="20" result="blur">
-            </feGaussianBlur>
-            <feColorMatrix in="blur" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 19 -9" result="goo">
-            </feColorMatrix>
-            <feComposite in="SourceGraphic" in2="goo" operator="atop">
-            </feComposite>
-          </filter>
-        </defs>
-      </svg>
+        <svg style="visibility: hidden; position: absolute" width="0" height="0" xmlns="http://www.w3.org/2000/svg"
+          version="1.1">
+          <defs>
+            <filter id="goo">
+              <feGaussianBlur in="SourceGraphic" stdDeviation="20" result="blur">
+              </feGaussianBlur>
+              <feColorMatrix in="blur" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 19 -9" result="goo">
+              </feColorMatrix>
+              <feComposite in="SourceGraphic" in2="goo" operator="atop">
+              </feComposite>
+            </filter>
+          </defs>
+        </svg>
     </div>
   </section>
 </main>
