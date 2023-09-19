@@ -65,7 +65,7 @@
   </li>
 
   <li class="nav-item">
-    <a class="nav-link" href="contact"><i class="fa-solid fa-envelope"></i> Contact</a>
+    <a class="nav-link" href="/contact"><i class="fa-solid fa-envelope"></i> Contact</a>
   </li>
 </ul>
 {% endblock %}
@@ -87,38 +87,36 @@
         </ul>
       {% endif %}
 
-      <form method="post" action="/register/create" id="formSignup">
+      <form action="/register/create" method="post" id="formSignup">
         <div class="input-group mb-3 data-container">
           <label class="input-group-text data-form" for="inputUsername"><i class="fa-solid fa-user"
               style="color: #7c7c82;"></i></label>
-          <input id="inputUsername" type="text" name="username" class="form-control data-form" placeholder="Username"
-            aria-label="Username" required>
+          <input class="form-control data-form" type="text" id="inputUsername" name="username" placeholder="Username" aria-label="Username" value="{{ user.username }}" required>
         </div>
         <div class="input-group mb-3 data-container">
           <label class="input-group-text data-form" for="inputEmail"><i class="fa-solid fa-at"
               style="color: #7c7c82"></i></label>
-          <input id="inputEmail" type="email" name="email" class="form-control data-form" placeholder="Email"
-            aria-label="Email" required>
+          <input class="form-control data-form" type="email" id="inputEmail" name="email" placeholder="Email"
+            aria-label="Email" value="{{ user.email }}" required>
         </div>
         <div class="input-group mb-3 data-container">
           <label class="input-group-text data-form" for="inputPassword"><i class="fa-solid fa-lock"
               style="color: #7c7c82"></i></label>
-          <input id="inputPassword" type="password" name="password" class="form-control data-form"
+          <input class="form-control data-form" type="password" id="inputPassword" name="password"
             placeholder="Password" aria-label="Password" required>
         </div>
         <div class="input-group mb-3 data-container">
           <label class="input-group-text data-form" for="inputRepeatPassword"><i class="fa-solid fa-lock"
               style="color: #7c7c82"></i></label>
-          <input id="inputRepeatPassword" type="password" name="password_confirmation" class="form-control data-form"
-            placeholder="Repeat password" aria-label="Repeat password" required>
+          <input class="form-control data-form" type="password" id="inputRepeatPassword" name="password_confirmation" placeholder="Repeat password" aria-label="Repeat password" required>
         </div>
         <div class="button-container" style="float: left;">
-          <button type="reset" class="btn btn-lg btn-danger sign-up-button">
+          <button class="btn btn-lg btn-danger sign-up-button" type="reset">
             <i class="fa-solid fa-rectangle-xmark icon"></i>Cancel
           </button>
         </div>
         <div class="button-container" style="float: right;">
-          <button type="submit" class="btn btn-lg btn-success sign-up-button">
+          <button class="btn btn-lg btn-success sign-up-button" type="submit">
             <i class="fa-solid fa-square-check icon"></i>Confirm
           </button>
         </div>
