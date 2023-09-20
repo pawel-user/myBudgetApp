@@ -2,6 +2,7 @@ body {
   background: radial-gradient(40rem at left bottom, #bec3fc, #8c52ff);
   color: #fff;
   font-family: "Montserrat";
+  height: 100%;
   opacity: 1;
 }
 
@@ -36,15 +37,15 @@ hr {
 
 .big-heading {
   line-height: 1.5;
-  padding-bottom: 20px;
+  padding-bottom: 10px;
 }
 
 .title-description {
   color: #c6d0ed;
   font-weight: 100;
   line-height: 1.5;
-  padding-bottom: 5%;
-  padding-right: 25%;
+  margin: 0 auto;
+  padding: 0 25% 2% 0;
   text-align: justify;
 }
 
@@ -111,11 +112,11 @@ hr {
 }
 
 .floating-label {
-  display: inline-block;
+  align-items: center;
+  display: flex;
   color: #7c7c82;
-  margin: 0 4% 0 0;
+  margin: 2% 10%;
   position: relative;
-  width: 45%;
 }
 
 .text-on-button {
@@ -132,7 +133,7 @@ hr {
   color: #7c7c82;
   font-size: 25px;
   font-weight: 700;
-  margin: 4% 4% 0 0;
+  margin: 0 4% 0 0;
   position: relative;
   width: 45%;
 }
@@ -146,7 +147,7 @@ hr {
   border-radius: 20px;
   font-size: 25px;
   font-weight: 700;
-  margin-bottom: 5%;
+  margin-bottom: 2%;
   width: 45%;
 }
 
@@ -163,7 +164,7 @@ hr {
   position: relative;
 }
 
-.template-section {
+.template-section, .login-section {
   margin: 0;
   padding: 0 5% 1%;
   position: relative;
@@ -253,7 +254,7 @@ hr {
   position: relative;
   display: inline-block;
   color: #c6d0ed;
-  margin-top: 4%;
+  margin-top: 0;
   text-align: center;
   text-decoration-line: none;
   vertical-align: middle;
@@ -265,8 +266,8 @@ hr {
 }
 
 .account-question {
-  color: #edebeb;
-  margin: 10% 0 3%;
+  color: #c6d0ed;
+  margin: 3% auto 2% auto;
 }
 
 .total-cell, .total-sum {
@@ -352,6 +353,33 @@ hr {
   display: inline-block;
   margin: 5% auto 0;
   width: 35%;
+}
+
+/* Login Section */
+.login-title {
+  margin: 5% auto 10%;
+  text-align: center;
+}
+
+.login-container {
+  position: relative;
+  display: block;
+  margin: 3% auto;
+  width: 35%;
+}
+
+.login-border {
+  background-color: #1D5D9B;
+  border: solid rgba(255, 255, 255, 0.55) 3px;
+  border-radius: 50px;
+  margin-top: 3%;
+  margin-bottom: 2%;
+  padding: 20px;
+}
+
+.centered-container {
+  display: flex;
+  align-items: center;
 }
 
 /* Account Section */
@@ -548,6 +576,7 @@ hr {
   }
 
   .title-description {
+    margin-bottom: 0;
     padding-right: 0;
   }
 
@@ -557,11 +586,11 @@ hr {
   }
 
   .login-button {
-    margin: 4% 0 0 -4%;
+    margin: 0% 0 0 4%;
   }
 
   .password-question {
-    margin-left: 4%;
+    margin-bottom: 0%;
   }
 
   .nav-item, .icon {
@@ -617,7 +646,13 @@ hr {
 /* Footer Section */
 
 .footer-section {
+  display: flex;
   background-color: #c6d0ed;
-  padding: 2% 5%;
+  padding: 15px;
+  justify-content: center;
   text-align: center;
+}
+
+.copyright {
+  margin: auto;
 }

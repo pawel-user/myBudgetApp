@@ -5,7 +5,7 @@
 {% block navigation %}
 <ul class="navbar-nav d-flex flex-row ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="contact"><i class="fa-solid fa-envelope"></i> Contact</a>
+    <a class="nav-link" href="/send"><i class="fa-solid fa-envelope"></i> Contact</a>
   </li>
 
   <li class="nav-item">
@@ -14,7 +14,7 @@
   </li>
 
   <li class="nav-item">
-    <a class="nav-link" href="/"><i class="fa-solid fa-right-from-bracket"></i> Log out</a>
+    <a class="nav-link" href="/logout"><i class="fa-solid fa-right-from-bracket"></i> Log out</a>
   </li>
 </ul>
 {% endblock %}
@@ -42,7 +42,7 @@
     <h4>Click one of the following options.</h4>
     <div class="row">
       <div class="col-lg-4 action-container">
-        <form class="coins-container" action="incomes">
+        <form class="coins-container" action="/incomes">
           <h3 class="action-title">Add income</h3>
           <button class="action-button">
             <img class="coin-image" src="/images/golden-coin.png" alt="coin-img">
@@ -51,7 +51,7 @@
         </form>
       </div>
       <div class="col-lg-4 action-container">
-        <form class="coins-container" action="expenses">
+        <form class="coins-container" action="/expenses">
           <h3 class="action-title">Add expense</h3>
           <button class="action-button">
             <img class="coin-image" src="/images/golden-coin.png" alt="coin-img">
@@ -60,7 +60,7 @@
         </form>
       </div>
       <div class="col-lg-4 action-container">
-        <form class="coins-container" action="balance">
+        <form class="coins-container" action="/balance">
           <h3 class="action-title">View balance</h3>
           <button class="action-button">
             <img class="coin-image" src="/images/golden-coin.png" alt="coin-img">

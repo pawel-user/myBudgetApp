@@ -59,7 +59,7 @@ class Start extends \Core\Controller
      */
     public function contactAction()
     {
-        View::renderTemplate('Home/contact.html');
+        View::renderTemplate('Start/contact.html');
     }
 
     /**

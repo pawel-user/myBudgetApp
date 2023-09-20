@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use Core\View;
+use \App\Models\User;
 
 /**
  * Home controller
@@ -47,7 +48,7 @@ class Home extends \Core\Controller {
         View::renderTemplate('Home/contact.html');
     }
 
-        /**
+    /**
      * How the change password page
      * 
      * @return void
@@ -55,5 +56,16 @@ class Home extends \Core\Controller {
     public function newpasswordAction() {
         View::renderTemplate('Home/newpassword.html');
     }
+
+    /**
+     * Log in a user
+     * 
+     * @return void
+     */
+    /**public function createAction() {
+        $user = User::findByEmail($_POST['email']);
+        
+        var_dump($user);
+    }*/
 
 }
