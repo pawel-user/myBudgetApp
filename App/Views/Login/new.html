@@ -5,9 +5,8 @@
 {% block navigation %}
 <ul class="navbar-nav d-flex flex-row ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="/"><i class="fa-solid fa-user"></i> Log in</a>
+    <a class="nav-link" href="/"><i class="fa-solid fa-house"></i> Home</a>
   </li>
-
   <li class="nav-item">
     <a class="nav-link" href="contact"><i class="fa-solid fa-envelope"></i> Contact</a>
   </li>
@@ -23,11 +22,13 @@
       </header>
       <form action="/login/create" method="post">
         <div class="form-floating floating-label">
-          <input class="form-control text-on-button" type="email" id="inputEmail" name="email" placeholder="Email address" autofocus />
+          <input class="form-control text-on-button" type="email" id="inputEmail" name="email"
+            placeholder="Email address" autofocus value="{{ email }}" />
           <label for="inputEmail">Email address</label>
         </div>
         <div class="form-floating floating-label">
-          <input class="form-control text-on-button" type="password" id="inputPassword" name="password" placeholder="Password" />
+          <input class="form-control text-on-button" type="password" id="inputPassword" name="password"
+            placeholder="Password" />
           <label for="inputPassword">Password</label>
         </div>
         <br>
@@ -46,4 +47,3 @@
   </div>
 </section>
 {% endblock %}
-
