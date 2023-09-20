@@ -44,7 +44,7 @@ $router->add('', ['controller' => 'Home', 'action' => 'index']);
 $router->add('contact', ['controller' => 'Home', 'action' => 'contact']);
 $router->add('newpassword', ['controller' => 'Home', 'action' => 'newpassword']);
 $router->add('start', ['controller' => 'Start', 'action' => 'home']);
-$router->add('send', ['controller' => 'Start', 'action' => 'contact']);
+//$router->add('send', ['controller' => 'Start', 'action' => 'contact']);
 $router->add('create', ['controller' => 'Login', 'action' => 'create']);
 $router->add('login', ['controller' => 'Login', 'action' => 'new']);
 $router->add('logout', ['controller' => 'Login', 'action' => 'destroy']);

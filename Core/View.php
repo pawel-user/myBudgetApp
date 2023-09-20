@@ -51,8 +51,8 @@ class View
         if ($twig === null) {
             $loader = new FilesystemLoader('../App/Views');
             $twig = new \Twig\Environment($loader);
-
-            echo $twig->render($template, $args);
+            $twig->addGlobal('session', $_SESSION);
         }
+        echo $twig->render($template, $args);
     }
 }
