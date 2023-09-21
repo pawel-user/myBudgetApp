@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use Core\View;
+use App\Auth;
 
 /**
  * Home controller
@@ -49,6 +50,9 @@ class Start extends \Core\Controller
      */
     public function homeAction()
     {
+        if (! Auth::isLoggedIn()) {
+            $this->redirect('/login');
+        }
         View::renderTemplate('Start/home.html');
     }
 
