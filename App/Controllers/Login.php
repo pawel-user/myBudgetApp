@@ -35,7 +35,7 @@ use \App\Auth;
 
             Auth::login($user);
 
-            $this->redirect('/start');
+            $this->redirect(Auth::getReturnToPage());
 
         } else {
 

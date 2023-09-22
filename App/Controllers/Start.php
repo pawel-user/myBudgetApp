@@ -51,6 +51,8 @@ class Start extends \Core\Controller
     public function homeAction()
     {
         if (! Auth::isLoggedIn()) {
+            Auth::rememberRequestedPage();
+            
             $this->redirect('/login');
         }
         View::renderTemplate('Start/home.html');
@@ -63,6 +65,11 @@ class Start extends \Core\Controller
      */
     public function contactAction()
     {
+        if (! Auth::isLoggedIn()) {
+            Auth::rememberRequestedPage();
+            
+            $this->redirect('/login');
+        }
         View::renderTemplate('Start/contact.html');
     }
 
@@ -73,6 +80,11 @@ class Start extends \Core\Controller
      */
     public function incomesAction()
     {
+        if (! Auth::isLoggedIn()) {
+            Auth::rememberRequestedPage();
+            
+            $this->redirect('/login');
+        }
         View::renderTemplate('Start/incomes.html');
     }
 
@@ -93,6 +105,11 @@ class Start extends \Core\Controller
      */
     public function balanceAction()
     {
+        if (! Auth::isLoggedIn()) {
+            Auth::rememberRequestedPage();
+            
+            $this->redirect('/login');
+        }
         View::renderTemplate('Start/balance.html');
     }
 }
