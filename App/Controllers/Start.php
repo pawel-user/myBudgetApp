@@ -19,8 +19,7 @@ class Start extends \Core\Controller
      */
     protected function before()
     {
-        //echo "(before) ";
-        //return false;
+        $this->requireLogin();
     }
 
     /**
@@ -50,8 +49,6 @@ class Start extends \Core\Controller
      */
     public function homeAction()
     {
-        $this->requireLogin();
-
         View::renderTemplate('Start/home.html');
     }
 
@@ -62,8 +59,6 @@ class Start extends \Core\Controller
      */
     public function contactAction()
     {
-        $this->requireLogin();
-
         View::renderTemplate('Start/contact.html');
     }
 
@@ -74,8 +69,6 @@ class Start extends \Core\Controller
      */
     public function incomesAction()
     {
-        $this->requireLogin();
-
         View::renderTemplate('Start/incomes.html');
     }
 
@@ -86,8 +79,6 @@ class Start extends \Core\Controller
      */
     public function expensesAction()
     {
-        $this->requireLogin();
-
         View::renderTemplate('Start/expenses.html');
     }
 
@@ -98,8 +89,6 @@ class Start extends \Core\Controller
      */
     public function balanceAction()
     {
-        $this->requireLogin();
-
         View::renderTemplate('Start/balance.html');
     }
 }
