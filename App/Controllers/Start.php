@@ -3,14 +3,13 @@
 namespace App\Controllers;
 
 use Core\View;
-use App\Auth;
 
 /**
  * Home controller
  * 
  * PHP version 7.4
  */
-class Start extends \Core\Controller
+class Start extends Authenticated
 {
     /**
      * Before filter
@@ -19,7 +18,7 @@ class Start extends \Core\Controller
      */
     protected function before()
     {
-        $this->requireLogin();
+        //echo " (before)";
     }
 
     /**
