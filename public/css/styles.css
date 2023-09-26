@@ -388,10 +388,6 @@ hr {
   text-align: left;
 }
 
-.choice-container {
-  text-align: right;
-}
-
 /* Welcome Section */
 
 .active-account {
@@ -480,8 +476,8 @@ hr {
 }
 
 .dropdown-button {
-  text-align: center;
-  padding-right: 4%;
+  padding-right: 5%;
+  float:right;
 }
 
 /* Add Income&Section and View Balance Section */
@@ -555,6 +551,11 @@ hr {
   .welcome-banner {
     margin: 2% 5% 5%;
   }
+
+  .choice-container {
+    padding-top: 5%;
+  }
+  
 }
 
 @media (max-width: 991px) {

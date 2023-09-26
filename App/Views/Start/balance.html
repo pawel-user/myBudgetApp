@@ -32,37 +32,36 @@
 {% endblock %}
 
 {% block body %}
-<section class="welcome-section">
+<section class="template-section">
   <div class="row">
     <div class="col-lg-3 col-md-4 col-sm-6 account-container active-account">
-        <i class="fa-solid fa-check icon" style="color: lightgreen; transform: scale(2);"></i>LOGGED-IN USER<br><i class="fa-solid fa-user icon"></i>
-        {{ current_user.username }}
+      <i class="fa-solid fa-check icon" style="color: lightgreen; transform: scale(2);"></i>LOGGED-IN USER<br><i
+        class="fa-solid fa-user icon"></i>{{current_user.username}}
     </div>
-  </div>
 
-    <div class="col-lg-6 choice-container">
-      <div class="dropdown">
-        <button type="button" class="btn btn-primary dropdown-toggle dropdown-button" data-bs-toggle="dropdown">
-          <i class="fa-regular fa-calendar icon"></i> Select time period
-        </button>
-        <ul class="dropdown-menu">
-          <li>
-            <a class="dropdown-item active" href="#current-month">Current month</a>
-          </li>
-          <li>
-            <a class="dropdown-item" href="#previous-month">Previous month</a>
-          </li>
-          <li>
-            <a class="dropdown-item" href="#current-year">Current year</a>
-          </li>
-          <li>
-            <hr class="dropdown-divider">
-          </li>
-          <li>
-            <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#rangeTimeModal">Custom</a>
-          </li>
-        </ul>
-      </div>
+    <div class="col-lg-6 col-md-6 col-sm-6"></div>
+
+    <div class="col choice-container">
+      <button type="button" class="btn btn-primary dropdown-toggle dropdown-button" data-bs-toggle="dropdown">
+        <i class="fa-regular fa-calendar icon"></i> Select time period
+      </button>
+      <ul class="dropdown-menu">
+        <li>
+          <a class="dropdown-item active" href="#current-month">Current month</a>
+        </li>
+        <li>
+          <a class="dropdown-item" href="#previous-month">Previous month</a>
+        </li>
+        <li>
+          <a class="dropdown-item" href="#current-year">Current year</a>
+        </li>
+        <li>
+          <hr class="dropdown-divider">
+        </li>
+        <li>
+          <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#rangeTimeModal">Custom</a>
+        </li>
+      </ul>
     </div>
   </div>
 </section>
