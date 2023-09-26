@@ -23,14 +23,10 @@
 <main>
   <section class="template-section">
     <div class="row">
-      <div class="col-lg-6 account-container">
-        <h4 class="active-account">
-          <i class="fa-solid fa-check account-icon"></i> ACCOUNT<br><i class="fa-solid fa-user icon"></i>
-          Username Username
-        </h4>
+      <div class="col-lg-3 col-md-4 col-sm-6 account-container active-account">
+          <i class="fa-solid fa-check icon" style="color: lightgreen; transform: scale(2);"></i>LOGGED-IN USER<br><i class="fa-solid fa-user icon"></i>{{ current_user.username }}
       </div>
-    </div>
-  </section>
+    </section>
 
   <section class="welcome-section">
     <header>

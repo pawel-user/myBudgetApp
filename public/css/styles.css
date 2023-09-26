@@ -406,17 +406,12 @@ hr {
   text-align: left !important;
 }
 
-.active-account .icon {
+.icon {
   color: #545454;
-  margin-right: 10px;
 }
 
 .account-icon {
   color: lightgreen;
-  margin-left: 2%;
-  margin-right: 2%;
-  padding-bottom: 1%;
-  right: 50%;
   transform: scale(2);
 }
 
@@ -602,7 +597,7 @@ hr {
   }
 
   .account-icon {
-    margin-right: 4%;
+    margin-right: 0;
   }
 
   .summary-container {
@@ -631,7 +626,7 @@ hr {
   }
 
   .account-icon {
-    margin-right: 3%;
+    margin-right: 0;
   }
 
   .nav-item, .nav-link {

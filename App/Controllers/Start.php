@@ -9,7 +9,7 @@ use Core\View;
  * 
  * PHP version 7.4
  */
-class Start extends \Core\Controller
+class Start extends Authenticated
 {
     /**
      * Before filter
@@ -18,8 +18,7 @@ class Start extends \Core\Controller
      */
     protected function before()
     {
-        //echo "(before) ";
-        //return false;
+        //echo " (before)";
     }
 
     /**

@@ -56,16 +56,4 @@ class Home extends \Core\Controller {
     public function newpasswordAction() {
         View::renderTemplate('Home/newpassword.html');
     }
-
-    /**
-     * Log in a user
-     * 
-     * @return void
-     */
-    /**public function createAction() {
-        $user = User::findByEmail($_POST['email']);
-        
-        var_dump($user);
-    }*/
-
 }
