@@ -399,12 +399,11 @@ hr {
   border: solid 1px;
   border-radius: 15px;
   color: #545454 !important;
-  display: block;
+  display: inline-block;
   line-height: 1.5;
   margin-left: 2px;
   padding: 0.5rem;
   text-align: left !important;
-  width: 100%;
 }
 
 .icon {
@@ -413,9 +412,6 @@ hr {
 
 .account-icon {
   color: lightgreen;
-  margin-left: 2px;
-  margin-right: 2px;
-  padding-bottom: 1%;
   transform: scale(2);
 }
 
