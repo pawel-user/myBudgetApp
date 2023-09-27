@@ -138,9 +138,21 @@ hr {
   width: 45%;
 }
 
+
 .icon {
-  margin-right: 6%;
+  margin-right: 3%;
 }
+
+
+.active-account .icon {
+  color: #545454;
+}
+
+.icon.account-icon {
+  color: lightgreen;
+  transform: scale(2);
+}
+
 
 .register-button {
   background-color: #7a92d9;
@@ -402,15 +414,6 @@ hr {
   text-align: left !important;
 }
 
-.icon {
-  color: #545454;
-}
-
-.account-icon {
-  color: lightgreen;
-  transform: scale(2);
-}
-
 .welcome-banner {
   background-color: #c6d0ed;
   border-radius: 25px;
@@ -597,10 +600,6 @@ hr {
     margin-left: 0;
   }
 
-  .account-icon {
-    margin-right: 0;
-  }
-
   .summary-container {
     margin: 0 5%;
   }
@@ -624,10 +623,6 @@ hr {
 
   .sign-up-button, .send-button {
     font-size: 1rem;
-  }
-
-  .account-icon {
-    margin-right: 0;
   }
 
   .nav-item, .nav-link {
