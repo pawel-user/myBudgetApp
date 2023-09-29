@@ -55,6 +55,16 @@
         <hr class="dividing-line">
     </div>
 
+    <section class="login-section">
+        <div class="row justify-content-center">
+            {% for message in flash_messages %}
+            <div class="col-lg-6 notification-container">
+                    <h4 class="notification-text">{{ message }}</h4>
+             </div>
+            {% endfor %}
+            </div>
+    </section>
+
     {% block body %}
     {% endblock %}
 

@@ -389,11 +389,25 @@ hr {
   padding: 20px;
 }
 
-.centered-container {
-  display: flex;
+.notification-container {
   align-items: center;
+  vertical-align: middle;
+  background-color: #fff;
+  border-radius: 25px;
+  display: flex;
+  justify-content: center;
+  margin: 0 25%;
+  color: red;
+  height: 50px;
 }
 
+.notification-text {
+  text-align: center;
+  vertical-align: middle;
+  line-height: auto;
+  margin: 0;
+  padding: 10px;
+}
 /* Account Section */
 
 .account-container {
