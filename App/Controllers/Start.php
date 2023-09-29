@@ -12,26 +12,6 @@ use Core\View;
 class Start extends Authenticated
 {
     /**
-     * Before filter
-     * 
-     * @return void
-     */
-    protected function before()
-    {
-        //echo " (before)";
-    }
-
-    /**
-     * After filter
-     * 
-     * @return void
-     */
-    protected function after()
-    {
-        //echo " (after)";
-    }
-
-    /**
      * How the index page
      * 
      * @return void
