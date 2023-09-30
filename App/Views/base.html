@@ -58,8 +58,8 @@
     <section class="login-section">
         <div class="row justify-content-center">
             {% for message in flash_messages %}
-            <div class="col-lg-6 notification-container">
-                    <h4 class="notification-text">{{ message }}</h4>
+            <div class="col-lg-6 alert alert-{{ message.type }}">
+                    <h4 class="alert-text">{{ message.body }}</h4>
              </div>
             {% endfor %}
             </div>
