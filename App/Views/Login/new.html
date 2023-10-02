@@ -31,7 +31,12 @@
             placeholder="Password" />
           <label for="inputPassword">Password</label>
         </div>
-        <br>
+        <div>
+          <label>
+              <input type="checkbox" name="remember_me" {% if remember_me %} checked="checked" {% endif %}/>Remember me
+          </label>
+      </div>
+          <br>
         <div class="login-container">
           <button class="btn btn-lg btn-warning send-button" type="submit"><i
               class="fa-solid fa-right-to-bracket icon"></i> Sign in</button>
