@@ -36,10 +36,7 @@ use \App\Flash;
 
         if ($user) {
 
-            Auth::login($user);
-
-            // Remember the login here
-            // ...
+            Auth::login($user, $remember_me);
 
             Flash::addMessage('Login successful');
 
