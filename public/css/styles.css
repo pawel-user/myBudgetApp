@@ -119,6 +119,20 @@ hr {
   position: relative;
 }
 
+.checkbox {
+  margin: 2% 10%;
+}
+
+.checkbox-input {
+  transform: scale(2);
+  transform-origin: left top;
+}
+
+.checkbox-text {
+  padding-left: 20px;
+  line-height: 40px;
+}
+
 .text-on-button {
   background-color: #c6d0ed;
   border-radius: 20px;
@@ -152,7 +166,6 @@ hr {
   color: lightgreen;
   transform: scale(2);
 }
-
 
 .register-button {
   background-color: #7a92d9;
