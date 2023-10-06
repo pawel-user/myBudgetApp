@@ -45,4 +45,23 @@ namespace App;
      * @var boolean
      */
     const SECRET_KEY = 'RMccOFnQR4RnddmRUkOQYuV1nzKwY0s1';
+
+    /**
+     * Mail hostname
+     * @var string
+     */
+    const MAIL_HOSTNAME = 'smtp.gmail.com';
+
+    /**
+     * Mailer e-mail address
+     * @var string
+     */
+    const MAIL_ADDRESS = 'testmailer1220@gmail.com';
+
+    /**
+     * Mailer password
+     * @var string
+     */
+    const MAIL_PASSWORD = 'uxkk jvge qeni flpt';
+
  }
