@@ -299,6 +299,22 @@ hr {
   width: 100%;
 }
 
+.notification {
+  display: block;
+  margin-bottom: 50px;
+  width: 100%;
+}
+
+.notification-container {
+  margin-bottom: 50px;
+}
+
+.notification-title {
+  display: block;
+  margin-bottom: 50px;
+  text-align: center;
+}
+
 .account-question {
   color: #c6d0ed;
   margin: 3% auto 2% auto;
