@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block title %}Reset password{% endblock %}
+
+{% block navigation %}
+<ul class="navbar-nav d-flex flex-row ms-auto">
+    <li class="nav-item">
+        <a class="nav-link" href="/"><i class="fa-solid fa-house"></i> Home</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="/login"><i class="fa-solid fa-user"></i> Log in</a>
+    </li>
+</ul>
+{% endblock %}
+
+{% block body %}
+<main>
+    <section class="template-section">
+        <div class="row justify-content-center notification-container">
+            <h3 class="notification-title">Request password reset</h3>
+            <div class="col-lg-6 alert alert-success">
+                <p class="alert-text notification">Please check your email.</p>
+            </div>
+        </div>
+    </section>
+</main>
+{% endblock %}

@@ -22,6 +22,10 @@ class ComposerStaticInitb3cee91dc7835289b220a247b49fbdf0
             'Symfony\\Polyfill\\Ctype\\' => 23,
             'Symfony\\Component\\Asset\\' => 24,
         ),
+        'P' => 
+        array (
+            'PHPMailer\\PHPMailer\\' => 20,
+        ),
         'C' => 
         array (
             'Core\\' => 5,
@@ -48,6 +52,10 @@ class ComposerStaticInitb3cee91dc7835289b220a247b49fbdf0
         'Symfony\\Component\\Asset\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/asset',
+        ),
+        'PHPMailer\\PHPMailer\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/phpmailer/phpmailer/src',
         ),
         'Core\\' => 
         array (

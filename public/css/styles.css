@@ -286,8 +286,33 @@ hr {
   width: 45%;
 }
 
-.password-question:hover {
+.password-question, .reset-password-question:hover {
   color: #fff;
+}
+
+
+.reset-password-question {
+  color: #c6d0ed;
+  display: block;
+  margin-top: 20px;
+  text-align: center;
+  width: 100%;
+}
+
+.notification {
+  display: block;
+  margin-bottom: 50px;
+  width: 100%;
+}
+
+.notification-container {
+  margin-bottom: 50px;
+}
+
+.notification-title {
+  display: block;
+  margin-bottom: 50px;
+  text-align: center;
 }
 
 .account-question {
@@ -387,10 +412,13 @@ hr {
 }
 
 .login-container {
-  position: relative;
   display: block;
   margin: 3% auto;
   width: 35%;
+}
+
+.login-container .reset-container {
+  width: 100%;
 }
 
 .login-border {
