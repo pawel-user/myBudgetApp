@@ -31,13 +31,37 @@ class Password extends \Core\Controller {
         View::renderTemplate('Password/reset_requested.html');
     }
 
+    /**
+     * Show the reset password form
+     * 
+     * @return void
+     */
     public function resetAction() {
         $token = $this->route_params['token'];
 
         $user = User::findByPasswordReset($token);
 
         if ($user) {
-            View::renderTemplate('Password/reset.html');
+            View::renderTemplate('Password/reset.html', [
+                'token' => $token
+            ]);
+        } else {
+            echo "Password reset token invalid";
+        }
+    }
+    
+    /**
+     * Reset the user's password
+     * 
+     * @return void
+     */
+    public function resetPasswordAction() {
+        $token = $_POST['token'];
+
+        $user = User::findByPasswordReset($token);
+
+        if ($user) {
+           echo "Reset user's password here";
         } else {
             echo "Password reset token invalid";
         }

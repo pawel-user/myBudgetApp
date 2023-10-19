@@ -73,7 +73,9 @@
       </ul>
       {% endif %}
 
-      <form method="post" id="formPassword">
+      <form action="/password/reset-password" method="post" id="formPassword">
+
+        <input type="hidden" name="token" value="{{ token }}" />
         <div class="input-group mb-3 data-container">
           <label class="input-group-text data-form" for="inputPassword"><i class="fa-solid fa-lock"
               style="color: #7c7c82"></i></label>
