@@ -434,7 +434,7 @@ hr {
   align-items: center;
   border-radius: 10px;
   display: flex;
-  height: 30px;
+  height: 60px;
   justify-content: center;
   margin: 0 15%;
 }
@@ -624,7 +624,6 @@ hr {
   .choice-container {
     padding-top: 5%;
   }
-  
 }
 
 @media (max-width: 991px) {
