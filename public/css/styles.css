@@ -290,7 +290,6 @@ hr {
   color: #fff;
 }
 
-
 .reset-password-question {
   color: #c6d0ed;
   display: block;
@@ -403,6 +402,10 @@ hr {
   display: inline-block;
   margin: 5% auto 0;
   width: 35%;
+}
+
+.register-section p {
+  color: #fff;
 }
 
 /* Login Section */
