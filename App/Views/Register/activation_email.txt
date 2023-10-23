@@ -1,0 +1,5 @@
+Account activation
+
+Thank you for signing up. Please click the following ling to activate your account:
+
+{{ url }}

@@ -51,6 +51,7 @@ class User extends \Core\Model
 
             $token = new Token();
             $hashed_token = $token->getHash();
+            $this->activation_token = $token->getValue();
 
             $sql = 'INSERT INTO users (username, email, password_hash, activation_hash)
                     VALUES (:username, :email, :password_hash, :activation_hash)';
@@ -338,6 +339,19 @@ class User extends \Core\Model
         }
 
     return false;
+    }
 
+    /**
+     * Send password reset instructions in an email to the user
+     * 
+     * @return void
+     */
+    public function sendActivationEmail() {
+        $url = 'http://' . $_SERVER['HTTP_HOST'] . '/register/activate/' . $this->activation_token;
+
+        $text = View::getTemplate('Register/activation_email.txt', ['url' => $url]);
+        $html = View::getTemplate('Register/activation_email.html', ['url' => $url]);
+        
+        Mail::send($this->email, 'Account activation', $text, $html);
     }
 }
