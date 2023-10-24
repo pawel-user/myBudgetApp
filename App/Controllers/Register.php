@@ -55,7 +55,7 @@ class Register extends \Core\Controller {
     /**
      * Activate a new account
      * 
-     * @return voic
+     * @return void
      */
     public function activateAction() {
         User::activate($this->route_params['token']);
