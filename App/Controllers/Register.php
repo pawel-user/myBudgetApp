@@ -31,8 +31,12 @@ class Register extends \Core\Controller {
 
         if ($user->save()) {
 
-            header('Location: http://' . $_SERVER['HTTP_HOST'] . '/register/success', true, 303);
-            exit;
+            $user->sendActivationEmail();
+
+            $this->redirect('/register/success');
+
+            //header('Location: http://' . $_SERVER['HTTP_HOST'] . '/register/success', true, 303);
+            //exit;
 
         } else {
             View::renderTemplate('Register/new.html', ['user' => $user]);
@@ -46,5 +50,25 @@ class Register extends \Core\Controller {
     public function successAction()
     {
         View::renderTemplate('Register/success.html');
+    }
+
+    /**
+     * Activate a new account
+     * 
+     * @return voic
+     */
+    public function activateAction() {
+        User::activate($this->route_params['token']);
+        
+        $this->redirect('/register/activated');
+    }
+
+    /**
+     * Show the activation success page
+     * 
+     * @return void
+     */
+    public function activatedAction() {
+        View::renderTemplate('Register/activated.html');
     }
 }

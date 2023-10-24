@@ -377,7 +377,7 @@ hr {
   padding: 3% 5% 6%;
 }
 
-.register-title {
+.register-title, .register-notification {
   margin: 0 auto 10%;
   text-align: center;
 }
