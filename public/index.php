@@ -43,6 +43,7 @@ $router->add('login', ['controller' => 'Login', 'action' => 'new']);
 $router->add('logout', ['controller' => 'Login', 'action' => 'destroy']);
 
 $router->add('password/reset/{token:[\da-f]+}', ['controller' => 'Password', 'action' => 'reset']);
+$router->add('register/activate/{token:[\da-f]+}', ['controller' => 'Register', 'action' => 'activate']);
 
 $router->add('incomes', ['controller' => 'Start', 'action' => 'incomes']);
 $router->add('expenses', ['controller' => 'Start', 'action' => 'expenses']);

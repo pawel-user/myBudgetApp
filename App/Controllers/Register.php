@@ -51,4 +51,24 @@ class Register extends \Core\Controller {
     {
         View::renderTemplate('Register/success.html');
     }
+
+    /**
+     * Activate a new account
+     * 
+     * @return voic
+     */
+    public function activateAction() {
+        User::activate($this->route_params['token']);
+        
+        $this->redirect('/register/activated');
+    }
+
+    /**
+     * Show the activation success page
+     * 
+     * @return void
+     */
+    public function activatedAction() {
+        View::renderTemplate('Register/activated.html');
+    }
 }
