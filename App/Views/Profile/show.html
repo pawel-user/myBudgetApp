@@ -15,10 +15,25 @@
 
 {% block body %}
 <main>
-    <section class="template-section">
-        <div class="row justify-content-center notification-container">
-            <h3 class="notification-title">Profile</h3>
-            
+    <section class="login-section">
+        <div class="row justify-content-center">
+            <div class="col-lg-6 login-border">
+                <header>
+                    <h3 class="notification-title">Profile</h3>
+                </header>
+
+                <dl>
+                    <dt>Userame:</dt>
+                    <dd>{{ user.username }}</dd>
+                    <dt>Email:</dt>
+                    <dd>{{ user.email }}</dd>
+                </dl>
+
+                <div class="edit-container">
+                    <a class="reset-password-question edit-profile" href="/profile/edit">Edit</a>
+                </div>
+          
+            </div>
         </div>
     </section>
 </main>

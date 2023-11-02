@@ -1,0 +1,130 @@
+{% extends "base.html" %}
+
+{% block title %}Profile{% endblock %}
+
+{% block footer %}
+<script src="/js/hideShowPassword.min.js"></script>
+<script src="/js/app.js"></script>
+
+<script>
+    $(document).ready(function () {
+
+        var userId = '{{ user.id }}';
+
+        /**
+         * Validate the form
+         */
+        $('#formProfile').validate({
+            rules: {
+                name: 'required',
+                email: {
+                    required: true,
+                    email: true,
+                    remote: {
+                        url: 'account/validate-email',
+                        data: {
+                            ignore_id: function () {
+                                return userId;
+                            }
+                        }
+                    }
+                },
+                password: {
+                    required: true,
+                    minlength: 6,
+                    validPassword: true
+                }
+            },
+            messages: {
+                email: {
+                    remote: 'Email already taken'
+                }
+            }
+        });
+
+        /**
+         * Show password toggle button
+         */
+        $('#inputPassword').hideShowPassword({
+            show: false,
+            innerToggle: 'focus'
+        });
+    });
+</script>
+{% endblock %}
+
+{% block navigation %}
+<ul class="navbar-nav d-flex flex-row ms-auto">
+  {% if is_logged_in %}
+  <li class="nav-item">
+      <a class="nav-link" href="/start"><i class="fa-solid fa-house"></i> Home</a>
+  </li>
+  <li class="nav-item">
+      <a class="nav-link" href="/logout"><i class="fa-solid fa-right-from-bracket"></i> Log out</a>
+    </li>
+  {% else %}
+  <li class="nav-item">
+      <a class="nav-link" href="/"><i class="fa-solid fa-house"></i> Home</a>
+  </li>
+  <li class="nav-item">
+      <a class="nav-link" href="/login"><i class="fa-solid fa-user"></i> Log in</a>
+  </li>
+  {% endif %}
+<li class="nav-item">
+    <a class="nav-link" href="/contact"><i class="fa-solid fa-envelope"></i> Contact</a>
+  </li>
+</ul>
+{% endblock %}
+
+{% block body %}
+<main>
+    <section class="login-section">
+        <div class="row justify-content-center">
+            <div class="col-lg-6 login-border">
+                <header>
+                    <h2 class="edit-title">Profile</h2>
+                </header>
+
+                {% if user.errors is not empty %}
+                <p>Errors:</p>
+                <ul>
+                    {% for error in user.errors %}
+                    <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+
+                <form method="post" id="formProfile">
+                    <label for="inputUsername">Username</label>
+                    <div class="input-group mb-3 data-container">
+                        <label class="input-group-text data-form" for="inputUsername"><i class="fa-solid fa-user"
+                            style="color: #7c7c82;"></i></label>
+                        <input class="form-control data-form" type="text" id="inputUsername" name="username" placeholder="Username" aria-label="Username"  value="{{ user.username }}"                         required />
+                    </div>
+
+                    <label for="inputEmail">Email address</label>
+                    <div class="input-group mb-3 data-container">
+                        <label class="input-group-text data-form" for="inputEmail"><i class="fa-solid fa-at"
+                            style="color: #7c7c82"></i></label>
+                        <input class="form-control data-form" type="email" id="inputEmail" name="email" placeholder="Email"
+                        aria-label="Email" value="{{ user.email }}" required />
+                    </div>
+
+                    <label for="inputPassword">Password</label>
+                    <div class="input-group mb-3 data-container">
+                        <label class="input-group-text data-form" for="inputPassword"><i class="fa-solid fa-lock"
+                            style="color: #7c7c82"></i></label>
+                        <input class="form-control data-form" type="password" id="inputPassword" name="password"
+                        placeholder="Password" aria-label="Password" required />
+                    </div>
+
+                    <div class="edit-container">
+                        <button class="btn btn-lg btn-success sign-up-button" type="submit">Save</button>
+                        <a class="reset-password-question cancel-edit-profile" href="/profile/show">Cancel</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+</main>
+{% endblock %}
