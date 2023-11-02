@@ -377,7 +377,7 @@ hr {
   padding: 3% 5% 6%;
 }
 
-.register-title, .register-notification {
+.register-title, .register-notification, .edit-title {
   margin: 0 auto 10%;
   text-align: center;
 }
@@ -460,6 +460,10 @@ hr {
   line-height: auto;
   margin: 0;
   padding: 10px;
+}
+
+.validating-notification {
+  color: lightgreen;
 }
 
 

@@ -30,7 +30,6 @@
                     }
                 },
                 password: {
-                    required: true,
                     minlength: 6,
                     validPassword: true
                 }
@@ -115,7 +114,8 @@
                         <label class="input-group-text data-form" for="inputPassword"><i class="fa-solid fa-lock"
                             style="color: #7c7c82"></i></label>
                         <input class="form-control data-form" type="password" id="inputPassword" name="password"
-                        placeholder="Password" aria-label="Password" required />
+                        placeholder="Password" aria-label="Password" aria-describedby="helpBlock"/>
+                        <span class="validating-notification" id="helpBlock">Leave blank to keep current password</span>
                     </div>
 
                     <div class="edit-container">
