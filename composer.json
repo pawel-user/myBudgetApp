@@ -1,5 +1,6 @@
 {
     "require": {
+        "php": "^8.2.0",
         "twig/twig": "^3.7.0",
         "symfony/asset": "^6.3",
         "phpmailer/phpmailer": "^6.8"
@@ -8,6 +9,11 @@
         "psr-4": {
             "Core\\": "Core/",
             "App\\": "App/"
+        }
+    },
+    "config": {
+        "platform": {
+            "php": "8.2.6"
         }
     }
 }
