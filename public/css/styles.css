@@ -298,6 +298,18 @@ hr {
   width: 100%;
 }
 
+.reset-password-question.edit-profile  {
+  text-align: left;
+}
+
+.edit-profile:hover {
+  color: lightgreen;
+}
+
+.cancel-edit-profile:hover  {
+  color: salmon;
+}
+
 .notification {
   display: block;
   margin-bottom: 50px;
@@ -377,7 +389,7 @@ hr {
   padding: 3% 5% 6%;
 }
 
-.register-title, .register-notification {
+.register-title, .register-notification, .edit-title {
   margin: 0 auto 10%;
   text-align: center;
 }
@@ -420,7 +432,7 @@ hr {
   width: 35%;
 }
 
-.login-container .reset-container {
+.login-container .reset-container,.edit-container {
   width: 100%;
 }
 
