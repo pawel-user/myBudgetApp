@@ -21,7 +21,7 @@
                     required: true,
                     email: true,
                     remote: {
-                        url: 'account/validate-email',
+                        url: '/account/validate-email',
                         data: {
                             ignore_id: function () {
                                 return userId;
@@ -93,7 +93,7 @@
                 </ul>
                 {% endif %}
 
-                <form method="post" id="formProfile">
+                <form id="formProfile" action="/profile/update" method="post" >
                     <label for="inputUsername">Username</label>
                     <div class="input-group mb-3 data-container">
                         <label class="input-group-text data-form" for="inputUsername"><i class="fa-solid fa-user"

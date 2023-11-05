@@ -164,6 +164,7 @@ hr {
 
 .icon.account-icon {
   color: lightgreen;
+  margin-left: 10px;
   transform: scale(2);
 }
 
@@ -368,6 +369,18 @@ hr {
   font-weight: bold;
   margin-bottom: 1%;
   width: 100%;
+}
+
+.profile-title {
+  margin-bottom: 10px;
+}
+
+.profile-element {
+  margin-left: 10px;
+}
+
+.profile-container {
+  margin-bottom: 0;
 }
 
 /* Register Section */
