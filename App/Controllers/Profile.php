@@ -12,7 +12,20 @@ use \App\Flash;
  * PHP version 7.4
  */
 
+ #[\AllowDynamicProperties]
  class Profile extends Authenticated {
+
+    /**
+     * Before filter - called before each action method
+     * 
+     * @return void
+     */
+    protected function before() {
+        parent::before();
+
+        $this->user = Auth::getUser();
+    }
+
     /**
      * Show the profile
      * 
@@ -20,7 +33,7 @@ use \App\Flash;
      */
     public function showAction() {
         View::renderTemplate('Profile/show.html', [
-            'user' => Auth::getUser()
+            'user' => $this->user
         ]);
     }
 
@@ -31,7 +44,7 @@ use \App\Flash;
      */
     public function editAction() {
         View::renderTemplate('Profile/edit.html', [
-            'user' => Auth::getUser()
+            'user' => $this->user
         ]);
     }
 
@@ -41,9 +54,8 @@ use \App\Flash;
      * @return void
      */
     public function updateAction() {
-        $user = Auth::getUser();
 
-        if ($user->updateProfile($_POST)) {
+        if ($this->user->updateProfile($_POST)) {
 
             Flash::addMessage('Changes saved');
 
@@ -52,7 +64,7 @@ use \App\Flash;
         } else {
 
             View::renderTemplate('Profile/edit.html', [
-                'user' => $user
+                'user' => $this->user
             ]);
         }
     }
