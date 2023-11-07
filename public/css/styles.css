@@ -316,7 +316,8 @@ hr {
 }
 
 .account-question {
-  color: #c6d0ed;
+  /*color: #c6d0ed;*/
+  color: #fff;
   margin: 3% auto 2% auto;
 }
 
@@ -565,14 +566,14 @@ hr {
 }
 
 .dropdown-button {
-  padding-right: 5%;
   float:right;
+  padding-right: 5%;
 }
 
 /* Add Income&Section and View Balance Section */
 
 .title-action {
-  margin-bottom: 2%;
+  margin: 5% auto 2%;
 }
 
 .table-description {
@@ -644,6 +645,11 @@ hr {
   .choice-container {
     padding-top: 5%;
   }
+
+  .title-action {
+    margin-top: 10%;
+  }
+  
 }
 
 @media (max-width: 991px) {
@@ -730,5 +736,11 @@ hr {
 }
 
 .copyright {
-  margin: auto;
+  margin: 1px 0;
+  width: 100%;
+}
+
+hr.horizontal-line1 {
+  border-top: 1px solid #7c7c82;
+  margin: 0;
 }
