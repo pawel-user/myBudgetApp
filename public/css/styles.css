@@ -164,6 +164,7 @@ hr {
 
 .icon.account-icon {
   color: lightgreen;
+  margin-left: 10px;
   transform: scale(2);
 }
 
@@ -327,7 +328,8 @@ hr {
 }
 
 .account-question {
-  color: #c6d0ed;
+  /*color: #c6d0ed;*/
+  color: #fff;
   margin: 3% auto 2% auto;
 }
 
@@ -380,6 +382,18 @@ hr {
   font-weight: bold;
   margin-bottom: 1%;
   width: 100%;
+}
+
+.profile-title {
+  margin-bottom: 10px;
+}
+
+.profile-element {
+  margin-left: 10px;
+}
+
+.profile-container {
+  margin-bottom: 0;
 }
 
 /* Register Section */
@@ -474,6 +488,10 @@ hr {
   padding: 10px;
 }
 
+.validating-notification {
+  color: lightgreen;
+}
+
 
 /* Account Section */
 
@@ -560,14 +578,14 @@ hr {
 }
 
 .dropdown-button {
-  padding-right: 5%;
   float:right;
+  padding-right: 5%;
 }
 
 /* Add Income&Section and View Balance Section */
 
 .title-action {
-  margin-bottom: 2%;
+  margin: 5% auto 2%;
 }
 
 .table-description {
@@ -639,6 +657,11 @@ hr {
   .choice-container {
     padding-top: 5%;
   }
+
+  .title-action {
+    margin-top: 10%;
+  }
+  
 }
 
 @media (max-width: 991px) {
@@ -725,5 +748,11 @@ hr {
 }
 
 .copyright {
-  margin: auto;
+  margin: 1px 0;
+  width: 100%;
+}
+
+hr.horizontal-line1 {
+  border-top: 1px solid #7c7c82;
+  margin: 0;
 }
