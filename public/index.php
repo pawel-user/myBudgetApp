@@ -36,7 +36,6 @@ $router = new Core\Router();
 // Add the routes
 $router->add('', ['controller' => 'Home', 'action' => 'index']);
 $router->add('contact', ['controller' => 'Home', 'action' => 'contact']);
-$router->add('newpassword', ['controller' => 'Home', 'action' => 'newpassword']);
 $router->add('start', ['controller' => 'Start', 'action' => 'home']);
 $router->add('create', ['controller' => 'Login', 'action' => 'create']);
 $router->add('login', ['controller' => 'Login', 'action' => 'new']);
@@ -48,8 +47,7 @@ $router->add('register/activate/{token:[\da-f]+}', ['controller' => 'Register', 
 $router->add('incomes', ['controller' => 'Start', 'action' => 'incomes']);
 $router->add('expenses', ['controller' => 'Start', 'action' => 'expenses']);
 $router->add('balance', ['controller' => 'Start', 'action' => 'balance']);
+
 $router->add('{controller}/{action}');
-//$router->add('{controller}/{id:\d+}/{action}');
-//$router->add('admin/{controller}/{action}', ['namespace' => 'Admin']);
     
 $router->dispatch($_SERVER['QUERY_STRING']);

@@ -468,18 +468,6 @@ hr {
   margin: 0 15%;
 }
 
-.alert-info {
-  background-color: #d9edf7;
-}
-
-.alert-success {
-  background-color: #dff0d8;
-}
-
-.alert-warning {
-  background-color: #fcf8e3;
-}
-
 .alert-text {
   text-align: center;
   vertical-align: middle;
