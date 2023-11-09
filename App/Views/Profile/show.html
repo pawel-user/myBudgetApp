@@ -14,11 +14,15 @@
                     <h3 class="notification-title">Profile</h3>
                 </header>
 
-                <dl>
-                    <dt>Userame:</dt>
-                    <dd>{{ user.username }}</dd>
-                    <dt>Email:</dt>
-                    <dd>{{ user.email }}</dd>
+                <dl class="row">
+                    <dt class="col-2">Userame:</dt>
+                    <dd class="col-10">{{ user.username }}</dd>
+                    <dt class="col-2">Email:</dt>
+                    <dd class="col-10">{{ user.email }}</dd>
+                    <dt class="col-2">Userame:</dt>
+                    <dd class="col-10">{{ user.username }}</dd>
+                    <dt class="col-2">Email:</dt>
+                    <dd class="col-10">{{ user.email }}</dd>
                 </dl>
 
                 <div class="edit-container">
@@ -28,5 +32,6 @@
             </div>
         </div>
     </section>
+
 </main>
 {% endblock %}
