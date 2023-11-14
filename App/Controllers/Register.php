@@ -31,12 +31,9 @@ class Register extends \Core\Controller {
 
         if ($user->save()) {
 
-            $user->sendActivationEmail();
-
             $this->redirect('/register/success');
 
-            //header('Location: http://' . $_SERVER['HTTP_HOST'] . '/register/success', true, 303);
-            //exit;
+            $user->sendActivationEmail();
 
         } else {
             View::renderTemplate('Register/new.html', ['user' => $user]);

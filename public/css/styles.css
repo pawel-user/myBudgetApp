@@ -197,7 +197,7 @@ hr {
   margin: 0;
   padding: 0 5% 1%;
   position: relative;
-  flex: 1;
+  flex: auto;
 }
 
 .welcome-section {
