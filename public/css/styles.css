@@ -392,7 +392,9 @@ hr {
 }
 
 .profile-title {
+  color: #545454;
   margin-bottom: 10px;
+  width: 100%;
 }
 
 .profile-element {
@@ -402,6 +404,16 @@ hr {
 .profile-container {
   margin-bottom: 0;
 }
+
+.dropdown-button {
+  float:right;
+  padding-right: 1%;
+}
+
+.profile-button {
+  float: left;
+}
+
 
 /* Register Section */
 
@@ -488,25 +500,7 @@ hr {
 }
 
 
-/* Account Section */
-
-.account-container {
-  text-align: left;
-}
-
 /* Welcome Section */
-
-.active-account {
-  background-color: #fff;
-  border: solid 1px;
-  border-radius: 15px;
-  color: #545454 !important;
-  display: inline-block;
-  line-height: 1.5;
-  margin-left: 2px;
-  padding: 0.5rem;
-  text-align: left !important;
-}
 
 .welcome-banner {
   background-color: #c6d0ed;
@@ -570,11 +564,6 @@ hr {
   display: block;
   transform: scale(7);
   z-index: 1;
-}
-
-.dropdown-button {
-  float:right;
-  padding-right: 5%;
 }
 
 /* Add Income&Section and View Balance Section */

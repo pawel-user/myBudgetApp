@@ -14,21 +14,9 @@
 
 {% endblock %}
 
+
 {% block body %}
 <section class="template-section">
-  <div class="row">
-    <div class="col-lg-6 col-md-12 col-sm-12 account-container active-account">
-      <dl class="profile-container">
-        <dt class="profile-title"><i class="fa-solid fa-check icon account-icon"></i>USER PROFILE</dt>
-        <dd class="profile-element"><i class="fa-solid fa-user icon"></i>{{ current_user.username }}</dd>
-        <dd class="profile-element"><i class="fa-solid fa-envelope icon"></i>{{ current_user.email }}</dd>
-        <a class="profile-element" href="/profile/edit">Edit</a>
-      </dl>
-    </div>
-  </div>
-
-  <div class="col-lg-6 col-md-6 col-sm-6"></div>
-
   <div class="col choice-container">
     <button type="button" class="btn btn-primary dropdown-toggle dropdown-button" data-bs-toggle="dropdown">
       <i class="fa-regular fa-calendar icon"></i> Select time period
@@ -50,7 +38,6 @@
         <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#rangeTimeModal">Custom</a>
       </li>
     </ul>
-  </div>
   </div>
 </section>
 
@@ -82,7 +69,6 @@
     </div>
   </div>
 </div>
-
 
 <main>
   <section class="view-balance-section">

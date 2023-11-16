@@ -16,19 +16,6 @@
 
 {% block body %}
 <main>
-  <section class="template-section">
-    <div class="row">
-      <div class="col-lg-6 col-md-12 col-sm-12 account-container active-account">
-        <dl class="profile-container">
-          <dt class="profile-title"><i class="fa-solid fa-check icon account-icon"></i>USER PROFILE</dt>
-          <dd class="profile-element"><i class="fa-solid fa-user icon"></i>{{ current_user.username }}</dd>
-          <dd class="profile-element"><i class="fa-solid fa-envelope icon"></i>{{ current_user.email }}</dd>
-          <a class="profile-element" href="/profile/edit">Edit</a>
-        </dl>
-      </div>
-    </div>
-  </section>
-
   <section class="add-expense-section">
     <h3 class="title-action">Enter expenses data:</h3>
     <div class="input-group mb-3 data-container">

@@ -106,6 +106,38 @@
         <hr class="dividing-line">
     </div>
 
+    {% if current_user %}
+    {% block profile %}
+    <section class="template-section">
+        <div class="row">
+            <div class="col-lg-6 col-md-12 col-sm-12 account-container active-account">
+                <button class="btn btn-primary profile-button" type="button" data-bs-toggle="offcanvas"
+                    data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions">Expand user
+                    profile view</button>
+
+                <div class="offcanvas offcanvas-start" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions"
+                    aria-labelledby="offcanvasWithBothOptionsLabel">
+                    <div class="offcanvas-header profile-container">
+                        <dt class="offcanvas-title profile-title" id="offcanvasWithBothOptionsLabel"><i
+                                class="fa-solid fa-check icon account-icon"></i> USER PROFILE</dt>
+                        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                    </div>
+                    <div class="offcanvas-body">
+                        <dl class="profile-container">
+                            <dd class="profile-element"><i class="fa-solid fa-user icon"></i>{{ current_user.username }}
+                            </dd>
+                            <dd class="profile-element"><i class="fa-solid fa-envelope icon"></i>{{ current_user.email
+                                }}</dd>
+                            <a class="profile-element" href="/profile/edit">Edit</a>
+                        </dl>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    {% endblock %}
+    {% endif %}
+
     <section class="login-section">
         <div class="row justify-content-center">
             {% for message in flash_messages %}
@@ -153,7 +185,8 @@
                                     <div class="input-group mb-3 data-container">
                                         <label class="input-group-text data-form" name="username" id="basic-addon1"><i
                                                 class="fa-solid fa-user" style="color: #7c7c82;"></i></label>
-                                        <input type="text" class="form-control data-form" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+                                        <input type="text" class="form-control data-form" placeholder="Username"
+                                            aria-label="Username" aria-describedby="basic-addon1">
                                     </div>
                                     <button type="button" class="btn btn-secondary"
                                         data-bs-dismiss="modal">Close</button>
@@ -233,11 +266,13 @@
                                     <div class="input-group mb-3">
                                         <select class="form-select" aria-label="Default select example">
                                             <option selected>Open this select menu</option>
-                                            <option value="" disabled="disabled">───────────────────────────────────────
+                                            <option value="" disabled="disabled">
+                                                ───────────────────────────────────────
                                             </option>
                                             <option value="1">Salary</option>
                                             <option value="2">Bank interest</option>
-                                            <option value="" disabled="disabled">───────────────────────────────────────
+                                            <option value="" disabled="disabled">
+                                                ───────────────────────────────────────
                                             </option>
                                             <option value="3">Other incomes</option>
                                         </select>
