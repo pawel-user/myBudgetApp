@@ -43,12 +43,26 @@
 
         /**
          * Show password toggle button
-         */
+         
         $('#inputPassword').hideShowPassword({
             show: false,
             innerToggle: 'focus'
+        });*/
+
+        $("#show_hide_password a").on('click', function (event) {
+            event.preventDefault();
+            if ($('#show_hide_password input').attr("type") == "text") {
+                $('#show_hide_password input').attr('type', 'password');
+                $('#show_hide_password span').addClass("fa-eye-slash");
+                $('#show_hide_password span').removeClass("fa-eye");
+            } else if ($('#show_hide_password input').attr("type") == "password") {
+                $('#show_hide_password input').attr('type', 'text');
+                $('#show_hide_password span').removeClass("fa-eye-slash");
+                $('#show_hide_password span').addClass("fa-eye");
+            }
         });
     });
+
 </script>
 {% endblock %}
 
@@ -73,30 +87,36 @@
                 </ul>
                 {% endif %}
 
-                <form id="formProfile" action="/profile/update" method="post" >
+                <form id="formProfile" action="/profile/update" method="post">
                     <label for="inputUsername">Username</label>
                     <div class="input-group mb-3 data-container">
                         <label class="input-group-text data-form" for="inputUsername"><i class="fa-solid fa-user"
-                            style="color: #7c7c82;"></i></label>
-                        <input class="form-control data-form" type="text" id="inputUsername" name="username" placeholder="Username" aria-label="Username"  value="{{ user.username }}"                         required />
+                                style="color: #7c7c82;"></i></label>
+                        <input class="form-control data-form" type="text" id="inputUsername" name="username"
+                            placeholder="Username" aria-label="Username" value="{{ user.username }}" required />
                     </div>
 
                     <label for="inputEmail">Email address</label>
                     <div class="input-group mb-3 data-container">
                         <label class="input-group-text data-form" for="inputEmail"><i class="fa-solid fa-at"
-                            style="color: #7c7c82"></i></label>
-                        <input class="form-control data-form" type="email" id="inputEmail" name="email" placeholder="Email"
-                        aria-label="Email" value="{{ user.email }}" required />
+                                style="color: #7c7c82"></i></label>
+                        <input class="form-control data-form" type="email" id="inputEmail" name="email"
+                            placeholder="Email" aria-label="Email" value="{{ user.email }}" required />
                     </div>
 
                     <label for="inputPassword">Password</label>
-                    <div class="input-group mb-3 data-container">
+                    <div class="input-group mb-3 data-container" id="show_hide_password">
                         <label class="input-group-text data-form" for="inputPassword"><i class="fa-solid fa-lock"
                             style="color: #7c7c82"></i></label>
                         <input class="form-control data-form" type="password" id="inputPassword" name="password"
-                        placeholder="Password" aria-label="Password" aria-describedby="helpBlock"/>
-                        <span class="validating-notification" id="helpBlock">Leave blank to keep current password</span>
+                            placeholder="Password" aria-label="Password" aria-describedby="helpBlock" />
+                        <label class="input-group-text data-form" for="inputPassword">
+                            <a href=""><span class="fa-solid fa-eye-slash" aria-hidden="true"
+                                    style="color: #7c7c82"></span></a>
+                        </label>
                     </div>
+                    <span class="validating-notification" id="helpBlock">Leave blank to keep current
+                        password</span><br>
 
                     <div class="edit-container">
                         <button class="btn btn-lg btn-success sign-up-button" type="submit">Save</button>
