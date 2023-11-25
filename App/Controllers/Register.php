@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use Core\View;
 use App\Models\User;
+use App\Models\IncomeCategory;
 
 /**
  * Signup controller
@@ -31,9 +32,14 @@ class Register extends \Core\Controller {
 
         if ($user->save()) {
 
+
             $this->redirect('/register/success');
 
             $user->sendActivationEmail();
+
+            $user = $user->getUserID();
+            $income_category = new IncomeCategory($user);
+            $income_category->loadDefaultIncomeCategories();
 
         } else {
             View::renderTemplate('Register/new.html', ['user' => $user]);

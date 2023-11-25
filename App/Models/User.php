@@ -425,4 +425,20 @@ class User extends \Core\Model
 
         return false;
     }
+
+    public function getUserID() {
+        $sql = 'SELECT (id) FROM users
+                    WHERE email = :email';
+
+        $db = static::getDB();
+        $stmt = $db->prepare($sql);
+
+        $stmt->bindValue(':email', $this->email, PDO::PARAM_STR);
+
+        $stmt->setFetchMode(PDO::FETCH_CLASS, get_called_class());
+
+        $stmt->execute();
+
+        return $stmt->fetch();
+    }
 }
