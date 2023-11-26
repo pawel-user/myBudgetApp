@@ -34,26 +34,6 @@
 
 
 {% block navigation %}
-<ul class="navbar-nav d-flex flex-row ms-auto">
-  {% if is_logged_in %}
-  <li class="nav-item">
-      <a class="nav-link" href="/start"><i class="fa-solid fa-house"></i> Home</a>
-  </li>
-  <li class="nav-item">
-      <a class="nav-link" href="/logout"><i class="fa-solid fa-right-from-bracket"></i> Log out</a>
-    </li>
-  {% else %}
-  <li class="nav-item">
-      <a class="nav-link" href="/"><i class="fa-solid fa-house"></i> Home</a>
-  </li>
-  <li class="nav-item">
-      <a class="nav-link" href="/login"><i class="fa-solid fa-user"></i> Log in</a>
-  </li>
-  {% endif %}
-<li class="nav-item">
-    <a class="nav-link" href="/contact"><i class="fa-solid fa-envelope"></i> Contact</a>
-  </li>
-</ul>
 {% endblock %}
 
 {% block body %}
