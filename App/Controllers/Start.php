@@ -61,6 +61,11 @@ class Start extends Authenticated
         View::renderTemplate('Start/expenses.html');
     }
 
+    public function newAction()
+    {
+        View::renderTemplate('Start/new.html');
+    }
+
     /**
      * How the balance page
      * 

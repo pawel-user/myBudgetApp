@@ -18,7 +18,6 @@ class Home extends \Core\Controller {
      */
     protected function before() {
         //echo "(before) ";
-        //return false;
     }
 
     /**
@@ -36,7 +35,6 @@ class Home extends \Core\Controller {
      * @return void
      */
     public function indexAction() {
-    //    \App\Mail::send('pawel.bochacik.programista@gmail.com', 'Test', 'This is a test', '<h1>This is a test</h1>');
         View::renderTemplate('Home/index.html');
     }
 
@@ -49,12 +47,4 @@ class Home extends \Core\Controller {
         View::renderTemplate('Home/contact.html');
     }
 
-    /**
-     * How the change password page
-     * 
-     * @return void
-     */
-    public function newpasswordAction() {
-        View::renderTemplate('Home/newpassword.html');
-    }
 }
