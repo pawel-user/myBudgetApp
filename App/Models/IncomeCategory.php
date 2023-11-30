@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use PDO;
-use \App\Models\User;
 
 /*
 * Income category model
@@ -14,9 +13,16 @@ use \App\Models\User;
 class IncomeCategory extends \Core\Model {
 
     /**
+     * Income category names
+     * 
+     * @var array
+     */
+    public $income_names = [];
+
+     /**
      * Class constructor
      * 
-     * @param array $data Initial property values
+     * @param array $data Load all default category names to array and initial property values
      * 
      * @return void
      */
@@ -25,6 +31,35 @@ class IncomeCategory extends \Core\Model {
         foreach ($data as $key => $value) {
             $this->$key = $value;
         };
+    }
+
+    /**
+     * Download default income categories to array
+     * 
+     * @return mixed Income object;
+     */
+    public function downloadDefaultIncomeCategories() {
+
+        $sql = 'SELECT *
+        FROM incomes_category_default';
+
+        $db = static::getDB();
+        $stmt = $db->prepare($sql);
+
+        $stmt->setFetchMode(PDO::FETCH_NUM);
+
+        $stmt->execute();
+
+        $stmt->fetch();
+
+        $index = 0;
+
+        foreach ($stmt as $row) {
+            $income_names[$index] = $row[1];
+            $index++;
+        }
+
+        return $income_names;
     }
 
     /**

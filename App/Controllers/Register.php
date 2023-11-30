@@ -41,6 +41,8 @@ class Register extends \Core\Controller {
             $income_category = new IncomeCategory($user);
             $income_category->loadDefaultIncomeCategories();
 
+            $income_category->downloadDefaultIncomeCategories();
+    
         } else {
             View::renderTemplate('Register/new.html', ['user' => $user]);
         }

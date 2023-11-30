@@ -7,12 +7,14 @@ use \App\Token;
 use \App\Mail;
 use \Core\View;
 
+use \AllowDynamicProperties;
+
 /**
  * Post model
  * 
  * PHP version 7.4
  */
-#[\AllowDynamicProperties]
+#[AllowDynamicProperties]
 class User extends \Core\Model
 {
     /**
@@ -426,6 +428,11 @@ class User extends \Core\Model
         return false;
     }
 
+    /**
+     * Get user ID by email
+     * 
+     * @return integer;
+     */
     public function getUserID() {
         $sql = 'SELECT (id) FROM users
                     WHERE email = :email';

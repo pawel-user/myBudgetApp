@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+
+{% block title %}Adding incomes{% endblock %}
+
+{% block navigation %}
+
+<li class="nav-item">
+  <a class="nav-link" href="/expenses"><i class="fa-solid fa-sack-xmark"></i> Add expense</a>
+</li>
+
+<li class="nav-item">
+  <a class="nav-link" href="/balance"><i class="fa-solid fa-scale-balanced"></i> View balance</a>
+</li>
+
+{% endblock %}
+
+{% block body %}
+<main>
+  <section class="add-income-section">
+    <h3 class="title-action">Enter incomes data:</h3>
+
+    <form method="post" action="/profit/create">
+      <div class="input-group mb-3 data-container">
+        <label class="input-group-text data-form" for="inputAmount"><i class="fa-solid fa-coins"
+            style="color: #7c7c82;"></i>
+        </label>
+        <input class="form-control data-form" type="number" id="inputAmount" name="amount" placeholder="Amount (PLN)" aria-label="Amount (PLN)" min="0.01" step="0.01">
+      </div>
+
+      <div class="input-group mb-3 data-container">
+        <label class="input-group-text data-form" for="inputDate"><i class="fa-sharp fa-regular fa-calendar"
+            style="color: #7c7c82;"></i>
+        </label>
+        <input class="form-control data-form" type="date" id="inputDate" name="date_of_income" aria-label="Date"
+          value="{{ currentDate }}" min="2000-01-01">
+      </div>
+
+      <div class="input-group mb-3 data-container">
+        <label class="input-group-text data-form" for="inputCategory"><i class="fa-solid fa-caret-down"
+            style="color: #7c7c82;"></i>
+        </label>
+        <select class="form-control data-form " id="inputCategory" name="name">
+          <option selected>Choose category...</option>
+          <option value="" disabled="disabled">───────────────────────────────────────</option>
+          {% if incomecategory.income_names is not empty %}
+            {% for income_name in incomecategory.income_names %}
+            <option value="{{ income_name }}">{{ income_name }}</option>
+            {% endfor %}
+          {% endif %}
+    
+          <!--<option value="salary">Salary</option>
+          <option value="Bank interest">Bank interest</option>-->
+          <option value="" disabled="disabled">───────────────────────────────────────</option>
+          <option value="other_incomes">Other incomes</option>
+        </select>
+      </div>
+
+      <div class="input-group mb-3 data-container">
+        <label class="input-group-text data-form" for="inputTextComment"><i
+            class="fa-solid fa-pencil" style="color: #7c7c82;"></i></label>
+        <textarea class="form-control data-form" id="inputTextComment" name="income_comment" rows="3" placeholder="Type a comment..." resize="none"></textarea>
+      </div>
+      <div class="button-container" style="float: left;">
+        <button type="reset" class="btn btn-lg btn-danger sign-up-button">
+          <i class="fa-solid fa-rectangle-xmark icon"></i>Cancel
+        </button>
+      </div>
+      <div class="button-container" style="float: right;">
+        <button type="submit" class="btn btn-lg btn-success sign-up-button">
+          <i class="fa-solid fa-square-check icon"></i>Confirm
+        </button>
+      </div>
+    </form>
+
+  </section>
+</main>
+{% endblock %}
