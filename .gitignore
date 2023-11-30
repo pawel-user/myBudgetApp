@@ -1,0 +1,10 @@
+/_archive
+/_plans
+/App/Config.php
+/vendor
+
+*.bak
+
+nginx*.txt
+
+LICENSE
