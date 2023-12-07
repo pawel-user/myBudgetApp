@@ -1,6 +1,7 @@
 /_archive
 /_plans
 /App/Config.php
+/App/Mail.php
 /vendor
 
 *.bak
