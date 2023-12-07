@@ -43,7 +43,7 @@
           <option selected>Choose category...</option>
           <option value="" disabled="disabled">───────────────────────────────────────</option>
           {% if incomecategory.income_names is not empty %}
-            {% for income_name in incomecategory.income_names %}
+            {% for income_name in dump(incomecategory.income_names) %}
             <option value="{{ income_name }}">{{ income_name }}</option>
             {% endfor %}
           {% endif %}

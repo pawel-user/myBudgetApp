@@ -13,16 +13,16 @@ use PDO;
 class IncomeCategory extends \Core\Model {
 
     /**
-     * Income category names
+     * Error messages
      * 
      * @var array
      */
-    public $income_names = [];
+    public $errors = [];
 
-     /**
+    /**
      * Class constructor
      * 
-     * @param array $data Load all default category names to array and initial property values
+     * @param array $data Initial property values
      * 
      * @return void
      */
@@ -38,28 +38,18 @@ class IncomeCategory extends \Core\Model {
      * 
      * @return mixed Income object;
      */
-    public function downloadDefaultIncomeCategories() {
+    public static function getDefaultIncomeCategories($userID) {
 
-        $sql = 'SELECT *
-        FROM incomes_category_default';
+        $sql = 'SELECT id, name FROM incomes_category_default
+                WHERE user_id = :userID';
 
         $db = static::getDB();
         $stmt = $db->prepare($sql);
-
-        $stmt->setFetchMode(PDO::FETCH_NUM);
-
+        $stmt->bindValue(':userID', $userID, PDO::PARAM_INT);
+        $stmt->setFetchMode(PDO::FETCH_CLASS, get_called_class());
         $stmt->execute();
 
-        $stmt->fetch();
-
-        $index = 0;
-
-        foreach ($stmt as $row) {
-            $income_names[$index] = $row[1];
-            $index++;
-        }
-
-        return $income_names;
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
     /**
@@ -67,7 +57,7 @@ class IncomeCategory extends \Core\Model {
      * 
      * @return void
      */
-    public function loadDefaultIncomeCategories() {
+    public static function loadDefaultIncomeCategories($userID) {
 
         $sql = 'INSERT INTO incomes_category_assigned_to_users (user_id, name)
         SELECT :user_id, name
@@ -76,7 +66,7 @@ class IncomeCategory extends \Core\Model {
         $db = static::getDB();
         $stmt = $db->prepare($sql);
 
-        $stmt->bindValue(':user_id', $this->id, PDO::PARAM_INT);
+        $stmt->bindValue(':user_id', $userID, PDO::PARAM_INT);
 
         $stmt->execute();
     }

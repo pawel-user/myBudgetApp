@@ -32,16 +32,14 @@ class Register extends \Core\Controller {
 
         if ($user->save()) {
 
-
             $this->redirect('/register/success');
 
             $user->sendActivationEmail();
 
-            $user = $user->getUserID();
-            $income_category = new IncomeCategory($user);
-            $income_category->loadDefaultIncomeCategories();
+            $userID = $user->getUserID()->id;
 
-            $income_category->downloadDefaultIncomeCategories();
+            IncomeCategory::loadDefaultIncomeCategories($userID);
+            IncomeCategory::getDefaultIncomeCategories($userID);
     
         } else {
             View::renderTemplate('Register/new.html', ['user' => $user]);
