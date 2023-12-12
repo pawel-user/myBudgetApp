@@ -14,6 +14,10 @@ use \App\Flash;
  */
 
  class Login extends \Core\Controller {
+
+    public  $income_names = [];
+
+
     /**
      * Show the login page
      * 

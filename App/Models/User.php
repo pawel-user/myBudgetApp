@@ -435,7 +435,7 @@ class User extends \Core\Model
      */
     public function getUserID() {
         $sql = 'SELECT (id) FROM users
-                    WHERE email = :email';
+                WHERE email = :email';
 
         $db = static::getDB();
         $stmt = $db->prepare($sql);

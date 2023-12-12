@@ -39,7 +39,6 @@ class Register extends \Core\Controller {
             $userID = $user->getUserID()->id;
 
             IncomeCategory::loadDefaultIncomeCategories($userID);
-            IncomeCategory::getDefaultIncomeCategories($userID);
     
         } else {
             View::renderTemplate('Register/new.html', ['user' => $user]);

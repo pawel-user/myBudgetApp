@@ -34,13 +34,32 @@ class IncomeCategory extends \Core\Model {
     }
 
     /**
-     * Download default income categories to array
+     * Load default income categories for registered user
      * 
-     * @return mixed Income object;
+     * @return void
      */
-    public static function getDefaultIncomeCategories($userID) {
+    public static function loadDefaultIncomeCategories($userID) {
 
-        $sql = 'SELECT id, name FROM incomes_category_default
+        $sql = 'INSERT INTO incomes_category_assigned_to_users (user_id, name)
+        SELECT :userID, name
+        FROM incomes_category_default';
+
+        $db = static::getDB();
+        $stmt = $db->prepare($sql);
+
+        $stmt->bindValue(':userID', $userID, PDO::PARAM_INT);
+
+        $stmt->execute();
+    }
+
+    /**
+     * Get user income categories to array
+     * 
+     * @return array;
+     */
+    public static function getUserIncomeCategories($userID) {
+
+        $sql = 'SELECT id, name FROM incomes_category_assigned_to_users
                 WHERE user_id = :userID';
 
         $db = static::getDB();
@@ -51,24 +70,4 @@ class IncomeCategory extends \Core\Model {
 
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
-
-    /**
-     * Load default income categories for registered user
-     * 
-     * @return void
-     */
-    public static function loadDefaultIncomeCategories($userID) {
-
-        $sql = 'INSERT INTO incomes_category_assigned_to_users (user_id, name)
-        SELECT :user_id, name
-        FROM incomes_category_default';
-
-        $db = static::getDB();
-        $stmt = $db->prepare($sql);
-
-        $stmt->bindValue(':user_id', $userID, PDO::PARAM_INT);
-
-        $stmt->execute();
-    }
 }
-

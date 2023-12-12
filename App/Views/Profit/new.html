@@ -39,19 +39,24 @@
         <label class="input-group-text data-form" for="inputCategory"><i class="fa-solid fa-caret-down"
             style="color: #7c7c82;"></i>
         </label>
-        <select class="form-control data-form " id="inputCategory" name="name">
+        <select class="form-control data-form " id="inputCategory" name="name" >
           <option selected>Choose category...</option>
           <option value="" disabled="disabled">───────────────────────────────────────</option>
-          {% if incomecategory.income_names is not empty %}
-            {% for income_name in dump(incomecategory.income_names) %}
-            <option value="{{ income_name }}">{{ income_name }}</option>
+          {% if income.income_names is not empty %}
+            {% set otherIncomeName = "" %}
+            {% for incomeName in income.income_names %}
+              {% if incomeName != "Other incomes" %}
+                <option value="{{ incomeName }}">{{ incomeName }}</option>
+              {% else %}
+                {% set otherIncomeName = incomeName %}
+                {{ otherIncomeName }}
+              {% endif %}
             {% endfor %}
-          {% endif %}
-    
-          <!--<option value="salary">Salary</option>
-          <option value="Bank interest">Bank interest</option>-->
           <option value="" disabled="disabled">───────────────────────────────────────</option>
-          <option value="other_incomes">Other incomes</option>
+          <option value="{{ otherIncomeName }}">{{ otherIncomeName }}</option>
+          {% endif %}
+          <!-- <option value="" disabled="disabled">───────────────────────────────────────</option>
+          <option value="Other incomes">Other incomes</option> -->
         </select>
       </div>
 

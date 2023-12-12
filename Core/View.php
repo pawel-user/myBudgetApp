@@ -66,6 +66,7 @@ class View
             $twig = new \Twig\Environment($loader, [
                     'debug' => true
             ]);
+            $twig->addExtension(new \Twig\Extension\DebugExtension());
             $twig->addGlobal('current_user', \App\Auth::getUser());
             $twig->addGlobal('flash_messages', \App\Flash::getMessages());
             $twig->addGlobal('currentDate', \App\Date::getCurrentDate());
