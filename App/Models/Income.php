@@ -52,17 +52,18 @@ class Income extends \Core\Model
     public function save()
     {
         $userID = $_SESSION['user_id'];
-        $incomeID = $this->getIncomeCategoryAssignedToUserID($userID)['id'];
 
-        $income_stmt = IncomeCategory::getUserIncomeCategories($userID);
-
-        foreach ($income_stmt as $row) {
-            $this->income_names[] = $row['name'];
-       }
-
-       //$this->errors[] = 'Error';
+        $this->validate();
 
         if (empty($this->errors)) {
+
+            $incomeID = $this->getIncomeCategoryAssignedToUserID($userID)['id'];
+
+            $income_stmt = IncomeCategory::getUserIncomeCategories($userID);
+
+            foreach ($income_stmt as $row) {
+                $this->income_names[] = $row['name'];
+            }
 
             $sql = 'INSERT INTO incomes (user_id, income_category_assigned_to_user_id, amount, date_of_income, income_comment)
             VALUES (:user_id, :income_category_assigned_to_user_id, :amount, :date_of_income, :income_comment)';
@@ -104,11 +105,27 @@ class Income extends \Core\Model
 
         $stmt->execute();
 
-        $stmt->fetch(PDO::FETCH_ASSOC);
-        //var_dump($stmt->fetch(PDO::FETCH_ASSOC));
-        //exit;
+        return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
+    /**
+     * Validate current property values, adding validation error messages to the errors array property for Income object
+     * 
+     * @return void
+     */
+    public function validate()
+    {
+
+        // Amount
+        if ($this->amount == '') {
+            $this->errors[] = 'Amount is required';
+        }
+
+        //Income category
+        if ($this->name == '') {
+            $this->errors[] = 'Selecting one of the given income categories is required';
+        }
+    }
 
     /**
      * Get user's income names by name

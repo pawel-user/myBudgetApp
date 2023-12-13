@@ -581,6 +581,11 @@ hr {
   text-align: center;
 }
 
+.error-message {
+  color: #fff;
+  text-align: left;
+}
+
 /* Title Image */
 
 .title-image {
