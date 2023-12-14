@@ -79,11 +79,6 @@ class User extends \Core\Model
      */
     public function validate()
     {
-        // Name
-        if ($this->username == '') {
-            $this->errors[] = 'Username is required';
-        }
-
         // Email address
         if (filter_var($this->email, FILTER_VALIDATE_EMAIL) === false) {
             $this->errors[] = 'Invalid email';
@@ -435,7 +430,7 @@ class User extends \Core\Model
      */
     public function getUserID() {
         $sql = 'SELECT (id) FROM users
-                    WHERE email = :email';
+                WHERE email = :email';
 
         $db = static::getDB();
         $stmt = $db->prepare($sql);

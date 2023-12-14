@@ -2,6 +2,35 @@
 
 {% block title %}Adding incomes{% endblock %}
 
+{% block footer %}
+<!-- <script>
+  $(document).ready(function () {
+    /**
+     * Validate the form
+     */
+    $('#formAddIncome').validate({
+      rules: {
+        name: 'required',
+        amount: {
+          required: true,
+        },
+        name: {
+          required: true,
+        }
+      },
+      messages: {
+        amount {
+          remote: 'Amount is required'
+        }
+        name {
+          remote: 'Selecting one of the categories is required'
+        }
+      }
+    });
+  });
+</script> -->
+{% endblock %}
+
 {% block navigation %}
 
 <li class="nav-item">
@@ -17,9 +46,19 @@
 {% block body %}
 <main>
   <section class="add-income-section">
+
+    {% if income.errors is not empty %}
+    <p class="error-message">Errors:</p>
+    <ul>
+      {% for error in income.errors %}
+      <li class="error-message">{{ error }}</li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+  
     <h3 class="title-action">Enter incomes data:</h3>
 
-    <form method="post" action="/profit/create">
+    <form method="post" action="/profit/create" id="formAddIncome">
       <div class="input-group mb-3 data-container">
         <label class="input-group-text data-form" for="inputAmount"><i class="fa-solid fa-coins"
             style="color: #7c7c82;"></i>
@@ -32,7 +71,7 @@
             style="color: #7c7c82;"></i>
         </label>
         <input class="form-control data-form" type="date" id="inputDate" name="date_of_income" aria-label="Date"
-          value="{{ currentDate }}" min="2000-01-01">
+          value="{{ currentDate }}" min="2000-01-01" max="{{ currentDate }}">
       </div>
 
       <div class="input-group mb-3 data-container">
@@ -40,18 +79,22 @@
             style="color: #7c7c82;"></i>
         </label>
         <select class="form-control data-form " id="inputCategory" name="name">
-          <option selected>Choose category...</option>
+          <option value="" selected>Choose category...</option>
           <option value="" disabled="disabled">───────────────────────────────────────</option>
-          {% if incomecategory.income_names is not empty %}
-            {% for income_name in incomecategory.income_names %}
-            <option value="{{ income_name }}">{{ income_name }}</option>
+          {% if income.income_names is not empty %}
+            {% set otherIncomeName = "" %}
+            {% for incomeName in income.income_names %}
+              {% if incomeName != "Other incomes" %}
+                <option value="{{ incomeName }}">{{ incomeName }}</option>
+              {% else %}
+                {% set otherIncomeName = incomeName %}
+              {% endif %}
             {% endfor %}
-          {% endif %}
-    
-          <!--<option value="salary">Salary</option>
-          <option value="Bank interest">Bank interest</option>-->
           <option value="" disabled="disabled">───────────────────────────────────────</option>
-          <option value="other_incomes">Other incomes</option>
+          <option value="{{ otherIncomeName }}">{{ otherIncomeName }}</option>
+          {% endif %}
+          <!-- <option value="" disabled="disabled">───────────────────────────────────────</option>
+          <option value="Other incomes">Other incomes</option> -->
         </select>
       </div>
 

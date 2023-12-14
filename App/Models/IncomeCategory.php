@@ -13,16 +13,16 @@ use PDO;
 class IncomeCategory extends \Core\Model {
 
     /**
-     * Income category names
+     * Error messages
      * 
      * @var array
      */
-    public $income_names = [];
+    public $errors = [];
 
-     /**
+    /**
      * Class constructor
      * 
-     * @param array $data Load all default category names to array and initial property values
+     * @param array $data Initial property values
      * 
      * @return void
      */
@@ -34,51 +34,40 @@ class IncomeCategory extends \Core\Model {
     }
 
     /**
-     * Download default income categories to array
-     * 
-     * @return mixed Income object;
-     */
-    public function downloadDefaultIncomeCategories() {
-
-        $sql = 'SELECT *
-        FROM incomes_category_default';
-
-        $db = static::getDB();
-        $stmt = $db->prepare($sql);
-
-        $stmt->setFetchMode(PDO::FETCH_NUM);
-
-        $stmt->execute();
-
-        $stmt->fetch();
-
-        $index = 0;
-
-        foreach ($stmt as $row) {
-            $income_names[$index] = $row[1];
-            $index++;
-        }
-
-        return $income_names;
-    }
-
-    /**
      * Load default income categories for registered user
      * 
      * @return void
      */
-    public function loadDefaultIncomeCategories() {
+    public static function loadDefaultIncomeCategories($userID) {
 
         $sql = 'INSERT INTO incomes_category_assigned_to_users (user_id, name)
-        SELECT :user_id, name
+        SELECT :userID, name
         FROM incomes_category_default';
 
         $db = static::getDB();
         $stmt = $db->prepare($sql);
 
-        $stmt->bindValue(':user_id', $this->id, PDO::PARAM_INT);
+        $stmt->bindValue(':userID', $userID, PDO::PARAM_INT);
 
         $stmt->execute();
     }
-}
 
+    /**
+     * Get user income categories to array
+     * 
+     * @return array;
+     */
+    public static function getUserIncomeCategories($userID) {
+
+        $sql = 'SELECT id, name FROM incomes_category_assigned_to_users
+                WHERE user_id = :userID';
+
+        $db = static::getDB();
+        $stmt = $db->prepare($sql);
+        $stmt->bindValue(':userID', $userID, PDO::PARAM_INT);
+        $stmt->setFetchMode(PDO::FETCH_CLASS, get_called_class());
+        $stmt->execute();
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+}
