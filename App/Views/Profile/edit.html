@@ -41,26 +41,26 @@
             }
         });
 
-        /**
-         * Show password toggle button
-         
-        $('#inputPassword').hideShowPassword({
+
+        // Show password toggle button
+
+        /**$('#inputPassword').hideShowPassword({
             show: false,
             innerToggle: 'focus'
         });*/
+    });
 
-        $("#show_hide_password a").on('click', function (event) {
-            event.preventDefault();
-            if ($('#show_hide_password input').attr("type") == "text") {
-                $('#show_hide_password input').attr('type', 'password');
-                $('#show_hide_password span').addClass("fa-eye-slash");
-                $('#show_hide_password span').removeClass("fa-eye");
-            } else if ($('#show_hide_password input').attr("type") == "password") {
-                $('#show_hide_password input').attr('type', 'text');
-                $('#show_hide_password span').removeClass("fa-eye-slash");
-                $('#show_hide_password span').addClass("fa-eye");
-            }
-        });
+    $("#show_hide_password a").on('click', function (event) {
+        event.preventDefault();
+        if ($('#show_hide_password input').attr("type") == "text") {
+            $('#show_hide_password input').attr('type', 'password');
+            $('#show_hide_password span').addClass("fa-eye-slash");
+            $('#show_hide_password span').removeClass("fa-eye");
+        } else if ($('#show_hide_password input').attr("type") == "password") {
+            $('#show_hide_password input').attr('type', 'text');
+            $('#show_hide_password span').removeClass("fa-eye-slash");
+            $('#show_hide_password span').addClass("fa-eye");
+        }
     });
 
 </script>
@@ -79,10 +79,10 @@
                 </header>
 
                 {% if user.errors is not empty %}
-                <p>Errors:</p>
+                <p class="error-message">Errors:</p>
                 <ul>
                     {% for error in user.errors %}
-                    <li>{{ error }}</li>
+                    <li class="">{{ error }}</li>
                     {% endfor %}
                 </ul>
                 {% endif %}
@@ -106,12 +106,12 @@
 
                     <label for="inputPassword">Password</label>
                     <div class="input-group mb-3 data-container" id="show_hide_password">
-                        <label class="input-group-text data-form" for="inputPassword"><i class="fa-solid fa-lock"
+                        <label class="input-group-text data-form"><i class="fa-solid fa-lock"
                                 style="color: #7c7c82"></i></label>
-                        <input class="form-control data-form" type="password" id="inputPassword" name="password"
+                        <input class="form-control data-form" type="password" name="password" id="inputPassword"
                             placeholder="Password" aria-label="Password" aria-describedby="helpBlock" />
-                        <label class="input-group-text data-form" for="inputPassword">
-                            <a href=""><span class="fa-solid fa-eye-slash" aria-hidden="true"
+                        <label class="input-group-text data-form">
+                            <a href=""><span class="fa-solid fa-eye-slash" id="show_hide_password" aria-hidden="true"
                                     style="color: #7c7c82"></span></a>
                         </label>
                     </div>
