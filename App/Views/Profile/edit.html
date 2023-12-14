@@ -41,7 +41,6 @@
             }
         });
 
-
         // Show password toggle button
 
         /**$('#inputPassword').hideShowPassword({
@@ -82,7 +81,7 @@
                 <p class="error-message">Errors:</p>
                 <ul>
                     {% for error in user.errors %}
-                    <li class="">{{ error }}</li>
+                    <li class="error-message">{{ error }}</li>
                     {% endfor %}
                 </ul>
                 {% endif %}

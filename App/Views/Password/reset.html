@@ -45,10 +45,10 @@
       </header>
 
       {% if user.errors is not empty %}
-      <p>Errors:</p>
+      <p class="error-message">Errors:</p>
       <ul>
         {% for error in user.errors %}
-        <li>{{ error }}</li>
+        <li class="error-message">{{ error }}</li>
         {% endfor %}
       </ul>
       {% endif %}
