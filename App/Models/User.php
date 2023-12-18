@@ -79,6 +79,13 @@ class User extends \Core\Model
      */
     public function validate()
     {
+        // Username
+        if (isset($this->username)) {
+            if (preg_match('/[^a-zA-Z0-9 ]+/' , $this->username) == 1) {
+                $this->errors[] = 'Forbidden characters used for username field. Please use only alphanumeric characters or keyboard spaces.';
+            }
+        }
+        
         // Email address
         if (filter_var($this->email, FILTER_VALIDATE_EMAIL) === false) {
             $this->errors[] = 'Invalid email';
@@ -88,7 +95,7 @@ class User extends \Core\Model
         }
 
         // Password
-        if (isset($this->password)) {
+        if (isset($this->password)) { 
 
             if (strlen($this->password) < 6) {
                 $this->errors[] = 'Please enter at least 6 characters for the password';
@@ -100,6 +107,15 @@ class User extends \Core\Model
     
             if (preg_match('/.*\d+.*/i', $this->password) == 0) {
                 $this->errors[] = 'Password needs at least one number';
+            }
+        }
+
+        // Comparison of password confirmation with the original password
+
+        if (isset($this->password_confirmation)) {
+            
+            if ($this->password != $this->password_confirmation) {
+                $this->errors[] = 'Passwords are different';
             }
         }
     }
