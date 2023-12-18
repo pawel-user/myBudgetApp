@@ -4,8 +4,9 @@ namespace App\Controllers;
 
 use Core\View;
 use App\Models\Income;
-use App\Models\IncomeCategory;
+//use App\Models\IncomeCategory;
 use App\Flash;
+use App\Settings;
 
 /**
  * Add & edit income controller
@@ -22,16 +23,18 @@ class Profit extends Authenticated
      */
     public function newAction()
     {
-        $income = new Income();
+        /*$income = new Income();
 
         $userID = $_SESSION['user_id'];
         $income_stmt = IncomeCategory::getUserIncomeCategories($userID);
 
         foreach ($income_stmt as $row) {
              $income->income_names[] = $row['name'];
-        }
+        }*/
 
-        View::renderTemplate('Profit/new.html', ['income' => $income]);
+        //Settings::loadUserIncomeNames();
+
+        View::renderTemplate('Profit/new.html', ['income' => Settings::loadUserIncomeNames()]);
     }
 
     /**
