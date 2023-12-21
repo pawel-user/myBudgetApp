@@ -3,7 +3,7 @@ body {
   color: #fff;
   font-family: "Montserrat";
   opacity: 1;
-  min-height: 100vh;
+  /*min-height: 100vh;*/
   display: flex;
   flex-direction: column;
 }
@@ -482,7 +482,7 @@ hr {
   align-items: center;
   border-radius: 10px;
   display: flex;
-  height: 60px;
+  height: auto;
   justify-content: center;
   margin: 0 15%;
 }
@@ -581,8 +581,17 @@ hr {
   text-align: center;
 }
 
+.error-container {
+  display: block;
+}
+
 .error-message {
   color: #fff;
+  text-align: left;
+}
+
+.error-message-danger {
+  color: #d90416;
   text-align: left;
 }
 

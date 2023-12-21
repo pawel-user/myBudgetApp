@@ -5,6 +5,7 @@ namespace App\Models;
 use PDO;
 use \App\Token;
 use \App\Mail;
+use \App\Auth;
 use \Core\View;
 
 use \AllowDynamicProperties;
@@ -88,21 +89,28 @@ class User extends \Core\Model
         
         // Email address
         if (filter_var($this->email, FILTER_VALIDATE_EMAIL) === false) {
-            $this->errors[] = 'Invalid email';
+            $this->errors[] = 'Invalid email.';
         }
         if ($this->emailExists($this->email, $this->id ?? null)) {
-            $this->errors[] = 'Email already taken';
+            $this->errors[] = 'Email already taken.';
+        }
+
+        // Old password
+        if (isset($this->old_password)) {
+            if (! password_verify($this->old_password, $this->password_hash)) {
+                $this->errors[] = 'Incorrect current password has been entered.';
+            }
         }
 
         // Password
         if (isset($this->password)) { 
 
             if (strlen($this->password) < 6) {
-                $this->errors[] = 'Please enter at least 6 characters for the password';
+                $this->errors[] = 'Please enter at least 6 characters for the password.';
             }
     
             if (preg_match('/.*[a-z]+.*/i', $this->password) == 0) {
-                $this->errors[] = 'Password needs at least one letter';
+                $this->errors[] = 'Password needs at least one letter.';
             }
     
             if (preg_match('/.*\d+.*/i', $this->password) == 0) {
@@ -115,7 +123,7 @@ class User extends \Core\Model
         if (isset($this->password_confirmation)) {
             
             if ($this->password != $this->password_confirmation) {
-                $this->errors[] = 'Passwords are different';
+                $this->errors[] = 'Passwords are different.';
             }
         }
     }
@@ -329,6 +337,7 @@ class User extends \Core\Model
     public function resetPassword($password, $password_confirmation) {
         $this->password = $password;
         $this->password_confirmation = $password_confirmation;
+        $this->old_password = $_POST['old_password'];
 
         $this->validate();
 

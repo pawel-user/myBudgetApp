@@ -55,7 +55,7 @@ class IncomeCategory extends \Core\Model {
     /**
      * Get user income categories to array
      * 
-     * @return array;
+     * @return array
      */
     public static function getUserIncomeCategories($userID) {
 
@@ -69,5 +69,50 @@ class IncomeCategory extends \Core\Model {
         $stmt->execute();
 
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    /**
+     * Add new user income category to database
+     * 
+     * @return void
+     */
+    public static function addIncomeCategory($userID, $incomeCategory) {
+
+    }
+
+    /**
+     * Validate current income category names
+     * 
+     * @return void
+     */
+    private static function validateCategory($userID, $incomeCategory) {
+
+    }
+
+    /**
+     * Check if new adding or editing income category name already exists 
+     * 
+     * @return boolean
+     */
+    private static function checkExistenceCategory($userID, $categoryToUpper) {
+
+        //$sql = 'SELECT name FROM (SELECT UPPER(name) AS name FROM incomes_category_assigned_to_users
+                //WHERE user_id = :userID) AND name = :category';
+
+        $sql = 'SELECT UPPER(name) AS name FROM incomes_category_assigned_to_users
+                WHERE user_id = :userID AND name = :category';
+        
+        $db = static::getDB();
+        $stmt = $db->prepare($sql);
+
+        $stmt->bindValue(':userID', $userID, PDO::PARAM_INT);
+        $stmt->bindValue(':category', $categoryToUpper, PDO::PARAM_STR);
+
+        $stmt->execute();
+
+        if (!$stmt->fetch(PDO::FETCH_ASSOC)) {
+            return false;
+        }
+        return true;
     }
 }

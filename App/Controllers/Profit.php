@@ -4,7 +4,7 @@ namespace App\Controllers;
 
 use Core\View;
 use App\Models\Income;
-//use App\Models\IncomeCategory;
+use App\Models\IncomeCategory;
 use App\Flash;
 use App\Settings;
 
@@ -54,6 +54,30 @@ class Profit extends Authenticated
 
         } else {
             View::renderTemplate('Profit/new.html', ['income' => $income]);
+        }
+    }
+
+    /**
+     * Add a new user income category
+     * 
+     * @return void
+     */
+    public function addAction() {
+        $income_category = new IncomeCategory($_POST);
+        $userID = $_SESSION['user_id'];
+        //$incomeCategory = $this->
+
+        if (IncomeCategory::addIncomeCategory($userID, $incomeCategory)) {
+
+            Flash::addMessage('A new income category successfully added.');
+
+            $this->redirect(Auth::getReturnToPage());
+
+        } else {
+
+            Flash::addMessage('The added category already exists.', Flash::WARNING);
+
+            $this->redirect(Auth::getReturnToPage());
         }
     }
 }
