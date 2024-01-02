@@ -191,8 +191,8 @@
                                                     class="fa-solid fa-user" style="color: #7c7c82;"></i>
                                             </label>
                                             <input type="text" id="inputUsername" name="username"
-                                                class="form-control data-form" placeholder="Username" aria-label="Username"
-                                                required>
+                                                class="form-control data-form" placeholder="Username"
+                                                aria-label="Username" required>
                                             <input type="hidden" name="email" value="{{ current_user.email }}">
                                             <input type="hidden" name="password" value="{{ current_user.password }}">
                                         </div>
@@ -312,12 +312,24 @@
                                             {% endif %}
                                         </select>
                                     </div>
-                                    <button type="button" class="btn btn-secondary"
-                                        data-bs-dismiss="modal">Close</button>
-                                    <button type="button" class="btn btn-primary">Edit</button>
-                                    <button type="button" class="btn btn-danger">Delete</button>
-
-                                    <button type="button" action="" class="btn btn-success">Create new category</button>
+                                    <div class="mb-3 data-container">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-bs-dismiss="modal">Close</button>
+                                        <button type="button" action="" class="btn btn-primary">Edit</button>
+                                        <button type="button" action="" class="btn btn-danger">Delete</button>
+                                    </div>
+                                    <form method="post" action="/profit/create" id="formEditIncome">
+                                        <div class="input-group mb-3 data-container">
+                                            <label class="input-group-text data-form" for="inputNewCategory"><i
+                                                    class="fa-solid fa-list" style="color: #7c7c82;"></i>
+                                            </label>
+                                            <input type="text" id="inputNewCategory" name="incomeCategory"
+                                                class="form-control data-form" placeholder="New income category"
+                                                aria-label="New income category" required>
+                                        </div>
+                                        <button type="submit" class="btn btn-success">Create new
+                                            category</button>
+                                    </form>
                                 </div>
                             </div>
                             <div class="accordion-item">

@@ -6,6 +6,7 @@ use Core\View;
 use App\Models\Income;
 use App\Models\IncomeCategory;
 use App\Flash;
+use App\Auth;
 use App\Settings;
 
 /**
@@ -42,7 +43,7 @@ class Profit extends Authenticated
      * 
      * @return void
      */
-    public function createAction()
+    public function addAction()
     {
         $income = new Income($_POST);
 
@@ -62,20 +63,19 @@ class Profit extends Authenticated
      * 
      * @return void
      */
-    public function addAction() {
-        $income_category = new IncomeCategory($_POST);
+    public function createAction() {
+        $incomeCategory = implode('', $_POST);
         $userID = $_SESSION['user_id'];
-        //$incomeCategory = $this->
 
         if (IncomeCategory::addIncomeCategory($userID, $incomeCategory)) {
 
-            Flash::addMessage('A new income category successfully added.');
+            Flash::addMessage('A new income category successfully created.');
 
             $this->redirect(Auth::getReturnToPage());
 
         } else {
 
-            Flash::addMessage('The added category already exists.', Flash::WARNING);
+            Flash::addMessage('Adding a new income category failed.', Flash::DANGER);
 
             $this->redirect(Auth::getReturnToPage());
         }

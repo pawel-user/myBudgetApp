@@ -5,7 +5,6 @@ namespace App\Models;
 use PDO;
 use \App\Token;
 use \App\Mail;
-use \App\Auth;
 use \Core\View;
 
 use \AllowDynamicProperties;

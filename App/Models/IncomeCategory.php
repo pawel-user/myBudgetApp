@@ -4,6 +4,8 @@ namespace App\Models;
 
 use PDO;
 
+use \App\Flash;
+
 /*
 * Income category model
 * 
@@ -41,8 +43,8 @@ class IncomeCategory extends \Core\Model {
     public static function loadDefaultIncomeCategories($userID) {
 
         $sql = 'INSERT INTO incomes_category_assigned_to_users (user_id, name)
-        SELECT :userID, name
-        FROM incomes_category_default';
+                SELECT :userID, name
+                FROM incomes_category_default';
 
         $db = static::getDB();
         $stmt = $db->prepare($sql);
@@ -74,10 +76,25 @@ class IncomeCategory extends \Core\Model {
     /**
      * Add new user income category to database
      * 
-     * @return void
+     * @return boolean
      */
     public static function addIncomeCategory($userID, $incomeCategory) {
 
+        if (static:: validateCategory($userID, $incomeCategory)) {
+            $sql = 'INSERT INTO incomes_category_assigned_to_users (user_id, name) 
+                    VALUES (:userID, :name)';
+
+            $db = static::getDB();
+            $stmt = $db->prepare($sql);
+            $stmt->bindValue(':userID', $userID, PDO::PARAM_INT);
+            $stmt->bindValue(':name', $incomeCategory, PDO::PARAM_STR);
+
+            $stmt->execute();
+
+            return true;
+        }
+
+        return false;
     }
 
     /**
@@ -86,7 +103,21 @@ class IncomeCategory extends \Core\Model {
      * @return void
      */
     private static function validateCategory($userID, $incomeCategory) {
+        $categoryToUpper = strtoupper($incomeCategory);
 
+        $pattern = '/[^\wa-zA-Z0-9 ]/i';
+        $result = preg_match($pattern, $categoryToUpper);
+
+        if ($result == 1) {
+            Flash::addMessage('Forbidden characters were used for the category name.', Flash::DANGER);
+            return false;
+        }
+
+        if (static::checkExistenceCategory($userID, $categoryToUpper)) {
+            Flash::addMessage('The added category already exists.', Flash::WARNING);
+            return false;
+        }
+        return true;
     }
 
     /**
