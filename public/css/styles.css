@@ -185,6 +185,11 @@ hr {
   width: 100%;
 }
 
+.button-caption {
+  color: #fff;
+  text-decoration: none;
+}
+
 /* Sections */
 
 .navbar-section {

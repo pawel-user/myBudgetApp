@@ -78,9 +78,9 @@ class IncomeCategory extends \Core\Model {
      * 
      * @return boolean
      */
-    public static function addIncomeCategory($userID, $incomeCategory) {
+    public static function createIncomeCategory($userID, $incomeCategory) {
 
-        if (static:: validateCategory($userID, $incomeCategory)) {
+        if (static::validateCategory($userID, $incomeCategory)) {
             $sql = 'INSERT INTO incomes_category_assigned_to_users (user_id, name) 
                     VALUES (:userID, :name)';
 
@@ -94,6 +94,30 @@ class IncomeCategory extends \Core\Model {
             return true;
         }
 
+        return false;
+    }
+
+    /**
+     * Edit user income category in a database
+     * 
+     * @return boolean
+     */
+    public static function editIncomeCategory($userID, $categoryID, $newCategoryName) {
+        if (static::validateCategory($userID, $newCategoryName)) {
+            $sql = 'UPDATE incomes_category_assigned_to_users
+                    SET name = :newCategory WHERE user_id = :userID AND id = :categoryID
+                    LIMIT 1';
+
+            $db = static::getDB();
+            $stmt = $db->prepare($sql);
+            $stmt->bindValue(':userID', $userID, PDO::PARAM_INT);
+            $stmt->bindValue(':categoryID', $categoryID, PDO::PARAM_INT);
+            $stmt->bindValue(':newCategory', $newCategoryName, PDO::PARAM_STR);
+
+            $stmt->execute();
+
+            return true;
+        }
         return false;
     }
 
@@ -114,7 +138,7 @@ class IncomeCategory extends \Core\Model {
         }
 
         if (static::checkExistenceCategory($userID, $categoryToUpper)) {
-            Flash::addMessage('The added category already exists.', Flash::WARNING);
+            Flash::addMessage('The entered category already exists.', Flash::WARNING);
             return false;
         }
         return true;

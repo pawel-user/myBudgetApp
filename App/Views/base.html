@@ -291,33 +291,36 @@
                             <div id="collapseFour" class="accordion-collapse collapse"
                                 data-bs-parent="#accordionSettingItem">
                                 <div class="accordion-body">
-                                    <div class="input-group mb-3">
-                                        <select class="form-select" aria-label="Default select example">
-                                            <option selected>Open this select menu</option>
-                                            <option value="" disabled="disabled">
-                                                ───────────────────────────────────────
-                                            </option>
-                                            {% if income.income_names is not empty %}
-                                            {% set otherIncomeName = "" %}
-                                            {% for incomeName in income.income_names %}
-                                            {% if incomeName != "Other incomes" %}
-                                            <option value="{{ incomeName }}">{{ incomeName }}</option>
-                                            {% else %}
-                                            {% set otherIncomeName = incomeName %}
-                                            {% endif %}
-                                            {% endfor %}
-                                            <option value="" disabled="disabled">───────────────────────────────────────
-                                            </option>
-                                            <option value="{{ otherIncomeName }}">{{ otherIncomeName }}</option>
-                                            {% endif %}
-                                        </select>
-                                    </div>
-                                    <div class="mb-3 data-container">
-                                        <button type="button" class="btn btn-secondary"
-                                            data-bs-dismiss="modal">Close</button>
-                                        <button type="button" action="" class="btn btn-primary">Edit</button>
-                                        <button type="button" action="" class="btn btn-danger">Delete</button>
-                                    </div>
+                                    <form action="/profit/select" method="get">
+                                        <div class="input-group mb-3">
+                                            <select class="form-select" name="name" aria-label="Default select example">
+                                                <option value="" selected>Open this select menu</option>
+                                                <option value="" disabled="disabled">
+                                                    ───────────────────────────────────────
+                                                </option>
+                                                {% if income.income_names is not empty %}
+                                                {% set otherIncomeName = "" %}
+                                                {% for incomeName in income.income_names %}
+                                                {% if incomeName != "Other incomes" %}
+                                                <option value="{{ incomeName }}">{{ incomeName }}</option>
+                                                {% else %}
+                                                {% set otherIncomeName = incomeName %}
+                                                {% endif %}
+                                                {% endfor %}
+                                                <option value="" disabled="disabled">
+                                                    ───────────────────────────────────────
+                                                </option>
+                                                <option value="{{ otherIncomeName }}">{{ otherIncomeName }}</option>
+                                                {% endif %}
+                                            </select>
+                                        </div>
+                                        <div class="mb-3 data-container">
+                                            <button name="action" type="submit" value="edit"
+                                                class="btn btn-primary">Edit</button>
+                                            <button name="action" type="submit" value="delete"
+                                                class="btn btn-danger">Delete</button>
+                                        </div>
+                                    </form>
                                     <form method="post" action="/profit/create" id="formEditIncome">
                                         <div class="input-group mb-3 data-container">
                                             <label class="input-group-text data-form" for="inputNewCategory"><i
@@ -329,6 +332,8 @@
                                         </div>
                                         <button type="submit" class="btn btn-success">Create new
                                             category</button>
+                                        <button type="button" class="btn btn-secondary"
+                                            data-bs-dismiss="modal">Close</button>
                                     </form>
                                 </div>
                             </div>

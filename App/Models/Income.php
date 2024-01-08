@@ -115,7 +115,6 @@ class Income extends \Core\Model
      */
     public function validate()
     {
-
         // Amount
         if ($this->amount == '') {
             $this->errors[] = 'Amount is required';
