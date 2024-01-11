@@ -94,8 +94,6 @@
           <option value="" disabled="disabled">───────────────────────────────────────</option>
           <option value="{{ otherIncomeName }}">{{ otherIncomeName }}</option>
           {% endif %}
-          <!-- <option value="" disabled="disabled">───────────────────────────────────────</option>
-          <option value="Other incomes">Other incomes</option> -->
         </select>
       </div>
 
@@ -105,15 +103,17 @@
         <textarea class="form-control data-form" id="inputTextComment" name="income_comment" rows="3"
           placeholder="Type a comment..." resize="none"></textarea>
       </div>
-      <div class="button-container" style="float: left;">
-        <button type="reset" class="btn btn-lg btn-danger sign-up-button">
-          <i class="fa-solid fa-rectangle-xmark icon"></i>Cancel
-        </button>
-      </div>
-      <div class="button-container" style="float: right;">
-        <button type="submit" class="btn btn-lg btn-success sign-up-button">
-          <i class="fa-solid fa-square-check icon"></i>Confirm
-        </button>
+      <div class="input-group mb-3 data-container">
+        <div class="button-container">
+          <button type="reset" class="btn btn-lg btn-danger sign-up-button">
+            <i class="fa-solid fa-rectangle-xmark icon"></i>Cancel
+          </button>
+        </div>
+        <div class="button-container">
+          <button type="submit" class="btn btn-lg btn-success sign-up-button">
+            <i class="fa-solid fa-square-check icon"></i>Confirm
+          </button>
+        </div>
       </div>
     </form>
 

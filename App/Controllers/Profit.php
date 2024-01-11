@@ -97,10 +97,6 @@ class Profit extends Authenticated
             case 'delete': //action for delete button
                 View::renderTemplate('Profit/delete_category_confirmation.html', ['selected_income_name' => $selected_income_name, 'userID' => $userID, 'categoryID' => $categoryID]);
                 break;
-                //echo ("Delete case");
-                //exit;
-                //IncomeCategory::removeIncomeCategory($userID, $categoryID);
-                //break;
         }
     }
 
