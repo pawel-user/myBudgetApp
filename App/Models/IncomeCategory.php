@@ -122,6 +122,23 @@ class IncomeCategory extends \Core\Model {
     }
 
     /**
+     * Remove user income category in a database
+     * 
+     * @return void
+     */
+    public static function removeIncomeCategory($userID, $categoryID) {
+        $sql = 'DELETE FROM incomes_category_assigned_to_users
+                WHERE user_id = :userID AND id = :categoryID LIMIT 1';
+
+        $db = static::getDB();
+        $stmt = $db->prepare($sql);
+        $stmt->bindValue(':userID', $userID, PDO::PARAM_INT);
+        $stmt->bindValue(':categoryID', $categoryID, PDO::PARAM_INT);
+
+        $stmt->execute();
+    }
+
+    /**
      * Validate current income category names
      * 
      * @return void

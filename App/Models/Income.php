@@ -29,6 +29,13 @@ class Income extends \Core\Model
      */
     public $income_names = [];
 
+    /**
+     * Action name
+     * 
+     * @var string
+     */
+    public $action = '';
+
 
     /**
      * Class constructor

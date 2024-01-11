@@ -78,7 +78,7 @@ class Profit extends Authenticated
     {
         $userID = $_SESSION['user_id'];
         $income = new Income($_GET);
-        
+
         if ($_GET['name'] == '') {
             $this->redirect(Auth::getReturnToPage());
             Flash::addMessage('No income category has been selected. Try again.', Flash::WARNING);
@@ -95,8 +95,12 @@ class Profit extends Authenticated
                 break;
 
             case 'delete': //action for delete button
-                echo ("Delete case");
+                View::renderTemplate('Profit/delete_category_confirmation.html', ['selected_income_name' => $selected_income_name, 'userID' => $userID, 'categoryID' => $categoryID]);
                 break;
+                //echo ("Delete case");
+                //exit;
+                //IncomeCategory::removeIncomeCategory($userID, $categoryID);
+                //break;
         }
     }
 
@@ -111,16 +115,43 @@ class Profit extends Authenticated
         $categoryID = $_POST['categoryID'];
         $newCategoryName = $_POST['changed-name'];
 
-        if (IncomeCategory::editIncomeCategory($userID, $categoryID, $newCategoryName)) {
+        switch ($_REQUEST['action']) {
+            case 'cancel': //action for cancel edit income category and return to previous page
+                Flash::addMessage('Editing of income category cancelled.', Flash::DANGER);
+                break;
 
-            Flash::addMessage('Successfully edited income category.');
+            case 'confirm': //action for confirm edit income category
+                if (IncomeCategory::editIncomeCategory($userID, $categoryID, $newCategoryName)) {
 
-            $this->redirect(Auth::getReturnToPage());
-        } else {
+                    Flash::addMessage('Successfully edited income category.');
+                } else {
 
-            Flash::addMessage('Editing income category failed.', Flash::DANGER);
-
-            $this->redirect(Auth::getReturnToPage());
+                    Flash::addMessage('Editing income category failed.', Flash::DANGER);
+                }
         }
+        $this->redirect(Auth::getReturnToPage());
+    }
+
+    /**
+     * Remove an existing user income category
+     * 
+     * @return void
+     */
+    public function removeAction()
+    {
+        $userID = $_GET['userID'];
+        $categoryID = $_GET['categoryID'];
+
+        switch ($_REQUEST['action']) {
+            case 'confirm': //action for confirm delete income category
+                IncomeCategory::removeIncomeCategory($userID, $categoryID);
+                Flash::addMessage('Successfully edited income category.');
+                break;
+
+            case 'cancel': //action for cancel delete income category
+                Flash::addMessage('Removal of income category cancelled.', Flash::DANGER);
+                break;
+        }
+        $this->redirect(Auth::getReturnToPage());
     }
 }
