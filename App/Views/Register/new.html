@@ -3,8 +3,6 @@
 {% block title %}Account registration{% endblock %}
 
 {% block footer %}
-<script src="/js/hideShowPassword.min.js"></script>
-<script src="/js/app.js"></script>
 
 <script>
   $(document).ready(function () {
@@ -35,10 +33,10 @@
     /**
      * Show password toggle button
      */
-    $('#inputPassword').hideShowPassword({
+    /*$('#inputPassword').hideShowPassword({
       show: false,
       innerToggle: 'focus'
-    });
+    });*/
   });
 </script>
 {% endblock %}
@@ -56,10 +54,10 @@
       </header>
 
       {% if user.errors is not empty %}
-      <p>Errors:</p>
+      <p class="error-message">Errors:</p>
       <ul>
         {% for error in user.errors %}
-        <li>{{ error }}</li>
+        <li class="error-message">{{ error }}</li>
         {% endfor %}
       </ul>
       {% endif %}

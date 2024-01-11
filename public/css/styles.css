@@ -3,7 +3,7 @@ body {
   color: #fff;
   font-family: "Montserrat";
   opacity: 1;
-  min-height: 100vh;
+  /*min-height: 100vh;*/
   display: flex;
   flex-direction: column;
 }
@@ -183,6 +183,11 @@ hr {
 .sign-up-button, .send-button, .cancel-button, .change-button {
   font-size: 1.2rem;
   width: 100%;
+}
+
+.button-caption {
+  color: #fff;
+  text-decoration: none;
 }
 
 /* Sections */
@@ -432,7 +437,9 @@ hr {
 }
 
 .data-container {
-  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  margin: 1rem auto;
   width: 100%;
   z-index: 1;
 }
@@ -443,9 +450,6 @@ hr {
 }
 
 .button-container {
-  position: relative;
-  display: inline-block;
-  margin: 5% auto 0;
   width: 35%;
 }
 
@@ -482,7 +486,7 @@ hr {
   align-items: center;
   border-radius: 10px;
   display: flex;
-  height: 60px;
+  height: auto;
   justify-content: center;
   margin: 0 15%;
 }
@@ -566,7 +570,7 @@ hr {
   z-index: 1;
 }
 
-/* Add Income&Section and View Balance Section */
+/* Add Income$Expense Section and View Balance Section */
 
 .title-action {
   margin: 5% auto 2%;
@@ -581,9 +585,35 @@ hr {
   text-align: center;
 }
 
+.error-container {
+  display: block;
+}
+
 .error-message {
   color: #fff;
   text-align: left;
+}
+
+.error-message-danger {
+  color: #d90416;
+  text-align: left;
+}
+
+.question-confirmation {
+  color: #fff;
+  font-size: 1.1rem;
+  margin-bottom: 10%;
+  text-align: center;
+  width: 100%;
+}
+
+.highlighted-text {
+  font-weight: bold;
+}
+
+.horizontal-line {
+  border-top: 1px solid #7c7c82;
+  margin: 1rem 0;
 }
 
 /* Title Image */

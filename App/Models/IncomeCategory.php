@@ -4,6 +4,8 @@ namespace App\Models;
 
 use PDO;
 
+use \App\Flash;
+
 /*
 * Income category model
 * 
@@ -41,8 +43,8 @@ class IncomeCategory extends \Core\Model {
     public static function loadDefaultIncomeCategories($userID) {
 
         $sql = 'INSERT INTO incomes_category_assigned_to_users (user_id, name)
-        SELECT :userID, name
-        FROM incomes_category_default';
+                SELECT :userID, name
+                FROM incomes_category_default';
 
         $db = static::getDB();
         $stmt = $db->prepare($sql);
@@ -55,7 +57,7 @@ class IncomeCategory extends \Core\Model {
     /**
      * Get user income categories to array
      * 
-     * @return array;
+     * @return array
      */
     public static function getUserIncomeCategories($userID) {
 
@@ -69,5 +71,120 @@ class IncomeCategory extends \Core\Model {
         $stmt->execute();
 
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    /**
+     * Add new user income category to database
+     * 
+     * @return boolean
+     */
+    public static function createIncomeCategory($userID, $incomeCategory) {
+
+        if (static::validateCategory($userID, $incomeCategory)) {
+            $sql = 'INSERT INTO incomes_category_assigned_to_users (user_id, name) 
+                    VALUES (:userID, :name)';
+
+            $db = static::getDB();
+            $stmt = $db->prepare($sql);
+            $stmt->bindValue(':userID', $userID, PDO::PARAM_INT);
+            $stmt->bindValue(':name', $incomeCategory, PDO::PARAM_STR);
+
+            $stmt->execute();
+
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * Edit user income category in a database
+     * 
+     * @return boolean
+     */
+    public static function editIncomeCategory($userID, $categoryID, $newCategoryName) {
+        if (static::validateCategory($userID, $newCategoryName)) {
+            $sql = 'UPDATE incomes_category_assigned_to_users
+                    SET name = :newCategory WHERE user_id = :userID AND id = :categoryID
+                    LIMIT 1';
+
+            $db = static::getDB();
+            $stmt = $db->prepare($sql);
+            $stmt->bindValue(':userID', $userID, PDO::PARAM_INT);
+            $stmt->bindValue(':categoryID', $categoryID, PDO::PARAM_INT);
+            $stmt->bindValue(':newCategory', $newCategoryName, PDO::PARAM_STR);
+
+            $stmt->execute();
+
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Remove user income category in a database
+     * 
+     * @return void
+     */
+    public static function removeIncomeCategory($userID, $categoryID) {
+        $sql = 'DELETE FROM incomes_category_assigned_to_users
+                WHERE user_id = :userID AND id = :categoryID LIMIT 1';
+
+        $db = static::getDB();
+        $stmt = $db->prepare($sql);
+        $stmt->bindValue(':userID', $userID, PDO::PARAM_INT);
+        $stmt->bindValue(':categoryID', $categoryID, PDO::PARAM_INT);
+
+        $stmt->execute();
+    }
+
+    /**
+     * Validate current income category names
+     * 
+     * @return void
+     */
+    private static function validateCategory($userID, $incomeCategory) {
+        $categoryToUpper = strtoupper($incomeCategory);
+
+        $pattern = '/[^\wa-zA-Z0-9 ]/i';
+        $result = preg_match($pattern, $categoryToUpper);
+
+        if ($result == 1) {
+            Flash::addMessage('Forbidden characters were used for the category name.', Flash::DANGER);
+            return false;
+        }
+
+        if (static::checkExistenceCategory($userID, $categoryToUpper)) {
+            Flash::addMessage('The entered category already exists.', Flash::WARNING);
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * Check if new adding or editing income category name already exists 
+     * 
+     * @return boolean
+     */
+    private static function checkExistenceCategory($userID, $categoryToUpper) {
+
+        //$sql = 'SELECT name FROM (SELECT UPPER(name) AS name FROM incomes_category_assigned_to_users
+                //WHERE user_id = :userID) AND name = :category';
+
+        $sql = 'SELECT UPPER(name) AS name FROM incomes_category_assigned_to_users
+                WHERE user_id = :userID AND name = :category';
+        
+        $db = static::getDB();
+        $stmt = $db->prepare($sql);
+
+        $stmt->bindValue(':userID', $userID, PDO::PARAM_INT);
+        $stmt->bindValue(':category', $categoryToUpper, PDO::PARAM_STR);
+
+        $stmt->execute();
+
+        if (!$stmt->fetch(PDO::FETCH_ASSOC)) {
+            return false;
+        }
+        return true;
     }
 }

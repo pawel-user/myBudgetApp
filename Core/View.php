@@ -70,6 +70,7 @@ class View
             $twig->addGlobal('current_user', \App\Auth::getUser());
             $twig->addGlobal('flash_messages', \App\Flash::getMessages());
             $twig->addGlobal('currentDate', \App\Date::getCurrentDate());
+            $twig->addGlobal('income', \App\Settings::loadUserIncomeNames());
         }
 
         return $twig->render($template, $args);

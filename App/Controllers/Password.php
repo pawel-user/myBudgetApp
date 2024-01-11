@@ -4,39 +4,54 @@ namespace App\Controllers;
 
 use \Core\View;
 use \App\Models\User;
+use \App\Flash;
+use \App\Auth;
 
 /**
  * Password controller
  * 
  * PHP version 7.4
  */
-class Password extends \Core\Controller {
+class Password extends \Core\Controller
+{
     /**
      * Show the forgotten password page
      * 
      * @return void
      */
-    public function forgotAction() {
+    public function forgotAction()
+    {
         View::renderTemplate('Password/forgot.html');
     }
 
     /**
-     * Send the password reset lin to the supplied email
+     * Send the password reset link to the supplied email
      * 
      * @return void
      */
-    public function requestResetAction() {
+    public function requestResetAction()
+    {
         User::sendPasswordReset($_POST['email']);
+
+        $this->redirect('/password/show-send-email-message');
+
+    }
+
+    public function showSendEmailMessageAction()
+    {
+        Flash::addMessage('Successfully sent a link to change your password');
 
         View::renderTemplate('Password/reset_requested.html');
     }
+
 
     /**
      * Show the reset password form
      * 
      * @return void
      */
-    public function resetAction() {
+    public function resetAction()
+    {
         $token = $this->route_params['token'];
 
         $user = $this->getUserOrExit($token);
@@ -45,21 +60,21 @@ class Password extends \Core\Controller {
             'token' => $token
         ]);
     }
-    
+
     /**
      * Reset the user's password
      * 
      * @return void
      */
-    public function resetPasswordAction() {
+    public function resetPasswordAction()
+    {
         $token = $_POST['token'];
 
         $user = $this->getUserOrExit($token);
 
         if ($user->resetPassword($_POST['password'], $_POST['password_confirmation'])) {
-            
-            View::renderTemplate('Password/reset_success.html');
 
+            View::renderTemplate('Password/reset_success.html');
         } else {
             View::renderTemplate('Password/reset.html', [
                 'token' => $token,
@@ -69,13 +84,32 @@ class Password extends \Core\Controller {
     }
 
     /**
+     * Rename the user's password
+     * 
+     * @return void
+     */
+    public function renamePasswordAction()
+    {
+        $user = Auth::getUser();
+
+        if ($user->resetPassword($_POST['password'], $_POST['password_confirmation'])) {
+            Flash::addMessage('Password rename successfully.');        
+        } else {
+            Flash::addMessage('Password rename failed. Try again.', Flash::DANGER);
+        }
+
+        View::renderTemplate('Password/notification.html', ['user' => $user]);
+    }
+
+    /**
      * Find the user model associated with the password reset token, or end the request with a message
      * 
      * @param string $token Password reset token sent to user
      * 
      * @return mixed User object if found and the token hasn't expired, null otherwise
      */
-    protected function getUserOrExit($token) {
+    protected function getUserOrExit($token)
+    {
         $user = User::findByPasswordReset($token);
 
         if ($user) {

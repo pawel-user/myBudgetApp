@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% block title %}Editing income category name{% endblock %}
+
+{% block footer %}
+{% endblock %}
+
+{% block navigation %}
+
+<li class="nav-item">
+  <a class="nav-link" href="/expenses"><i class="fa-solid fa-sack-xmark"></i> Add expense</a>
+</li>
+
+<li class="nav-item">
+  <a class="nav-link" href="/balance"><i class="fa-solid fa-scale-balanced"></i> View balance</a>
+</li>
+
+{% endblock %}
+
+{% block body %}
+<main>
+  <section class="add-income-section">
+
+    <!-- {% if income.errors is not empty %}
+    <p class="error-message">Errors:</p>
+    <ul>
+      {% for error in income.errors %}f
+      <li class="error-message">{{ error }}</li>
+      {% endfor %}
+    </ul>
+    {% endif %} -->
+
+    <h3 class="title-action">Enter a new income category name:</h3><br>
+
+    <form method="post" action="/profit/edit">
+      <div class="input-group mb-4 data-container">
+        <label class="input-group-text data-form" for="inputChangedCategory"><i class="fa-solid fa-list"
+            style="color: #7c7c82;"></i></label>
+        <input type="text" id="inputChangedCategory" name="changed-name" class="form-control data-form"
+          value="{{ selected_income_name }}" placeholder="Enter changed income category name"
+          aria-label="Changed income category" required autofocus>
+        <input type="hidden" name="userID" value="{{ userID }}">
+        <input type="hidden" name="categoryID" value="{{ categoryID }}">
+      </div>
+
+      <div class="input-group mb-4 data-container">
+        <div class="button-container">
+          <button name="action" type="submit" value="cancel" class="btn btn-lg btn-danger sign-up-button">
+            <i class="fa-solid fa-rectangle-xmark icon"></i>Cancel
+          </button>
+        </div>
+        <div class="button-container">
+          <button name="action" type="submit" value="confirm" class="btn btn-lg btn-success sign-up-button">
+            <i class="fa-solid fa-square-check icon"></i>Confirm
+          </button>
+        </div>
+      </div>
+    </form>
+
+  </section>
+</main>
+{% endblock %}

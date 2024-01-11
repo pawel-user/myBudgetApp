@@ -3,66 +3,6 @@
 {% block title %}Profile{% endblock %}
 
 {% block footer %}
-<script src="/js/hideShowPassword.min.js"></script>
-<script src="/js/app.js"></script>
-
-<script>
-    $(document).ready(function () {
-
-        var userId = '{{ user.id }}';
-
-        /**
-         * Validate the form
-         */
-        $('#formProfile').validate({
-            rules: {
-                name: 'required',
-                email: {
-                    required: true,
-                    email: true,
-                    remote: {
-                        url: '/account/validate-email',
-                        data: {
-                            ignore_id: function () {
-                                return userId;
-                            }
-                        }
-                    }
-                },
-                password: {
-                    minlength: 6,
-                    validPassword: true
-                }
-            },
-            messages: {
-                email: {
-                    remote: 'Email already taken'
-                }
-            }
-        });
-
-        // Show password toggle button
-
-        /**$('#inputPassword').hideShowPassword({
-            show: false,
-            innerToggle: 'focus'
-        });*/
-    });
-
-    $("#show_hide_password a").on('click', function (event) {
-        event.preventDefault();
-        if ($('#show_hide_password input').attr("type") == "text") {
-            $('#show_hide_password input').attr('type', 'password');
-            $('#show_hide_password span').addClass("fa-eye-slash");
-            $('#show_hide_password span').removeClass("fa-eye");
-        } else if ($('#show_hide_password input').attr("type") == "password") {
-            $('#show_hide_password input').attr('type', 'text');
-            $('#show_hide_password span').removeClass("fa-eye-slash");
-            $('#show_hide_password span').addClass("fa-eye");
-        }
-    });
-
-</script>
 {% endblock %}
 
 {% block navigation %}

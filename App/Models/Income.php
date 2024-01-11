@@ -29,6 +29,13 @@ class Income extends \Core\Model
      */
     public $income_names = [];
 
+    /**
+     * Action name
+     * 
+     * @var string
+     */
+    public $action = '';
+
 
     /**
      * Class constructor
@@ -115,7 +122,6 @@ class Income extends \Core\Model
      */
     public function validate()
     {
-
         // Amount
         if ($this->amount == '') {
             $this->errors[] = 'Amount is required';

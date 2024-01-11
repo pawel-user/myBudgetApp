@@ -19,10 +19,10 @@
         }
       },
       messages: {
-        amount {
+        amount: {
           remote: 'Amount is required'
-        }
-        name {
+        },
+        name: {
           remote: 'Selecting one of the categories is required'
         }
       }
@@ -55,15 +55,16 @@
       {% endfor %}
     </ul>
     {% endif %}
-  
+
     <h3 class="title-action">Enter incomes data:</h3>
 
-    <form method="post" action="/profit/create" id="formAddIncome">
+    <form method="post" action="/profit/add" id="formAddIncome">
       <div class="input-group mb-3 data-container">
         <label class="input-group-text data-form" for="inputAmount"><i class="fa-solid fa-coins"
             style="color: #7c7c82;"></i>
         </label>
-        <input class="form-control data-form" type="number" id="inputAmount" name="amount" placeholder="Amount (PLN)" aria-label="Amount (PLN)" min="0.01" step="0.01">
+        <input class="form-control data-form" type="number" id="inputAmount" name="amount" placeholder="Amount (PLN)"
+          aria-label="Amount (PLN)" min="0.01" step="0.01">
       </div>
 
       <div class="input-group mb-3 data-container">
@@ -82,36 +83,37 @@
           <option value="" selected>Choose category...</option>
           <option value="" disabled="disabled">───────────────────────────────────────</option>
           {% if income.income_names is not empty %}
-            {% set otherIncomeName = "" %}
-            {% for incomeName in income.income_names %}
-              {% if incomeName != "Other incomes" %}
-                <option value="{{ incomeName }}">{{ incomeName }}</option>
-              {% else %}
-                {% set otherIncomeName = incomeName %}
-              {% endif %}
-            {% endfor %}
+          {% set otherIncomeName = "" %}
+          {% for incomeName in income.income_names %}
+          {% if incomeName != "Other incomes" %}
+          <option value="{{ incomeName }}">{{ incomeName }}</option>
+          {% else %}
+          {% set otherIncomeName = incomeName %}
+          {% endif %}
+          {% endfor %}
           <option value="" disabled="disabled">───────────────────────────────────────</option>
           <option value="{{ otherIncomeName }}">{{ otherIncomeName }}</option>
           {% endif %}
-          <!-- <option value="" disabled="disabled">───────────────────────────────────────</option>
-          <option value="Other incomes">Other incomes</option> -->
         </select>
       </div>
 
       <div class="input-group mb-3 data-container">
-        <label class="input-group-text data-form" for="inputTextComment"><i
-            class="fa-solid fa-pencil" style="color: #7c7c82;"></i></label>
-        <textarea class="form-control data-form" id="inputTextComment" name="income_comment" rows="3" placeholder="Type a comment..." resize="none"></textarea>
+        <label class="input-group-text data-form" for="inputTextComment"><i class="fa-solid fa-pencil"
+            style="color: #7c7c82;"></i></label>
+        <textarea class="form-control data-form" id="inputTextComment" name="income_comment" rows="3"
+          placeholder="Type a comment..." resize="none"></textarea>
       </div>
-      <div class="button-container" style="float: left;">
-        <button type="reset" class="btn btn-lg btn-danger sign-up-button">
-          <i class="fa-solid fa-rectangle-xmark icon"></i>Cancel
-        </button>
-      </div>
-      <div class="button-container" style="float: right;">
-        <button type="submit" class="btn btn-lg btn-success sign-up-button">
-          <i class="fa-solid fa-square-check icon"></i>Confirm
-        </button>
+      <div class="input-group mb-3 data-container">
+        <div class="button-container">
+          <button type="reset" class="btn btn-lg btn-danger sign-up-button">
+            <i class="fa-solid fa-rectangle-xmark icon"></i>Cancel
+          </button>
+        </div>
+        <div class="button-container">
+          <button type="submit" class="btn btn-lg btn-success sign-up-button">
+            <i class="fa-solid fa-square-check icon"></i>Confirm
+          </button>
+        </div>
       </div>
     </form>
 

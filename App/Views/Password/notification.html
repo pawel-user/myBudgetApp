@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block title %}Rename password notification{% endblock %}
+
+{% block navigation %}
+{% endblock %}
+
+{% block body %}
+<main>
+    <section class="template-section">
+        <div class="row justify-content-center notification-container">
+            {% if user.errors is not empty %}
+            <h3 class="notification-title">Password rename notification</h3>
+            <div class="col-lg-6 alert alert-danger error-container">
+                <p class="alert-text notification error-message-danger">Errors:</p>
+                <ul>
+                  {% for error in user.errors %}
+                  <li class="alert-text error-message-danger">{{ error }}</li>
+                  {% endfor %}
+                </ul>
+            </div>
+            {% endif %}
+        </div>
+    </section>
+</main>
+{% endblock %}
