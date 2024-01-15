@@ -70,10 +70,10 @@ class Settings {
         $user = Auth::getUser();
 
         if ($user) {
-            $payment_stmt = PaymentCategory::getUserPaymentCategories($user->id);
+            $payment_stmt = PaymentCategory::getUserPaymentMethods($user->id);
 
             foreach ($payment_stmt as $row) {
-                 $payment->payment_names[] = $row['name'];
+                 $payment->payment_methods[] = $row['name'];
             }
         }
 

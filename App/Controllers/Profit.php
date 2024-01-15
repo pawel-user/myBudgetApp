@@ -28,7 +28,7 @@ class Profit extends Authenticated
     }
 
     /**
-     * Add a new user income
+     * Add a new user income category from existing list of income categories
      * 
      * @return void
      */
@@ -47,7 +47,7 @@ class Profit extends Authenticated
     }
 
     /**
-     * Add a new user income category
+     * Create a new user income category and add to list of income categories
      * 
      * @return void
      */

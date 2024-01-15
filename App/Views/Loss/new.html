@@ -8,7 +8,7 @@
     /**
      * Validate the form
      */
-    $('#formAddIncome').validate({
+    $('#formAddExpense').validate({
       rules: {
         name: 'required',
         amount: {
@@ -62,28 +62,31 @@
         <span class="input-group-text data-form" id="basic-addon1"><i class="fa-solid fa-coins"
             style="color: #7c7c82;"></i>
         </span>
-        <input type="number" min="0.01" step="0.01" class="form-control data-form" placeholder="Amount (PLN)"
-          aria-label="Amount (PLN)" aria-describedby="basic-addon1">
+        <input class="form-control data-form" type="number" id="inputAmount" name="amount" placeholder="Amount (PLN)"
+          aria-label="Amount (PLN)" min="0.01" step="0.01">
       </div>
 
       <div class="input-group mb-3 data-container">
-        <span class="input-group-text data-form" id="basic-addon2"><i class="fa-sharp fa-regular fa-calendar"
+        <span class="input-group-text data-form" for="inputDate"><i class="fa-sharp fa-regular fa-calendar"
             style="color: #7c7c82;"></i>
         </span>
-        <input type="date" class="form-control data-form" aria-label="Date" aria-describedby="basic-addon1"
+        <input class="form-control data-form" type="date" id="inputDate" name="date_of_expense" aria-label="Date"
           value="{{ currentDate }}" min="2000-01-01" max="{{ currentDate }}">
       </div>
 
       <div class="input-group mb-3 data-container">
-        <label class="input-group-text data-form" id="basic-addon3" for="formControlSelect1"><i
-            class="fa-solid fa-caret-down" style="color: #7c7c82;"></i>
+        <label class="input-group-text data-form" for="inputPaymentMethod"><i class="fa-solid fa-caret-down"
+            style="color: #7c7c82;"></i>
         </label>
-        <select class="form-control data-form" id="formControlSelect1">
+        <select class="form-control data-form" id="inputPaymentMethod" name="method">
           <option value="" selected>Choose payment method...</option>
           <option value="" disabled="disabled">───────────────────────────────────────</option>
-          <option value="cash">Cash</option>
-          <option value="debit-card">Debit card</option>
-          <option value="credit-card">Credit card</option>
+          {% if payment.payment_methods is not empty %}
+          {% for paymentMethod in payment.payment_methods %}
+          <option value="{{ paymentMethod }}">{{ paymentMethod }}</option>
+          {% endfor %}
+          <option value="" disabled="disabled">───────────────────────────────────────</option>
+          {% endif %}
         </select>
       </div>
 
@@ -91,39 +94,33 @@
         <label class="input-group-text data-form" id="basic-addon4"><i class="fa-solid fa-caret-down"
             style="color: #7c7c82;"></i>
         </label>
-        <select class="form-control data-form">
+        <select class="form-control data-form" id="inputCategory" name="name">
           <option value="" selected>Choose category...</option>
           <option value="" disabled="disabled">───────────────────────────────────────</option>
-          <option value="food">Food</option>
-          <option value="flat">Flat</option>
-          <option value="transport">Transport</option>
-          <option value="telecom">Telecommunication</option>
-          <option value="healthcare">Healthcare</option>
-          <option value="clothing">Clothing</option>
-          <option value="hygiene">Hygiene</option>
-          <option value="children">Children</option>
-          <option value="trips">Trips</option>
-          <option value="entertainment">Entertainment</option>
-          <option value="training">Training</option>
-          <option value="books">Books</option>
-          <option value="savings">Savings</option>
-          <option value="retirement">For a golden autumn, or retirement</option>
-          <option value="repayment-debts">Repayment of debts</option>
-          <option value="donation">Donation</option>
+          {% if expense.expense_names is not empty %}
+          {% set otherExpenseName = "" %}
+          {% for expenseName in expense.expense_names %}
+          {% if expenseName != "Other expenses" %}
+          <option value="{{ expenseName }}">{{ expenseName }}</option>
+          {% else %}
+          {% set otherExpenseName = expenseName %}
+          {% endif %}
+          {% endfor %}
           <option value="" disabled="disabled">───────────────────────────────────────</option>
-          <option value="others">Other expenses</option>
+          <option value="{{ otherExpenseName }}">{{ otherExpenseName }}</option>
+          {% endif %}
         </select>
       </div>
       <div class="input-group mb-3 data-container">
-        <label class="input-group-text data-form" id="basic-addon5" for="formControlTextarea1"><i
-            class="fa-solid fa-pencil" style="color: #7c7c82;"></i></label>
-        <textarea class="form-control data-form" id="formControlTextarea1" rows="3"
-          placeholder="Type a comment..."></textarea>
+        <label class="input-group-text data-form" for="inputTextComment"><i class="fa-solid fa-pencil"
+            style="color: #7c7c82;"></i></label>
+        <textarea class="form-control data-form" id="inputTextComment" name="income_comment" rows="3"
+          placeholder="Type a comment..." resize="none"></textarea>
       </div>
       <div class="input-group mb-3 data-container">
         <div class="button-container">
           <button type="reset" class="btn btn-lg btn-danger sign-up-button">
-            <i class="fa-solid fa-rectangle-xmark icon"></i>Cancel
+            <i class="fa-solid fa-rectangle-xmark icon"></i>Clear
           </button>
         </div>
         <div class="button-container">

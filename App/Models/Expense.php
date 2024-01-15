@@ -22,6 +22,20 @@ use \AllowDynamicProperties;
     public $errors = [];
 
     /**
+     * User expense category names
+     * 
+     * @var array
+     */
+    public $expense_names = [];
+
+    /**
+     * User payment methods
+     * 
+     * @var array
+     */
+    public $payment_methods = [];
+    
+    /**
      * Class constructor
      * 
      * @param array $data Initial property values
@@ -36,11 +50,11 @@ use \AllowDynamicProperties;
     }
 
     /**
-     * Save the user income model with the current property values
+     * Save the user expense model with the current property values
      * 
      * @return void
      */
-    /**public function save()
+    public function save()
     {
         $userID = $_SESSION['user_id'];
 
@@ -48,30 +62,77 @@ use \AllowDynamicProperties;
 
         if (empty($this->errors)) {
 
-            $incomeID = $this->getIncomeCategoryAssignedToUserID($userID)['id'];
+            $expenseID = $this->getExpenseCategoryAssignedToUserID($userID)['id'];
 
-            $income_stmt = IncomeCategory::getUserIncomeCategories($userID);
+            $expense_stmt = ExpenseCategory::getUserExpenseCategories($userID);
 
-            foreach ($income_stmt as $row) {
-                $this->income_names[] = $row['name'];
+            foreach ($expense_stmt as $row) {
+                $this->expense_names[] = $row['name'];
             }
 
-            $sql = 'INSERT INTO incomes (user_id, income_category_assigned_to_user_id, amount, date_of_income, income_comment)
-            VALUES (:user_id, :income_category_assigned_to_user_id, :amount, :date_of_income, :income_comment)';
+            $sql = 'INSERT INTO expenses (user_id, expense_category_assigned_to_user_id, amount, date_of_expense, expense_comment)
+            VALUES (:user_id, :expense_category_assigned_to_user_id, :amount, :date_of_expense, :expense_comment)';
 
             $db = static::getDB();
             $stmt = $db->prepare($sql);
 
             $stmt->bindValue(':user_id', $userID, PDO::PARAM_INT);
-            $stmt->bindValue(':income_category_assigned_to_user_id', $incomeID, PDO::PARAM_INT);
+            $stmt->bindValue(':expense_category_assigned_to_user_id', $expenseID, PDO::PARAM_INT);
             $stmt->bindValue(':amount', (float) $this->amount, PDO::PARAM_STR);
-            $stmt->bindValue(':date_of_income', $this->date_of_income, PDO::PARAM_STR);
-            $stmt->bindValue(':income_comment', $this->income_comment, PDO::PARAM_STR);
+            $stmt->bindValue(':date_of_expense', $this->date_of_expense, PDO::PARAM_STR);
+            $stmt->bindValue(':expense_comment', $this->expense_comment, PDO::PARAM_STR);
 
             return $stmt->execute();
         } else {
 
             return false;
         }
-    }*/
+    }
+
+    /**
+     * Get user's expense ID by user_id
+     * 
+     * @return array
+     */
+    public function getExpenseCategoryAssignedToUserID($userID)
+    {
+        $sql = 'SELECT (id) FROM expenses_category_assigned_to_users
+                    WHERE user_id = :user_id 
+                    AND name = :name';
+
+        $db = static::getDB();
+        $stmt = $db->prepare($sql);
+
+        $stmt->bindValue(':user_id', $userID, PDO::PARAM_INT);
+        $stmt->bindValue(':name', $this->name, PDO::PARAM_STR);
+
+        $stmt->setFetchMode(PDO::FETCH_CLASS, get_called_class());
+
+        $stmt->execute();
+
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
+    /**
+     * Validate current property values, adding validation error messages to the errors array property for Expense object
+     * 
+     * @return void
+     */
+    public function validate()
+    {
+        // Amount
+        if ($this->amount == '') {
+            $this->errors[] = 'Amount is required';
+        }
+
+        //Expense category
+        if ($this->name == '') {
+            $this->errors[] = 'Selecting one of the given expense categories is required';
+        }
+
+        //Payment methods
+        if ($this->method == '') {
+            $this->errors[] = 'Selecting one of the given payment methods is required';
+        }
+    }
  }

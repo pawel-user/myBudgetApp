@@ -4,7 +4,9 @@ namespace App\Controllers;
 
 use Core\View;
 use App\Models\Expense;
+use App\Models\ExpenseCategory;
 use App\Flash;
+use App\Auth;
 use App\Settings;
 
 /**
@@ -24,11 +26,11 @@ class Loss extends Authenticated {
     }
 
     /**
-     * Add a new user income
+     * Add a new user expense category from existing list of income categories
      * 
      * @return void
      */
-    /**public function addAction()
+    public function addAction()
     {
         $expense = new Expense($_POST);
 
@@ -40,5 +42,6 @@ class Loss extends Authenticated {
         } else {
             View::renderTemplate('Loss/new.html', ['expense' => $expense]);
         }
-    }*/
+    }
+
 }
