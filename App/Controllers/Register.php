@@ -5,6 +5,8 @@ namespace App\Controllers;
 use Core\View;
 use App\Models\User;
 use App\Models\IncomeCategory;
+use App\Models\ExpenseCategory;
+use App\Models\PaymentCategory;
 
 /**
  * Signup controller
@@ -25,7 +27,7 @@ class Register extends \Core\Controller {
     /**
      * Sign up a new user
      * 
-     * @return void
+     * @return mixed User object
      */
     public function createAction() {
         $user = new User($_POST);
@@ -36,14 +38,14 @@ class Register extends \Core\Controller {
 
             $user->sendActivationEmail();
 
-            $userID = $user->getUserID()->id;
+            $user->getUserID()->id;
 
-            IncomeCategory::loadDefaultIncomeCategories($userID);
-    
         } else {
             View::renderTemplate('Register/new.html', ['user' => $user]);
         }
+        return $user;
     }
+
     /**
      * Show the signup success page
      *
@@ -60,8 +62,18 @@ class Register extends \Core\Controller {
      * @return void
      */
     public function activateAction() {
-        User::activate($this->route_params['token']);
-        
+
+        $activation_token = $this->route_params['token'];
+
+        $user = User::findUserIdByHashedToken($activation_token);
+        $userID = $user->id;
+
+        IncomeCategory::loadDefaultIncomeCategories($userID);
+        ExpenseCategory::loadDefaultExpenseCategories($userID);
+        PaymentCategory::loadDefaultPaymentMethods($userID);
+
+        User::activate($activation_token);
+
         $this->redirect('/register/activated');
     }
 

@@ -7,6 +7,3 @@
 *.bak
 
 nginx*.txt
-
-App/Controllers/Expense.php
-App/Views/Expense/

@@ -1,0 +1,138 @@
+{% extends "base.html" %}
+
+{% block title %}Adding expenses{% endblock %}
+
+{% block footer %}
+<!-- <script>
+  $(document).ready(function () {
+    /**
+     * Validate the form
+     */
+    $('#formAddIncome').validate({
+      rules: {
+        name: 'required',
+        amount: {
+          required: true,
+        },
+        name: {
+          required: true,
+        }
+      },
+      messages: {
+        amount: {
+          remote: 'Amount is required'
+        },
+        name: {
+          remote: 'Selecting one of the categories is required'
+        }
+      }
+    });
+  });
+</script> -->
+{% endblock %}
+
+{% block navigation %}
+
+<li class="nav-item">
+  <a class="nav-link" href="/incomes"><i class="fa-solid fa-piggy-bank"></i> Add income</a>
+</li>
+
+<li class="nav-item">
+  <a class="nav-link" href="/balance"><i class="fa-solid fa-scale-balanced"></i> View balance</a>
+</li>
+
+{% endblock %}
+
+{% block body %}
+<main>
+  <section class="add-expense-section">
+
+    {% if expense.errors is not empty %}
+    <p class="error-message">Errors:</p>
+    <ul>
+      {% for error in expense.errors %}
+      <li class="error-message">{{ error }}</li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+
+    <h3 class="title-action">Enter expenses data:</h3>
+    <form method="post" action="/loss/add" id="formAddExpense">
+      <div class="input-group mb-3 data-container">
+        <span class="input-group-text data-form" id="basic-addon1"><i class="fa-solid fa-coins"
+            style="color: #7c7c82;"></i>
+        </span>
+        <input type="number" min="0.01" step="0.01" class="form-control data-form" placeholder="Amount (PLN)"
+          aria-label="Amount (PLN)" aria-describedby="basic-addon1">
+      </div>
+
+      <div class="input-group mb-3 data-container">
+        <span class="input-group-text data-form" id="basic-addon2"><i class="fa-sharp fa-regular fa-calendar"
+            style="color: #7c7c82;"></i>
+        </span>
+        <input type="date" class="form-control data-form" aria-label="Date" aria-describedby="basic-addon1"
+          value="{{ currentDate }}" min="2000-01-01" max="{{ currentDate }}">
+      </div>
+
+      <div class="input-group mb-3 data-container">
+        <label class="input-group-text data-form" id="basic-addon3" for="formControlSelect1"><i
+            class="fa-solid fa-caret-down" style="color: #7c7c82;"></i>
+        </label>
+        <select class="form-control data-form" id="formControlSelect1">
+          <option value="" selected>Choose payment method...</option>
+          <option value="" disabled="disabled">───────────────────────────────────────</option>
+          <option value="cash">Cash</option>
+          <option value="debit-card">Debit card</option>
+          <option value="credit-card">Credit card</option>
+        </select>
+      </div>
+
+      <div class="input-group mb-3 data-container">
+        <label class="input-group-text data-form" id="basic-addon4"><i class="fa-solid fa-caret-down"
+            style="color: #7c7c82;"></i>
+        </label>
+        <select class="form-control data-form">
+          <option value="" selected>Choose category...</option>
+          <option value="" disabled="disabled">───────────────────────────────────────</option>
+          <option value="food">Food</option>
+          <option value="flat">Flat</option>
+          <option value="transport">Transport</option>
+          <option value="telecom">Telecommunication</option>
+          <option value="healthcare">Healthcare</option>
+          <option value="clothing">Clothing</option>
+          <option value="hygiene">Hygiene</option>
+          <option value="children">Children</option>
+          <option value="trips">Trips</option>
+          <option value="entertainment">Entertainment</option>
+          <option value="training">Training</option>
+          <option value="books">Books</option>
+          <option value="savings">Savings</option>
+          <option value="retirement">For a golden autumn, or retirement</option>
+          <option value="repayment-debts">Repayment of debts</option>
+          <option value="donation">Donation</option>
+          <option value="" disabled="disabled">───────────────────────────────────────</option>
+          <option value="others">Other expenses</option>
+        </select>
+      </div>
+      <div class="input-group mb-3 data-container">
+        <label class="input-group-text data-form" id="basic-addon5" for="formControlTextarea1"><i
+            class="fa-solid fa-pencil" style="color: #7c7c82;"></i></label>
+        <textarea class="form-control data-form" id="formControlTextarea1" rows="3"
+          placeholder="Type a comment..."></textarea>
+      </div>
+      <div class="input-group mb-3 data-container">
+        <div class="button-container">
+          <button type="reset" class="btn btn-lg btn-danger sign-up-button">
+            <i class="fa-solid fa-rectangle-xmark icon"></i>Cancel
+          </button>
+        </div>
+        <div class="button-container">
+          <button type="submit" class="btn btn-lg btn-success sign-up-button">
+            <i class="fa-solid fa-square-check icon"></i>Confirm
+          </button>
+        </div>
+      </div>
+    </form>
+  </section>
+</main>
+{% endblock %}
