@@ -13,7 +13,7 @@ use App\Flash;
 */
 
 #[\AllowDynamicProperties]
-class PaymentCategory extends \Core\Model
+class PaymentMethod extends \Core\Model
 {
     /**
      * Error messages
@@ -83,7 +83,7 @@ class PaymentCategory extends \Core\Model
     public static function createPaymentMethod($userID, $paymentMethod)
     {
 
-        if (static::validateCategory($userID, $paymentMethod)) {
+        if (static::validateMethod($userID, $paymentMethod)) {
             $sql = 'INSERT INTO payment_methods_assigned_to_users (user_id, name) 
                     VALUES (:userID, :name)';
 
@@ -105,7 +105,7 @@ class PaymentCategory extends \Core\Model
      * 
      * @return void
      */
-    private static function validateCategory($userID, $paymentMethod)
+    private static function validateMethod($userID, $paymentMethod)
     {
         $paymentMethodToUpper = strtoupper($paymentMethod);
 

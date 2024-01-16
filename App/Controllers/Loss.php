@@ -5,7 +5,7 @@ namespace App\Controllers;
 use Core\View;
 use App\Models\Expense;
 use App\Models\ExpenseCategory;
-use App\Models\PaymentCategory;
+use App\Models\PaymentMethod;
 use App\Flash;
 use App\Auth;
 use App\Settings;
@@ -78,7 +78,7 @@ class Loss extends Authenticated {
         $paymentMethod = implode('', $_POST);
         $userID = $_SESSION['user_id'];
 
-        if (PaymentCategory::createPaymentMethod($userID, $paymentMethod)) {
+        if (PaymentMethod::createPaymentMethod($userID, $paymentMethod)) {
 
             Flash::addMessage('A new payment method successfully created.');
 
