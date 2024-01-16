@@ -11,8 +11,10 @@ use \App\Flash;
 * 
 * PHP Version 8.2.6
 */
+
 #[\AllowDynamicProperties]
-class IncomeCategory extends \Core\Model {
+class IncomeCategory extends \Core\Model
+{
 
     /**
      * Error messages
@@ -40,7 +42,8 @@ class IncomeCategory extends \Core\Model {
      * 
      * @return void
      */
-    public static function loadDefaultIncomeCategories($userID) {
+    public static function loadDefaultIncomeCategories($userID)
+    {
 
         $sql = 'INSERT INTO incomes_category_assigned_to_users (user_id, name)
                 SELECT :userID, name
@@ -59,7 +62,8 @@ class IncomeCategory extends \Core\Model {
      * 
      * @return array
      */
-    public static function getUserIncomeCategories($userID) {
+    public static function getUserIncomeCategories($userID)
+    {
 
         $sql = 'SELECT id, name FROM incomes_category_assigned_to_users
                 WHERE user_id = :userID';
@@ -74,11 +78,12 @@ class IncomeCategory extends \Core\Model {
     }
 
     /**
-     * Add new user income category to database
+     * Create new user income category and add to database
      * 
      * @return boolean
      */
-    public static function createIncomeCategory($userID, $incomeCategory) {
+    public static function createIncomeCategory($userID, $incomeCategory)
+    {
 
         if (static::validateCategory($userID, $incomeCategory)) {
             $sql = 'INSERT INTO incomes_category_assigned_to_users (user_id, name) 
@@ -102,7 +107,8 @@ class IncomeCategory extends \Core\Model {
      * 
      * @return boolean
      */
-    public static function editIncomeCategory($userID, $categoryID, $newCategoryName) {
+    public static function editIncomeCategory($userID, $categoryID, $newCategoryName)
+    {
         if (static::validateCategory($userID, $newCategoryName)) {
             $sql = 'UPDATE incomes_category_assigned_to_users
                     SET name = :newCategory WHERE user_id = :userID AND id = :categoryID
@@ -126,7 +132,8 @@ class IncomeCategory extends \Core\Model {
      * 
      * @return void
      */
-    public static function removeIncomeCategory($userID, $categoryID) {
+    public static function removeIncomeCategory($userID, $categoryID)
+    {
         $sql = 'DELETE FROM incomes_category_assigned_to_users
                 WHERE user_id = :userID AND id = :categoryID LIMIT 1';
 
@@ -143,13 +150,14 @@ class IncomeCategory extends \Core\Model {
      * 
      * @return void
      */
-    private static function validateCategory($userID, $incomeCategory) {
+    private static function validateCategory($userID, $incomeCategory)
+    {
         $categoryToUpper = strtoupper($incomeCategory);
 
-        $pattern = '/[^\wa-zA-Z0-9 ]/i';
+        $pattern = '/^[a-zA-Z][a-zA-Z0-9 ,]+$/';
         $result = preg_match($pattern, $categoryToUpper);
 
-        if ($result == 1) {
+        if ($result == 0) {
             Flash::addMessage('Forbidden characters were used for the category name.', Flash::DANGER);
             return false;
         }
@@ -166,14 +174,15 @@ class IncomeCategory extends \Core\Model {
      * 
      * @return boolean
      */
-    private static function checkExistenceCategory($userID, $categoryToUpper) {
+    private static function checkExistenceCategory($userID, $categoryToUpper)
+    {
 
         //$sql = 'SELECT name FROM (SELECT UPPER(name) AS name FROM incomes_category_assigned_to_users
-                //WHERE user_id = :userID) AND name = :category';
+        //WHERE user_id = :userID) AND name = :category';
 
         $sql = 'SELECT UPPER(name) AS name FROM incomes_category_assigned_to_users
                 WHERE user_id = :userID AND name = :category';
-        
+
         $db = static::getDB();
         $stmt = $db->prepare($sql);
 

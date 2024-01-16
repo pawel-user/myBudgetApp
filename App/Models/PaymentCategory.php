@@ -4,13 +4,17 @@ namespace App\Models;
 
 use PDO;
 
+use App\Flash;
+
 /*
 * Payment category model
 * 
 * PHP Version 8.2.6
 */
+
 #[\AllowDynamicProperties]
-class PaymentCategory extends \Core\Model {
+class PaymentCategory extends \Core\Model
+{
     /**
      * Error messages
      * 
@@ -37,7 +41,8 @@ class PaymentCategory extends \Core\Model {
      * 
      * @return void
      */
-    public static function loadDefaultPaymentMethods($userID) {
+    public static function loadDefaultPaymentMethods($userID)
+    {
 
         $sql = 'INSERT INTO payment_methods_assigned_to_users (user_id, name)
                 SELECT :userID, name
@@ -56,7 +61,8 @@ class PaymentCategory extends \Core\Model {
      * 
      * @return array
      */
-    public static function getUserPaymentMethods($userID) {
+    public static function getUserPaymentMethods($userID)
+    {
 
         $sql = 'SELECT id, name FROM payment_methods_assigned_to_users
                 WHERE user_id = :userID';
@@ -69,5 +75,82 @@ class PaymentCategory extends \Core\Model {
 
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+    /**
+     * Create new user payment method and add to database
+     * 
+     * @return boolean
+     */
+    public static function createPaymentMethod($userID, $paymentMethod)
+    {
 
+        if (static::validateCategory($userID, $paymentMethod)) {
+            $sql = 'INSERT INTO payment_methods_assigned_to_users (user_id, name) 
+                    VALUES (:userID, :name)';
+
+            $db = static::getDB();
+            $stmt = $db->prepare($sql);
+            $stmt->bindValue(':userID', $userID, PDO::PARAM_INT);
+            $stmt->bindValue(':name', $paymentMethod, PDO::PARAM_STR);
+
+            $stmt->execute();
+
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * Validate current payment method names
+     * 
+     * @return void
+     */
+    private static function validateCategory($userID, $paymentMethod)
+    {
+        $paymentMethodToUpper = strtoupper($paymentMethod);
+
+        //$pattern = '/[^\wa-zA-Z0-9, ]/i';
+        //$pattern = '/[^\p{L}\d][^\p{L}]+/i';
+        //$pattern = '/[^\p{L}]+/i';
+        $pattern = '/^[a-zA-Z][a-zA-Z0-9 ,]+$/';
+        $result = preg_match($pattern, $paymentMethodToUpper);
+        //var_dump($result);
+        //exit;
+
+        if ($result == 0) {
+            Flash::addMessage('Forbidden characters were used for the payment method name.', Flash::DANGER);
+            return false;
+        }
+
+        if (static::checkExistenceMethod($userID, $paymentMethodToUpper)) {
+            Flash::addMessage('The entered payment method already exists.', Flash::WARNING);
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * Check if new adding or editing payment method name already exists 
+     * 
+     * @return boolean
+     */
+    private static function checkExistenceMethod($userID, $methodToUpper)
+    {
+
+        $sql = 'SELECT UPPER(name) AS name FROM payment_methods_assigned_to_users
+                WHERE user_id = :userID AND name = :method';
+
+        $db = static::getDB();
+        $stmt = $db->prepare($sql);
+
+        $stmt->bindValue(':userID', $userID, PDO::PARAM_INT);
+        $stmt->bindValue(':method', $methodToUpper, PDO::PARAM_STR);
+
+        $stmt->execute();
+
+        if (!$stmt->fetch(PDO::FETCH_ASSOC)) {
+            return false;
+        }
+        return true;
+    }
 }

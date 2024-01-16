@@ -329,7 +329,7 @@
                                         <!-- <p id="demo"></p> -->
                                     </form>
                                     <hr class="horizontal-line">
-                                    <form method="post" action="/profit/create" id="formEditIncome">
+                                    <form method="post" action="/profit/create" id="formCreateIncome">
                                         <div class="input-group mb-3 data-container">
                                             <label class="input-group-text data-form" for="inputNewCategory"><i
                                                     class="fa-solid fa-list" style="color: #7c7c82;"></i>
@@ -356,37 +356,53 @@
                                 <div id="collapseFive" class="accordion-collapse collapse"
                                     aria-labelledby="flush-headingFive" data-bs-parent="#accordionSettingItem">
                                     <div class="accordion-body">
-                                        <div class="input-group mb-3">
-                                            <select class="form-select" aria-label="Default select example">
-                                                <option selected>Open this select menu</option>
-                                                <option value="" disabled="disabled">
-                                                    ───────────────────────────────────────</option>
-                                                <option value="1">Food</option>
-                                                <option value="2">Flat</option>
-                                                <option value="3">Transport</option>
-                                                <option value="4">Telecommunication</option>
-                                                <option value="5">Healthcare</option>
-                                                <option value="6">Clothing</option>
-                                                <option value="7">Hygiene</option>
-                                                <option value="8">Children</option>
-                                                <option value="9">Trips</option>
-                                                <option value="10">Entertainment</option>
-                                                <option value="11">Training</option>
-                                                <option value="12">Books</option>
-                                                <option value="13">Savings</option>
-                                                <option value="14">For a golden autumn, or retirement</option>
-                                                <option value="15">Repayment of debts</option>
-                                                <option value="16">Donation</option>
-                                                <option value="" disabled="disabled">
-                                                    ───────────────────────────────────────</option>
-                                                <option value="17">Other expenses</option>
-                                            </select>
-                                        </div>
-                                        <button type="button" class="btn btn-secondary"
-                                            data-bs-dismiss="modal">Close</button>
-                                        <button type="button" class="btn btn-primary">Edit</button>
-                                        <button type="button" class="btn btn-danger">Delete</button>
-                                        <button type="submit" class="btn btn-success">Create new category</button>
+                                        <form action="/loss/select" method="get">
+                                            <div class="input-group mb-3">
+                                                <select class="form-select" name="name"
+                                                    aria-label="Default select example">
+                                                    <option value="" selected>Open this select menu</option>
+                                                    <option value="" disabled="disabled">
+                                                        ───────────────────────────────────────
+                                                    </option>
+                                                    {% if expense.expense_names is not empty %}
+                                                    {% set otherExpenseName = "" %}
+                                                    {% for expenseName in expense.expense_names %}
+                                                    {% if expenseName != "Other expenses" %}
+                                                    <option value="{{ expenseName }}">{{ expenseName }}</option>
+                                                    {% else %}
+                                                    {% set otherExpenseName = expenseName %}
+                                                    {% endif %}
+                                                    {% endfor %}
+                                                    <option value="" disabled="disabled">
+                                                        ───────────────────────────────────────
+                                                    </option>
+                                                    <option value="{{ otherExpenseName }}">{{ otherExpenseName }}
+                                                    </option>
+                                                    {% endif %}
+                                                </select>
+                                            </div>
+                                            <button name="action" type="submit" value="edit"
+                                                class="btn btn-primary">Edit</button>
+                                            <button name="action" type="submit" value="delete"
+                                                class="btn btn-danger">Delete</button>
+                                            <button type="button" class="btn btn-secondary"
+                                                data-bs-dismiss="modal">Close</button>
+                                        </form>
+                                        <hr class="horizontal-line">
+                                        <form method="post" action="/loss/create-category" id="formCreateExpense">
+                                            <div class="input-group mb-3 data-container">
+                                                <label class="input-group-text data-form" for="inputNewCategory"><i
+                                                        class="fa-solid fa-list" style="color: #7c7c82;"></i>
+                                                </label>
+                                                <input type="text" id="inputNewCategory" name="expenseCategory"
+                                                    class="form-control data-form" placeholder="New expense category"
+                                                    aria-label="New expense category" required>
+                                            </div>
+                                            <button type="submit" class="btn btn-success">Create new
+                                                category</button>
+                                            <button type="button" class="btn btn-secondary"
+                                                data-bs-dismiss="modal">Close</button>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
@@ -400,22 +416,45 @@
                                 <div id="collapseSix" class="accordion-collapse collapse"
                                     aria-labelledby="flush-headingSix" data-bs-parent="#accordionSettingItem">
                                     <div class="accordion-body">
-                                        <div class="input-group mb-3">
-                                            <select class="form-select" aria-label="Default select example">
-                                                <option selected>Open this select menu</option>
-                                                <option value="" disabled="disabled">
-                                                    ───────────────────────────────────────</option>
-                                                <option value="1">Cash</option>
-                                                <option value="2">Debit card</option>
-                                                <option value="3">Credit card</option>
-                                            </select>
+                                        <form action="/loss/select" method="get">
+                                            <div class="input-group mb-3">
+                                                <select class="form-select" name="method" aria-label="Default select example">
+                                                    <option selected>Open this select menu</option>
+                                                    <option value="" disabled="disabled">
+                                                        ───────────────────────────────────────</option>
+                                                    {% if payment.payment_methods is not empty %}
+                                                    {% for paymentMethod in payment.payment_methods %}
+                                                    <option value="{{ paymentMethod }}">{{ paymentMethod }}</option>
+                                                    {% endfor %}
+                                                    <option value="" disabled="disabled">
+                                                        ───────────────────────────────────────</option>
+                                                    {% endif %}
+                                                </select>
+                                            </div>
+                                            <button type="button" class="btn btn-secondary"
+                                                data-bs-dismiss="modal">Close</button>
+                                                <button name="action" type="submit" value="edit"
+                                                class="btn btn-primary">Edit</button>
+                                            <button name="action" type="submit" value="delete"
+                                                class="btn btn-danger">Delete</button>
+                                            <button type="button" class="btn btn-secondary"
+                                                data-bs-dismiss="modal">Close</button>
+                                        </form>
+                                        <hr class="horizontal-line">
+                                        <form method="post" action="/loss/create-method" id="formCreateMethod">
+                                            <div class="input-group mb-3 data-container">
+                                                <label class="input-group-text data-form" for="inputNewMethod"><i
+                                                        class="fa-solid fa-list" style="color: #7c7c82;"></i>
+                                                </label>
+                                                <input type="text" id="inputNewMethod" name="paymentMethod"
+                                                    class="form-control data-form" placeholder="New payment method"
+                                                    aria-label="New payment method" required>
+                                            </div>
+                                            <button type="submit" class="btn btn-success">Create new
+                                                payment method</button>
+                                            <button type="button" class="btn btn-secondary"
+                                                data-bs-dismiss="modal">Close</button>
                                         </div>
-                                        <button type="button" class="btn btn-secondary"
-                                            data-bs-dismiss="modal">Close</button>
-                                        <button type="button" class="btn btn-primary">Edit</button>
-                                        <button type="button" class="btn btn-danger">Delete</button>
-                                        <button type="submit" class="btn btn-success">Create new category</button>
-                                    </div>
                                 </div>
                             </div>
                         </div>
