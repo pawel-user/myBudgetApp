@@ -97,7 +97,32 @@ class ExpenseCategory extends \Core\Model {
     }
 
     /**
-     * Validate current income category names
+     * Edit user expense category in a database
+     * 
+     * @return boolean
+     */
+    public static function editExpenseCategory($userID, $categoryID, $newCategoryName)
+    {
+        if (static::validateCategory($userID, $newCategoryName)) {
+            $sql = 'UPDATE expenses_category_assigned_to_users
+                    SET name = :newCategory WHERE user_id = :userID AND id = :categoryID
+                    LIMIT 1';
+
+            $db = static::getDB();
+            $stmt = $db->prepare($sql);
+            $stmt->bindValue(':userID', $userID, PDO::PARAM_INT);
+            $stmt->bindValue(':categoryID', $categoryID, PDO::PARAM_INT);
+            $stmt->bindValue(':newCategory', $newCategoryName, PDO::PARAM_STR);
+
+            $stmt->execute();
+
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Validate current expense category names
      * 
      * @return void
      */

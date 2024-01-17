@@ -114,6 +114,30 @@ use \AllowDynamicProperties;
     }
 
     /**
+     * Get user's payment method ID by user_id
+     * 
+     * @return array
+     */
+    public function getPaymentMethodAssignedToUserID($userID)
+    {
+        $sql = 'SELECT (id) FROM payment_methods_assigned_to_users
+                    WHERE user_id = :user_id 
+                    AND name = :name';
+
+        $db = static::getDB();
+        $stmt = $db->prepare($sql);
+
+        $stmt->bindValue(':user_id', $userID, PDO::PARAM_INT);
+        $stmt->bindValue(':name', $this->method, PDO::PARAM_STR);
+
+        $stmt->setFetchMode(PDO::FETCH_CLASS, get_called_class());
+
+        $stmt->execute();
+
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
+    /**
      * Validate current property values, adding validation error messages to the errors array property for Expense object
      * 
      * @return void

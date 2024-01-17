@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}Editing income category name{% endblock %}
+{% block title %}Editing payment method name{% endblock %}
 
 {% block footer %}
 {% endblock %}
@@ -8,7 +8,7 @@
 {% block navigation %}
 
 <li class="nav-item">
-  <a class="nav-link" href="/expenses"><i class="fa-solid fa-sack-xmark"></i> Add expense</a>
+  <a class="nav-link" href="/incomes"><i class="fa-solid fa-piggy-bank"></i> Add income</a>
 </li>
 
 <li class="nav-item">
@@ -19,26 +19,26 @@
 
 {% block body %}
 <main>
-  <section class="add-income-section">
+  <section class="add-expense-section">
 
-    <!-- {% if income.errors is not empty %}
+    <!-- {% if expense.errors is not empty %}
     <p class="error-message">Errors:</p>
     <ul>
-      {% for error in income.errors %}f
+      {% for error in expense.errors %}f
       <li class="error-message">{{ error }}</li>
       {% endfor %}
     </ul>
     {% endif %} -->
 
-    <h3 class="title-action">Enter a new income category name:</h3><br>
+    <h3 class="title-action">Enter a new payment method name:</h3><br>
 
-    <form method="post" action="/profit/edit-category">
+    <form method="post" action="/loss/edit-method">
       <div class="input-group mb-4 data-container">
-        <label class="input-group-text data-form" for="inputChangedCategory"><i class="fa-solid fa-list"
+        <label class="input-group-text data-form" for="inputChangedMethod"><i class="fa-solid fa-list"
             style="color: #7c7c82;"></i></label>
-        <input type="text" id="inputChangedCategory" name="changed-name" class="form-control data-form"
-          value="{{ selected_income_name }}" placeholder="Enter changed income category name"
-          aria-label="Changed income category" required autofocus>
+        <input type="text" id="inputChangedMethod" name="changed-method" class="form-control data-form"
+          value="{{ selected_payment_method }}" placeholder="Enter changed payment method name"
+          aria-label="Changed payment method" required autofocus>
         <input type="hidden" name="userID" value="{{ userID }}">
         <input type="hidden" name="categoryID" value="{{ categoryID }}">
       </div>

@@ -101,6 +101,31 @@ class PaymentMethod extends \Core\Model
     }
 
     /**
+     * Edit user payment method in a database
+     * 
+     * @return boolean
+     */
+    public static function editPaymentMethod($userID, $paymentID, $newPaymentMethod)
+    {
+        if (static::validateMethod($userID, $newPaymentMethod)) {
+            $sql = 'UPDATE payment_methods_assigned_to_users
+                    SET name = :newMethod WHERE user_id = :userID AND id = :paymentID
+                    LIMIT 1';
+
+            $db = static::getDB();
+            $stmt = $db->prepare($sql);
+            $stmt->bindValue(':userID', $userID, PDO::PARAM_INT);
+            $stmt->bindValue(':paymentID', $paymentID, PDO::PARAM_INT);
+            $stmt->bindValue(':newMethod', $newPaymentMethod, PDO::PARAM_STR);
+
+            $stmt->execute();
+
+            return true;
+        }
+        return false;
+    }
+
+    /**
      * Validate current payment method names
      * 
      * @return void

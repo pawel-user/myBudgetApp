@@ -51,7 +51,7 @@ class Profit extends Authenticated
      * 
      * @return void
      */
-    public function createAction()
+    public function createCategoryAction()
     {
         $incomeCategory = implode('', $_POST);
         $userID = $_SESSION['user_id'];
@@ -74,7 +74,7 @@ class Profit extends Authenticated
      * 
      * @return void
      */
-    public function selectAction()
+    public function selectCategoryAction()
     {
         $userID = $_SESSION['user_id'];
         $income = new Income($_GET);
@@ -105,7 +105,7 @@ class Profit extends Authenticated
      * 
      * @return void
      */
-    public function editAction()
+    public function editCategoryAction()
     {
         $userID = $_POST['userID'];
         $categoryID = $_POST['categoryID'];

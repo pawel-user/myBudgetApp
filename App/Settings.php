@@ -6,7 +6,7 @@ use App\Models\Income;
 use App\Models\Expense;
 use App\Models\IncomeCategory;
 use App\Models\ExpenseCategory;
-use App\Models\PaymentCategory;
+use App\Models\PaymentMethod;
 use App\Auth;
 
 /**
@@ -70,7 +70,7 @@ class Settings {
         $user = Auth::getUser();
 
         if ($user) {
-            $payment_stmt = PaymentCategory::getUserPaymentMethods($user->id);
+            $payment_stmt = PaymentMethod::getUserPaymentMethods($user->id);
 
             foreach ($payment_stmt as $row) {
                  $payment->payment_methods[] = $row['name'];
