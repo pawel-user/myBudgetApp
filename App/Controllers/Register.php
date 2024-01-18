@@ -6,7 +6,7 @@ use Core\View;
 use App\Models\User;
 use App\Models\IncomeCategory;
 use App\Models\ExpenseCategory;
-use App\Models\PaymentCategory;
+use App\Models\PaymentMethod;
 
 /**
  * Signup controller
@@ -70,7 +70,7 @@ class Register extends \Core\Controller {
 
         IncomeCategory::loadDefaultIncomeCategories($userID);
         ExpenseCategory::loadDefaultExpenseCategories($userID);
-        PaymentCategory::loadDefaultPaymentMethods($userID);
+        PaymentMethod::loadDefaultPaymentMethods($userID);
 
         User::activate($activation_token);
 

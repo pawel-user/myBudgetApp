@@ -126,6 +126,25 @@ class PaymentMethod extends \Core\Model
     }
 
     /**
+     * Remove user payment method in a database
+     * 
+     * @return void
+     */
+    public static function removePaymentMethod($userID, $paymentID)
+    {
+        $sql = 'DELETE FROM payment_methods_assigned_to_users
+                WHERE user_id = :userID AND id = :paymentID LIMIT 1';
+
+        $db = static::getDB();
+        $stmt = $db->prepare($sql);
+        $stmt->bindValue(':userID', $userID, PDO::PARAM_INT);
+        $stmt->bindValue(':paymentID', $paymentID, PDO::PARAM_INT);
+
+        $stmt->execute();
+    }
+
+
+    /**
      * Validate current payment method names
      * 
      * @return void

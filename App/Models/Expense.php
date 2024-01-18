@@ -63,6 +63,7 @@ use \AllowDynamicProperties;
         if (empty($this->errors)) {
 
             $expenseID = $this->getExpenseCategoryAssignedToUserID($userID)['id'];
+            $paymentID = $this->getPaymentMethodAssignedToUserID($userID)['id'];
 
             $expense_stmt = ExpenseCategory::getUserExpenseCategories($userID);
 
@@ -70,14 +71,15 @@ use \AllowDynamicProperties;
                 $this->expense_names[] = $row['name'];
             }
 
-            $sql = 'INSERT INTO expenses (user_id, expense_category_assigned_to_user_id, amount, date_of_expense, expense_comment)
-            VALUES (:user_id, :expense_category_assigned_to_user_id, :amount, :date_of_expense, :expense_comment)';
+            $sql = 'INSERT INTO expenses (user_id, expense_category_assigned_to_user_id, payment_method_assigned_to_user_id, amount, date_of_expense, expense_comment)
+            VALUES (:user_id, :expense_category_assigned_to_user_id, :payment_method_assigned_to_user_id, :amount, :date_of_expense, :expense_comment)';
 
             $db = static::getDB();
             $stmt = $db->prepare($sql);
 
             $stmt->bindValue(':user_id', $userID, PDO::PARAM_INT);
             $stmt->bindValue(':expense_category_assigned_to_user_id', $expenseID, PDO::PARAM_INT);
+            $stmt->bindValue(':payment_method_assigned_to_user_id', $paymentID, PDO::PARAM_INT);
             $stmt->bindValue(':amount', (float) $this->amount, PDO::PARAM_STR);
             $stmt->bindValue(':date_of_expense', $this->date_of_expense, PDO::PARAM_STR);
             $stmt->bindValue(':expense_comment', $this->expense_comment, PDO::PARAM_STR);

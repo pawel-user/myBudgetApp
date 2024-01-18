@@ -23,7 +23,7 @@ class Loss extends Authenticated {
      */
     public function newAction()
     {
-        View::renderTemplate('Loss/new.html', ['expense' => Settings::loadUserExpenseNames(), 'payment' => Settings::loadUserPaymentMethods()]);
+        View::renderTemplate('Loss/new.html', ['expense_load' => Settings::loadUserExpenseNames(), 'payment_load' => Settings::loadUserPaymentMethods()]);
     }
 
     /**
@@ -41,7 +41,7 @@ class Loss extends Authenticated {
 
             $this->redirect('/loss/new');
         } else {
-            View::renderTemplate('Loss/new.html', ['expense' => $expense]);
+            View::renderTemplate('Loss/new.html', ['expense' => $expense, 'expense_load' => Settings::loadUserExpenseNames(), 'payment_load' => Settings::loadUserPaymentMethods()]);
         }
     }
 
@@ -117,7 +117,7 @@ class Loss extends Authenticated {
                 break;
 
             case 'delete': //action for delete button
-                View::renderTemplate('Loss/delete_category_confirmation.html', ['selected_expense_name' => $selected_expense_name, 'userID' => $userID, 'categoryID' => $categoryID]);
+                View::renderTemplate('Loss/delete_category_confirm.html', ['selected_expense_name' => $selected_expense_name, 'userID' => $userID, 'categoryID' => $categoryID]);
                 break;
         }
     }
@@ -160,23 +160,23 @@ class Loss extends Authenticated {
         $userID = $_SESSION['user_id'];
         $expense = new Expense($_GET);
         
-        if ($_GET['method'] == '') {
+        if ($_GET['name'] == '') {
             $this->redirect(Auth::getReturnToPage());
             Flash::addMessage('No payment method has been selected. Try again.', Flash::WARNING);
             exit;
         }
 
-        $selected_payment_method = $expense->method;
+        $selected_payment_method = $expense->name;
         $paymentID = $expense->getPaymentMethodAssignedToUserID($userID)['id'];
 
         switch ($_REQUEST['action']) {
 
             case 'edit': //action for edit button
-                View::renderTemplate('Loss/edit_payment_method.html', ['selected_payment_method' => $selected_payment_method, 'userID' => $userID, 'categoryID' => $paymentID]);
+                View::renderTemplate('Loss/edit_payment_method.html', ['selected_payment_method' => $selected_payment_method, 'userID' => $userID, 'paymentID' => $paymentID]);
                 break;
 
             case 'delete': //action for delete button
-                View::renderTemplate('Loss/delete_payment_method_confirmation.html', ['selected_payment_method' => $selected_payment_method, 'userID' => $userID, 'categoryID' => $paymentID]);
+                View::renderTemplate('Loss/delete_payment_method_confirm.html', ['selected_payment_method' => $selected_payment_method, 'userID' => $userID, 'paymentID' => $paymentID]);
                 break;
         }
     }
@@ -189,7 +189,7 @@ class Loss extends Authenticated {
     public function editMethodAction()
     {
         $userID = $_POST['userID'];
-        $categoryID = $_POST['categoryID'];
+        $paymentID = $_POST['paymentID'];
         $newPaymentMethod = $_POST['changed-method'];
 
         switch ($_REQUEST['action']) {
@@ -198,7 +198,7 @@ class Loss extends Authenticated {
                 break;
 
             case 'confirm': //action for confirm edit payment method
-                if (PaymentMethod::editPaymentMethod($userID, $categoryID, $newPaymentMethod)) {
+                if (PaymentMethod::editPaymentMethod($userID, $paymentID, $newPaymentMethod)) {
 
                     Flash::addMessage('Successfully edited payment method.');
                 } else {
@@ -209,5 +209,49 @@ class Loss extends Authenticated {
         $this->redirect(Auth::getReturnToPage());
     }
 
+    /**
+     * Remove an existing user expense category
+     * 
+     * @return void
+     */
+    public function removeCategoryAction()
+    {
+        $userID = $_GET['userID'];
+        $categoryID = $_GET['categoryID'];
 
+        switch ($_REQUEST['action']) {
+            case 'confirm': //action for confirm delete income category
+                ExpenseCategory::removeExpenseCategory($userID, $categoryID);
+                Flash::addMessage('Successfully removed expense category.');
+                break;
+
+            case 'cancel': //action for cancel delete income category
+                Flash::addMessage('Removal of expense category cancelled.', Flash::DANGER);
+                break;
+        }
+        $this->redirect(Auth::getReturnToPage());
+    }
+
+    /**
+     * Remove an existing user payment method
+     * 
+     * @return void
+     */
+    public function removeMethodAction()
+    {
+        $userID = $_GET['userID'];
+        $paymentID = $_GET['paymentID'];
+
+        switch ($_REQUEST['action']) {
+            case 'confirm': //action for confirm delete payment method
+                PaymentMethod::removePaymentMethod($userID, $paymentID);
+                Flash::addMessage('Successfully removed payment method.');
+                break;
+
+            case 'cancel': //action for cancel delete income category
+                Flash::addMessage('Removal of payment method cancelled.', Flash::DANGER);
+                break;
+        }
+        $this->redirect(Auth::getReturnToPage());
+    }
 }

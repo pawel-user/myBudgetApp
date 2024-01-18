@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block title %}Delete income category confirmation{% endblock %}
+
+{% block footer %}
+{% endblock %}
+
+{% block navigation %}
+
+<li class="nav-item">
+  <a class="nav-link" href="/expenses"><i class="fa-solid fa-sack-xmark"></i> Add expense</a>
+</li>
+
+<li class="nav-item">
+  <a class="nav-link" href="/balance"><i class="fa-solid fa-scale-balanced"></i> View balance</a>
+</li>
+
+{% endblock %}
+
+{% block body %}
+<main>
+  <section class="add-income-section">
+
+    <!-- {% if income.errors is not empty %}
+    <p class="error-message">Errors:</p>
+    <ul>
+      {% for error in income.errors %}
+      <li class="error-message">{{ error }}</li>
+      {% endfor %}
+    </ul>
+    {% endif %} -->
+
+    <h3 class="title-action">Confirmation income category delete:</h3><br>
+
+    <form method="get" action="/profit/remove">
+      <div class="input-group mb-4 data-container">
+        <p class="question-confirmation">Are you sure to delete <span class="highlighted-text">{{ selected_income_name }}</span> income category?</p>
+        <input type="hidden" name="userID" value="{{ userID }}">
+        <input type="hidden" name="categoryID" value="{{ categoryID }}">
+
+        <div class="button-container">
+          <button name="action" type="submit" value="cancel" class="btn btn-lg btn-danger sign-up-button">
+            <i class="fa-solid fa-rectangle-xmark icon"></i>Cancel
+          </button>
+        </div>
+        <div class="button-container">
+          <button name="action" type="submit" value="confirm" class="btn btn-lg btn-success sign-up-button">
+            <i class="fa-solid fa-square-check icon"></i>Confirm
+          </button>
+        </div>
+      </div>
+    </form>
+
+  </section>
+</main>
+{% endblock %}

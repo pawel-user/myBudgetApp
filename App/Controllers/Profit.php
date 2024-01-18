@@ -24,7 +24,7 @@ class Profit extends Authenticated
      */
     public function newAction()
     {
-        View::renderTemplate('Profit/new.html', ['income' => Settings::loadUserIncomeNames()]);
+        View::renderTemplate('Profit/new.html', ['income_load' => Settings::loadUserIncomeNames()]);
     }
 
     /**
@@ -42,7 +42,7 @@ class Profit extends Authenticated
 
             $this->redirect('/profit/new');
         } else {
-            View::renderTemplate('Profit/new.html', ['income' => $income]);
+            View::renderTemplate('Profit/new.html', ['income' => $income, 'income_load' => Settings::loadUserIncomeNames()]);
         }
     }
 
@@ -95,7 +95,7 @@ class Profit extends Authenticated
                 break;
 
             case 'delete': //action for delete button
-                View::renderTemplate('Profit/delete_category_confirmation.html', ['selected_income_name' => $selected_income_name, 'userID' => $userID, 'categoryID' => $categoryID]);
+                View::renderTemplate('Profit/delete_category_confirm.html', ['selected_income_name' => $selected_income_name, 'userID' => $userID, 'categoryID' => $categoryID]);
                 break;
         }
     }
@@ -141,7 +141,7 @@ class Profit extends Authenticated
         switch ($_REQUEST['action']) {
             case 'confirm': //action for confirm delete income category
                 IncomeCategory::removeIncomeCategory($userID, $categoryID);
-                Flash::addMessage('Successfully edited income category.');
+                Flash::addMessage('Successfully removed income category.');
                 break;
 
             case 'cancel': //action for cancel delete income category
