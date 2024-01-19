@@ -5,6 +5,7 @@ namespace App\Models;
 use PDO;
 
 use \App\Flash;
+use \App\DataSetup;
 
 /*
 * Expense category model
@@ -12,7 +13,7 @@ use \App\Flash;
 * PHP Version 8.2.6
 */
 #[\AllowDynamicProperties]
-class ExpenseCategory extends \Core\Model {
+class ExpenseCategory extends \Core\Model  {
 
     /**
      * Error messages
@@ -137,6 +138,10 @@ class ExpenseCategory extends \Core\Model {
         $stmt->bindValue(':categoryID', $categoryID, PDO::PARAM_INT);
 
         $stmt->execute();
+
+        //$tableName = 'expenses_category_assigned_to_users';
+        //$tableName = implode('', $tableName);
+        DataSetup::orderExpenseCategoryTableItems();   
     }
 
     /**

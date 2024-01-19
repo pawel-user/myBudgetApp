@@ -5,6 +5,7 @@ namespace App\Models;
 use PDO;
 
 use App\Flash;
+use App\DataSetup;
 
 /*
 * Payment category model
@@ -141,6 +142,9 @@ class PaymentMethod extends \Core\Model
         $stmt->bindValue(':paymentID', $paymentID, PDO::PARAM_INT);
 
         $stmt->execute();
+
+        //$tableName = 'payment_methods_assigned_to_users';
+        DataSetup::orderPaymentMethodsTableItems();   
     }
 
 

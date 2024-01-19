@@ -5,6 +5,7 @@ namespace App\Models;
 use PDO;
 
 use \App\Flash;
+use \App\DataSetup;
 
 /*
 * Income category model
@@ -143,6 +144,8 @@ class IncomeCategory extends \Core\Model
         $stmt->bindValue(':categoryID', $categoryID, PDO::PARAM_INT);
 
         $stmt->execute();
+
+        DataSetup::orderIncomeCategoryTableItems();   
     }
 
     /**
