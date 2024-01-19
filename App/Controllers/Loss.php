@@ -129,8 +129,8 @@ class Loss extends Authenticated {
      */
     public function editCategoryAction()
     {
-        $userID = $_POST['userID'];
-        $categoryID = $_POST['categoryID'];
+        $userID = intval($_POST['userID']);
+        $categoryID = intval($_POST['categoryID']);
         $newCategoryName = $_POST['changed-name'];
 
         switch ($_REQUEST['action']) {
@@ -188,8 +188,8 @@ class Loss extends Authenticated {
      */
     public function editMethodAction()
     {
-        $userID = $_POST['userID'];
-        $paymentID = $_POST['paymentID'];
+        $userID = intval($_POST['userID']);
+        $paymentID = intval($_POST['paymentID']);
         $newPaymentMethod = $_POST['changed-method'];
 
         switch ($_REQUEST['action']) {
@@ -216,16 +216,20 @@ class Loss extends Authenticated {
      */
     public function removeCategoryAction()
     {
-        $userID = $_GET['userID'];
-        $categoryID = $_GET['categoryID'];
+        $userID = intval($_GET['userID']);
+        $categoryID = intval($_GET['categoryID']);
 
         switch ($_REQUEST['action']) {
-            case 'confirm': //action for confirm delete income category
-                ExpenseCategory::removeExpenseCategory($userID, $categoryID);
-                Flash::addMessage('Successfully removed expense category.');
+            case 'confirm': //action for confirm delete expense category
+                if (ExpenseCategory::checkRemoveExpenseCategory($userID, $categoryID)) {
+                    Flash::addMessage('Successfully removed expense category.');
+                } else {
+                    Flash::addMessage('Removed expense category is not empty.', Flash::WARNING);
+                    Flash::addMessage('Delete these items first or change the category for them.', Flash::INFO);
+                }
                 break;
 
-            case 'cancel': //action for cancel delete income category
+            case 'cancel': //action for cancel delete expense category
                 Flash::addMessage('Removal of expense category cancelled.', Flash::DANGER);
                 break;
         }
@@ -239,16 +243,20 @@ class Loss extends Authenticated {
      */
     public function removeMethodAction()
     {
-        $userID = $_GET['userID'];
-        $paymentID = $_GET['paymentID'];
+        $userID = intval($_GET['userID']);
+        $paymentID = intval($_GET['paymentID']);
 
         switch ($_REQUEST['action']) {
             case 'confirm': //action for confirm delete payment method
-                PaymentMethod::removePaymentMethod($userID, $paymentID);
-                Flash::addMessage('Successfully removed payment method.');
+                if (PaymentMethod::checkRemovePaymentMethod($userID, $paymentID)) {
+                    Flash::addMessage('Successfully removed payment method.');
+                } else {
+                    Flash::addMessage('Removed payment method is not empty.', Flash::WARNING);
+                    Flash::addMessage('Delete these items first or change the payment method for them.', Flash::INFO);
+                }
                 break;
 
-            case 'cancel': //action for cancel delete income category
+            case 'cancel': //action for cancel delete payment method
                 Flash::addMessage('Removal of payment method cancelled.', Flash::DANGER);
                 break;
         }

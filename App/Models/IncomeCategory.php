@@ -129,6 +129,31 @@ class IncomeCategory extends \Core\Model
     }
 
     /**
+     * Check if exists income item which is assigned to specific income category to be deleted
+     * 
+     * @return boolean
+     */
+    public static function checkRemoveIncomeCategory($userID, $categoryID) {
+        $sql = 'SELECT id FROM incomes 
+                WHERE user_id = :userID AND income_category_assigned_to_user_id = :categoryID';
+        
+        $db = static::getDB();
+        $stmt = $db->prepare($sql);
+        $stmt->bindValue(':userID', $userID, PDO::PARAM_INT);
+        $stmt->bindValue(':categoryID', $categoryID, PDO::PARAM_INT);
+
+        $stmt->execute();
+
+        $fetchArray = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if (empty($fetchArray)) {
+            static::removeIncomeCategory($userID, $categoryID);
+            return true;
+        }             
+        return false;
+}
+
+    /**
      * Remove user income category in a database
      * 
      * @return void
@@ -145,7 +170,9 @@ class IncomeCategory extends \Core\Model
 
         $stmt->execute();
 
-        DataSetup::orderIncomeCategoryTableItems();   
+        DataSetup::orderIncomeCategoryTableItems(); 
+        
+        
     }
 
     /**

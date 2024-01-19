@@ -107,8 +107,8 @@ class Profit extends Authenticated
      */
     public function editCategoryAction()
     {
-        $userID = $_POST['userID'];
-        $categoryID = $_POST['categoryID'];
+        $userID = intval($_POST['userID']);
+        $categoryID = intval($_POST['categoryID']);
         $newCategoryName = $_POST['changed-name'];
 
         switch ($_REQUEST['action']) {
@@ -135,16 +135,20 @@ class Profit extends Authenticated
      */
     public function removeAction()
     {
-        $userID = $_GET['userID'];
-        $categoryID = $_GET['categoryID'];
+        $userID = intval($_GET['userID']);
+        $categoryID = intval($_GET['categoryID']);
 
         switch ($_REQUEST['action']) {
             case 'confirm': //action for confirm delete income category
-                IncomeCategory::removeIncomeCategory($userID, $categoryID);
-                Flash::addMessage('Successfully removed income category.');
+                if (IncomeCategory::checkRemoveIncomeCategory($userID, $categoryID)) {
+                    Flash::addMessage('Successfully removed income category.');
+                } else {
+                    Flash::addMessage('Removed income category is not empty.', Flash::WARNING);
+                    Flash::addMessage('Delete these items first or change the category for them.', Flash::INFO);
+                }
                 break;
 
-            case 'cancel': //action for cancel delete income category
+            case 'cancel': //action for cancel deletion income category
                 Flash::addMessage('Removal of income category cancelled.', Flash::DANGER);
                 break;
         }

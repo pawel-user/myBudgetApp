@@ -127,6 +127,31 @@ class PaymentMethod extends \Core\Model
     }
 
     /**
+     * Check if exists payment method item which is assigned to specific payment method to be deleted
+     * 
+     * @return boolean
+     */
+    public static function checkRemovePaymentMethod($userID, $paymentID) {
+        $sql = 'SELECT id FROM expenses 
+                WHERE user_id = :userID AND payment_methods_assigned_to_user_id = :paymentID';
+        
+        $db = static::getDB();
+        $stmt = $db->prepare($sql);
+        $stmt->bindValue(':userID', $userID, PDO::PARAM_INT);
+        $stmt->bindValue(':paymentID', $paymentID, PDO::PARAM_INT);
+
+        $stmt->execute();
+
+        $fetchArray = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if (empty($fetchArray)) {
+            static::removePaymentMethod($userID, $paymentID);
+            return true;
+        }             
+        return false;
+}
+
+    /**
      * Remove user payment method in a database
      * 
      * @return void

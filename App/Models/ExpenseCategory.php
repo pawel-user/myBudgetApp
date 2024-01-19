@@ -123,6 +123,31 @@ class ExpenseCategory extends \Core\Model  {
     }
 
     /**
+     * Check if exists expense item which is assigned to specific expense category to be deleted
+     * 
+     * @return boolean
+     */
+    public static function checkRemoveExpenseCategory($userID, $categoryID) {
+        $sql = 'SELECT id FROM expenses 
+                WHERE user_id = :userID AND expense_category_assigned_to_user_id = :categoryID';
+        
+        $db = static::getDB();
+        $stmt = $db->prepare($sql);
+        $stmt->bindValue(':userID', $userID, PDO::PARAM_INT);
+        $stmt->bindValue(':categoryID', $categoryID, PDO::PARAM_INT);
+
+        $stmt->execute();
+
+        $fetchArray = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if (empty($fetchArray)) {
+            static::removeExpenseCategory($userID, $categoryID);
+            return true;
+        }             
+        return false;
+}
+
+    /**
      * Remove user expense category in a database
      * 
      * @return void
