@@ -71,6 +71,8 @@ class View
             $twig->addGlobal('flash_messages', \App\Flash::getMessages());
             $twig->addGlobal('currentDate', \App\Date::getCurrentDate());
             $twig->addGlobal('income', \App\Settings::loadUserIncomeNames());
+            $twig->addGlobal('expense', \App\Settings::loadUserExpenseNames());
+            $twig->addGlobal('payment', \App\Settings::loadUserPaymentMethods());
         }
 
         return $twig->render($template, $args);

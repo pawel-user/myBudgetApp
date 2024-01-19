@@ -399,6 +399,30 @@ class User extends \Core\Model
     }
 
     /**
+     * Find user id by hashed token
+     * 
+     * @return mixed User object
+     */
+    public static function findUserIdByHashedToken($value) {
+        $token = new Token($value);
+        $hashed_token = $token->getHash();
+
+        $sql = 'SELECT id FROM users
+                WHERE activation_hash = :hashed_token';
+        
+        $db = static::getDB();
+        $stmt = $db->prepare($sql);
+
+        $stmt->bindValue(':hashed_token', $hashed_token, PDO::PARAM_STR);
+
+        $stmt->setFetchMode(PDO::FETCH_CLASS, get_called_class());
+
+        $stmt->execute();
+
+        return $stmt->fetch();
+    }
+
+    /**
      * Update the user's profile
      * 
      * @param array $data Data from the edit profile form

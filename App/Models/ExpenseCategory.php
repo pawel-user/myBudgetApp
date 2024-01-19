@@ -8,14 +8,12 @@ use \App\Flash;
 use \App\DataSetup;
 
 /*
-* Income category model
+* Expense category model
 * 
 * PHP Version 8.2.6
 */
-
 #[\AllowDynamicProperties]
-class IncomeCategory extends \Core\Model
-{
+class ExpenseCategory extends \Core\Model  {
 
     /**
      * Error messages
@@ -39,16 +37,15 @@ class IncomeCategory extends \Core\Model
     }
 
     /**
-     * Load default income categories for registered user
+     * Load default expense categories for registered user
      * 
      * @return void
      */
-    public static function loadDefaultIncomeCategories($userID)
-    {
+    public static function loadDefaultExpenseCategories($userID) {
 
-        $sql = 'INSERT INTO incomes_category_assigned_to_users (user_id, name)
+        $sql = 'INSERT INTO expenses_category_assigned_to_users (user_id, name)
                 SELECT :userID, name
-                FROM incomes_category_default';
+                FROM expenses_category_default';
 
         $db = static::getDB();
         $stmt = $db->prepare($sql);
@@ -59,14 +56,13 @@ class IncomeCategory extends \Core\Model
     }
 
     /**
-     * Get user income categories to array
+     * Get user expense categories to array
      * 
      * @return array
      */
-    public static function getUserIncomeCategories($userID)
-    {
+    public static function getUserExpenseCategories($userID) {
 
-        $sql = 'SELECT id, name FROM incomes_category_assigned_to_users
+        $sql = 'SELECT id, name FROM expenses_category_assigned_to_users
                 WHERE user_id = :userID';
 
         $db = static::getDB();
@@ -77,23 +73,21 @@ class IncomeCategory extends \Core\Model
 
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
-
     /**
-     * Create new user income category and add to database
+     * Create new user expense category and add to database
      * 
      * @return boolean
      */
-    public static function createIncomeCategory($userID, $incomeCategory)
-    {
+    public static function createExpenseCategory($userID, $expenseCategory) {
 
-        if (static::validateCategory($userID, $incomeCategory)) {
-            $sql = 'INSERT INTO incomes_category_assigned_to_users (user_id, name) 
+        if (static::validateCategory($userID, $expenseCategory)) {
+            $sql = 'INSERT INTO expenses_category_assigned_to_users (user_id, name) 
                     VALUES (:userID, :name)';
 
             $db = static::getDB();
             $stmt = $db->prepare($sql);
             $stmt->bindValue(':userID', $userID, PDO::PARAM_INT);
-            $stmt->bindValue(':name', $incomeCategory, PDO::PARAM_STR);
+            $stmt->bindValue(':name', $expenseCategory, PDO::PARAM_STR);
 
             $stmt->execute();
 
@@ -104,14 +98,14 @@ class IncomeCategory extends \Core\Model
     }
 
     /**
-     * Edit user income category in a database
+     * Edit user expense category in a database
      * 
      * @return boolean
      */
-    public static function editIncomeCategory($userID, $categoryID, $newCategoryName)
+    public static function editExpenseCategory($userID, $categoryID, $newCategoryName)
     {
         if (static::validateCategory($userID, $newCategoryName)) {
-            $sql = 'UPDATE incomes_category_assigned_to_users
+            $sql = 'UPDATE expenses_category_assigned_to_users
                     SET name = :newCategory WHERE user_id = :userID AND id = :categoryID
                     LIMIT 1';
 
@@ -129,13 +123,13 @@ class IncomeCategory extends \Core\Model
     }
 
     /**
-     * Check if exists income item which is assigned to specific income category to be deleted
+     * Check if exists expense item which is assigned to specific expense category to be deleted
      * 
      * @return boolean
      */
-    public static function checkRemoveIncomeCategory($userID, $categoryID) {
-        $sql = 'SELECT id FROM incomes 
-                WHERE user_id = :userID AND income_category_assigned_to_user_id = :categoryID';
+    public static function checkRemoveExpenseCategory($userID, $categoryID) {
+        $sql = 'SELECT id FROM expenses 
+                WHERE user_id = :userID AND expense_category_assigned_to_user_id = :categoryID';
         
         $db = static::getDB();
         $stmt = $db->prepare($sql);
@@ -147,20 +141,20 @@ class IncomeCategory extends \Core\Model
         $fetchArray = $stmt->fetch(PDO::FETCH_ASSOC);
 
         if (empty($fetchArray)) {
-            static::removeIncomeCategory($userID, $categoryID);
+            static::removeExpenseCategory($userID, $categoryID);
             return true;
         }             
         return false;
 }
 
     /**
-     * Remove user income category in a database
+     * Remove user expense category in a database
      * 
      * @return void
      */
-    public static function removeIncomeCategory($userID, $categoryID)
+    public static function removeExpenseCategory($userID, $categoryID)
     {
-        $sql = 'DELETE FROM incomes_category_assigned_to_users
+        $sql = 'DELETE FROM expenses_category_assigned_to_users
                 WHERE user_id = :userID AND id = :categoryID LIMIT 1';
 
         $db = static::getDB();
@@ -170,20 +164,20 @@ class IncomeCategory extends \Core\Model
 
         $stmt->execute();
 
-        DataSetup::orderIncomeCategoryTableItems(); 
-        
-        
+        //$tableName = 'expenses_category_assigned_to_users';
+        //$tableName = implode('', $tableName);
+        DataSetup::orderExpenseCategoryTableItems();   
     }
 
     /**
-     * Validate current income category names
+     * Validate current expense category names
      * 
      * @return void
      */
-    private static function validateCategory($userID, $incomeCategory)
-    {
-        $categoryToUpper = strtoupper($incomeCategory);
+    private static function validateCategory($userID, $expenseCategory) {
+        $categoryToUpper = strtoupper($expenseCategory);
 
+        //$pattern = '/[^\wa-zA-Z0-9, ]/i';
         $pattern = '/^[a-zA-Z][a-zA-Z0-9 ,]+$/';
         $result = preg_match($pattern, $categoryToUpper);
 
@@ -200,19 +194,15 @@ class IncomeCategory extends \Core\Model
     }
 
     /**
-     * Check if new adding or editing income category name already exists 
+     * Check if new adding or editing expense category name already exists 
      * 
      * @return boolean
      */
-    private static function checkExistenceCategory($userID, $categoryToUpper)
-    {
+    private static function checkExistenceCategory($userID, $categoryToUpper) {
 
-        //$sql = 'SELECT name FROM (SELECT UPPER(name) AS name FROM incomes_category_assigned_to_users
-        //WHERE user_id = :userID) AND name = :category';
-
-        $sql = 'SELECT UPPER(name) AS name FROM incomes_category_assigned_to_users
+        $sql = 'SELECT UPPER(name) AS name FROM expenses_category_assigned_to_users
                 WHERE user_id = :userID AND name = :category';
-
+        
         $db = static::getDB();
         $stmt = $db->prepare($sql);
 

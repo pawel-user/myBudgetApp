@@ -24,11 +24,11 @@ class Profit extends Authenticated
      */
     public function newAction()
     {
-        View::renderTemplate('Profit/new.html', ['income' => Settings::loadUserIncomeNames()]);
+        View::renderTemplate('Profit/new.html', ['income_load' => Settings::loadUserIncomeNames()]);
     }
 
     /**
-     * Add a new user income
+     * Add a new user income category from existing list of income categories
      * 
      * @return void
      */
@@ -42,16 +42,16 @@ class Profit extends Authenticated
 
             $this->redirect('/profit/new');
         } else {
-            View::renderTemplate('Profit/new.html', ['income' => $income]);
+            View::renderTemplate('Profit/new.html', ['income' => $income, 'income_load' => Settings::loadUserIncomeNames()]);
         }
     }
 
     /**
-     * Add a new user income category
+     * Create a new user income category and add to list of income categories
      * 
      * @return void
      */
-    public function createAction()
+    public function createCategoryAction()
     {
         $incomeCategory = implode('', $_POST);
         $userID = $_SESSION['user_id'];
@@ -74,7 +74,7 @@ class Profit extends Authenticated
      * 
      * @return void
      */
-    public function selectAction()
+    public function selectCategoryAction()
     {
         $userID = $_SESSION['user_id'];
         $income = new Income($_GET);
@@ -95,7 +95,7 @@ class Profit extends Authenticated
                 break;
 
             case 'delete': //action for delete button
-                View::renderTemplate('Profit/delete_category_confirmation.html', ['selected_income_name' => $selected_income_name, 'userID' => $userID, 'categoryID' => $categoryID]);
+                View::renderTemplate('Profit/delete_category_confirm.html', ['selected_income_name' => $selected_income_name, 'userID' => $userID, 'categoryID' => $categoryID]);
                 break;
         }
     }
@@ -105,10 +105,10 @@ class Profit extends Authenticated
      * 
      * @return void
      */
-    public function editAction()
+    public function editCategoryAction()
     {
-        $userID = $_POST['userID'];
-        $categoryID = $_POST['categoryID'];
+        $userID = intval($_POST['userID']);
+        $categoryID = intval($_POST['categoryID']);
         $newCategoryName = $_POST['changed-name'];
 
         switch ($_REQUEST['action']) {
@@ -135,16 +135,20 @@ class Profit extends Authenticated
      */
     public function removeAction()
     {
-        $userID = $_GET['userID'];
-        $categoryID = $_GET['categoryID'];
+        $userID = intval($_GET['userID']);
+        $categoryID = intval($_GET['categoryID']);
 
         switch ($_REQUEST['action']) {
             case 'confirm': //action for confirm delete income category
-                IncomeCategory::removeIncomeCategory($userID, $categoryID);
-                Flash::addMessage('Successfully edited income category.');
+                if (IncomeCategory::checkRemoveIncomeCategory($userID, $categoryID)) {
+                    Flash::addMessage('Successfully removed income category.');
+                } else {
+                    Flash::addMessage('Removed income category is not empty.', Flash::WARNING);
+                    Flash::addMessage('Delete these items first or change the category for them.', Flash::INFO);
+                }
                 break;
 
-            case 'cancel': //action for cancel delete income category
+            case 'cancel': //action for cancel deletion income category
                 Flash::addMessage('Removal of income category cancelled.', Flash::DANGER);
                 break;
         }

@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}Editing income category name{% endblock %}
+{% block title %}Delete income category confirmation{% endblock %}
 
 {% block footer %}
 {% endblock %}
@@ -24,26 +24,20 @@
     <!-- {% if income.errors is not empty %}
     <p class="error-message">Errors:</p>
     <ul>
-      {% for error in income.errors %}f
+      {% for error in income.errors %}
       <li class="error-message">{{ error }}</li>
       {% endfor %}
     </ul>
     {% endif %} -->
 
-    <h3 class="title-action">Enter a new income category name:</h3><br>
+    <h3 class="title-action">Confirmation income category delete:</h3><br>
 
-    <form method="post" action="/profit/edit-category">
+    <form method="get" action="/profit/remove">
       <div class="input-group mb-4 data-container">
-        <label class="input-group-text data-form" for="inputChangedCategory"><i class="fa-solid fa-list"
-            style="color: #7c7c82;"></i></label>
-        <input type="text" id="inputChangedCategory" name="changed-name" class="form-control data-form"
-          value="{{ selected_income_name }}" placeholder="Enter changed income category name"
-          aria-label="Changed income category" required autofocus>
+        <p class="question-confirmation">Are you sure to delete <span class="highlighted-text">{{ selected_income_name }}</span> income category?</p>
         <input type="hidden" name="userID" value="{{ userID }}">
         <input type="hidden" name="categoryID" value="{{ categoryID }}">
-      </div>
 
-      <div class="input-group mb-4 data-container">
         <div class="button-container">
           <button name="action" type="submit" value="cancel" class="btn btn-lg btn-danger sign-up-button">
             <i class="fa-solid fa-rectangle-xmark icon"></i>Cancel

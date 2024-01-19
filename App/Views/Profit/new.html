@@ -34,7 +34,7 @@
 {% block navigation %}
 
 <li class="nav-item">
-  <a class="nav-link" href="/expenses"><i class="fa-solid fa-sack-xmark"></i> Add expense</a>
+  <a class="nav-link" href="/loss/new"><i class="fa-solid fa-sack-xmark"></i> Add expense</a>
 </li>
 
 <li class="nav-item">
@@ -64,7 +64,7 @@
             style="color: #7c7c82;"></i>
         </label>
         <input class="form-control data-form" type="number" id="inputAmount" name="amount" placeholder="Amount (PLN)"
-          aria-label="Amount (PLN)" min="0.01" step="0.01">
+          aria-label="Amount (PLN)" min="0.01" step="0.01" value="{{ income.amount }}">
       </div>
 
       <div class="input-group mb-3 data-container">
@@ -79,12 +79,12 @@
         <label class="input-group-text data-form" for="inputCategory"><i class="fa-solid fa-caret-down"
             style="color: #7c7c82;"></i>
         </label>
-        <select class="form-control data-form " id="inputCategory" name="name">
+        <select class="form-control data-form" id="inputCategory" name="name">
           <option value="" selected>Choose category...</option>
           <option value="" disabled="disabled">───────────────────────────────────────</option>
-          {% if income.income_names is not empty %}
+          {% if income_load.income_names is not empty %}
           {% set otherIncomeName = "" %}
-          {% for incomeName in income.income_names %}
+          {% for incomeName in income_load.income_names %}
           {% if incomeName != "Other incomes" %}
           <option value="{{ incomeName }}">{{ incomeName }}</option>
           {% else %}
@@ -98,15 +98,17 @@
       </div>
 
       <div class="input-group mb-3 data-container">
-        <label class="input-group-text data-form" for="inputTextComment"><i class="fa-solid fa-pencil"
-            style="color: #7c7c82;"></i></label>
-        <textarea class="form-control data-form" id="inputTextComment" name="income_comment" rows="3"
-          placeholder="Type a comment..." resize="none"></textarea>
+        <label class="input-group-text data-form" for="inputTextComment"><i class="fa-solid fa-pencil" style="color: #7c7c82;"></i></label>
+        {% if income.income_comment is not empty %} 
+        <textarea class="form-control data-form" id="inputTextComment" name="income_comment" rows="3" placeholder="Type a comment..." resize="none">{{ income.income_comment }}</textarea>
+        {% else %} 
+        <textarea class="form-control data-form" id="inputTextComment" name="income_comment" rows="3" placeholder="Type a comment..." resize="none"></textarea>
+        {% endif %}        
       </div>
       <div class="input-group mb-3 data-container">
         <div class="button-container">
           <button type="reset" class="btn btn-lg btn-danger sign-up-button">
-            <i class="fa-solid fa-rectangle-xmark icon"></i>Cancel
+            <i class="fa-solid fa-rectangle-xmark icon"></i>Clear
           </button>
         </div>
         <div class="button-container">
