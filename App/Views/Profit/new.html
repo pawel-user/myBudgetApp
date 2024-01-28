@@ -56,6 +56,8 @@
     </ul>
     {% endif %}
 
+    {{ dump(currentDate) }}
+
     <h3 class="title-action">Enter incomes data:</h3>
 
     <form method="post" action="/profit/add" id="formAddIncome">
@@ -98,12 +100,15 @@
       </div>
 
       <div class="input-group mb-3 data-container">
-        <label class="input-group-text data-form" for="inputTextComment"><i class="fa-solid fa-pencil" style="color: #7c7c82;"></i></label>
-        {% if income.income_comment is not empty %} 
-        <textarea class="form-control data-form" id="inputTextComment" name="income_comment" rows="3" placeholder="Type a comment..." resize="none">{{ income.income_comment }}</textarea>
-        {% else %} 
-        <textarea class="form-control data-form" id="inputTextComment" name="income_comment" rows="3" placeholder="Type a comment..." resize="none"></textarea>
-        {% endif %}        
+        <label class="input-group-text data-form" for="inputTextComment"><i class="fa-solid fa-pencil"
+            style="color: #7c7c82;"></i></label>
+        {% if income.income_comment is not empty %}
+        <textarea class="form-control data-form" id="inputTextComment" name="income_comment" rows="3"
+          placeholder="Type a comment..." resize="none">{{ income.income_comment }}</textarea>
+        {% else %}
+        <textarea class="form-control data-form" id="inputTextComment" name="income_comment" rows="3"
+          placeholder="Type a comment..." resize="none"></textarea>
+        {% endif %}
       </div>
       <div class="input-group mb-3 data-container">
         <div class="button-container">

@@ -2,7 +2,6 @@
 
 namespace App\Controllers;
 
-use App\Models\BalanceSummary;
 use Core\View;
 use App\Settings;
 
@@ -14,9 +13,7 @@ class Balance extends Authenticated {
      */
     public function summaryAction()
     {
-        $balance = new BalanceSummary();
-        $balance = Settings::loadTotalUserIncomesAndExpensesForCurrentMonth();
-        View::renderTemplate('Balance/summary.html', ['incomes_load' => $balance->income_data, 'expenses_load' => $balance->expense_data]);
+        View::renderTemplate('Balance/summary.html', ['balance_load' => Settings::loadBalanceDataOfIncomesAndExpensesInCurrentMonth(), 'current_month_and_year' => Settings::downloadCurrentMonthAndYear()]);
     }
 
 }

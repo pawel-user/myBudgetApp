@@ -86,11 +86,11 @@ class Settings
     }
 
     /**
-     * Load user total incomes & expenses for current month
+     * Load all user balance data of incomes & expenses for current month
      * 
      * @return mixed Balance object with incomes & expenses associative arrays
      */
-    public static function loadTotalUserIncomesAndExpensesForCurrentMonth()
+    public static function loadBalanceDataOfIncomesAndExpensesInCurrentMonth()
     {
         $balance = new BalanceSummary();
 
@@ -100,22 +100,42 @@ class Settings
         $date_end = date('Y-m-t');
 
         if ($user) {
-            $total_incomes_stmt = BalanceSummary::getTotalUserIncomesForSelectedPeriod($user->id, $date_begin, $date_end);
+            $all_incomes_stmt = BalanceSummary::getAllUserIncomesForSelectedPeriod($user->id, $date_begin, $date_end);
 
-            foreach ($total_incomes_stmt as $row) {
+            foreach ($all_incomes_stmt as $row) {
                 $balance->income_data[] = $row;
             }
 
-            $total_expenses_stmt = BalanceSummary::getTotalUserExpensesForSelectedPeriod($user->id, $date_begin, $date_end);
+            $all_expenses_stmt = BalanceSummary::getAllUserExpensesForSelectedPeriod($user->id, $date_begin, $date_end);
 
-            foreach ($total_expenses_stmt as $row) {
+            foreach ($all_expenses_stmt as $row) {
                 $balance->expense_data[] = $row;
+            }
+
+            $income_category_total_amount_stmt = BalanceSummary::getTotalAmountOfIncomesForEachCategoryInSelectedPeriod($user->id, $date_begin, $date_end);
+
+            foreach ($income_category_total_amount_stmt as $row) {
+                $balance->income_category_total_amount[] = $row;
+            }
+
+            $expense_category_total_amount_stmt = BalanceSummary::getTotalAmountOfExpensesForEachCategoryInSelectedPeriod($user->id, $date_begin, $date_end);
+
+            foreach ($expense_category_total_amount_stmt as $row) {
+                $balance->expense_category_total_amount[] = $row;
             }
         }
 
-        //var_dump($balance->expense_data);
-        //exit;
         return $balance;
+    }
+
+    /**
+     * Download current month and year
+     * 
+     * @return string Month and year
+     */
+    public static function downloadCurrentMonthAndYear() {
+
+        return date('F Y');
     }
 
 }
