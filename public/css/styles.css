@@ -82,8 +82,8 @@ th {
 
 /* Tables */
 
-.amount-table-field {
-}
+/*.amount-table-field {
+}*/
 
 .category-table-field .details-table-field {
   width: 10rem;
@@ -427,8 +427,14 @@ th {
   margin: 0 0 2rem;
 }
 
-.summary-text {
+.summary-text-success {
   color: green;
+  font-weight: bold;
+  text-align: center;
+}
+
+.summary-text-failure {
+  color: red;
   font-weight: bold;
   text-align: center;
 }

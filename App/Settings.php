@@ -86,18 +86,12 @@ class Settings
     }
 
     /**
-     * Load all user balance data of incomes & expenses for current month
+     * Load all user balance data of incomes & expenses in selected period
      * 
      * @return mixed Balance object with incomes & expenses associative arrays
      */
-    public static function loadBalanceDataOfIncomesAndExpensesInCurrentMonth()
+    public static function loadBalanceDataOfIncomesAndExpensesInSelectedPeriod($balance, $user, $date_begin, $date_end)
     {
-        $balance = new BalanceSummary();
-
-        $user = Auth::getUser();
-
-        $date_begin = date('Y-m-01');
-        $date_end = date('Y-m-t');
 
         if ($user) {
             $all_incomes_stmt = BalanceSummary::getAllUserIncomesForSelectedPeriod($user->id, $date_begin, $date_end);
@@ -123,6 +117,14 @@ class Settings
             foreach ($expense_category_total_amount_stmt as $row) {
                 $balance->expense_category_total_amount[] = $row;
             }
+
+            $balance->total_incomes = BalanceSummary::getTotalSumOfIncomesInSelectedPeriod($user->id, $date_begin, $date_end)["amount"];
+
+            /*$balance->total_incomes = BalanceSummary::getTotalSumOfIncomesInSelectedPeriod($user->id, $date_begin, $date_end)[0]->amount; -- Dla zwracanego obiektu.*/
+
+            $balance->total_expenses = BalanceSummary::getTotalSumOfExpensesInSelectedPeriod($user->id, $date_begin, $date_end)["amount"];
+
+            $balance->final_balance = $balance->total_incomes - $balance->total_expenses;
         }
 
         return $balance;

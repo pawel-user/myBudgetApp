@@ -142,7 +142,7 @@
           <tr class="row-sum" style="border: solid green 2px;">
             <td class="total-sum" style="color: green">Total Incomes</td>
             <td class="total-sum" style="color: green"></td>
-            <td class="total-sum text-to-right" style="color: green">6200.00 PLN</td>
+            <td class="total-sum text-to-right" style="color: green">{{ balance_load.total_incomes }} PLN</td>
             <td class="total-sum" style="color: green"></td>
             <td class="total-sum" style="color: green"></td>
           </tr>
@@ -196,7 +196,7 @@
           <tr class="row-sum" style="border: solid red 2px;">
             <td class="total-sum" style="color: red">Total Expenses</td>
             <td class="total-sum" style="color: red"></td>
-            <td class="total-sum text-to-right" style="color: red">6200.00 PLN</td>
+            <td class="total-sum text-to-right" style="color: red">{{ balance_load.total_expenses }} PLN</td>
             <td class="total-sum" style="color: red"></td>
             <td class="total-sum" style="color: red"></td>
           </tr>
@@ -206,17 +206,26 @@
     </div>
   </div>
 
-  <div class="col-lg-6"></div>
+  {% if balance_load is not empty %}
+  <h4 class="table-title">
+    <i class="fa-solid fa-scroll"></i> Summary
+  </h4>
   <div class="summary-container">
     <h4 style="text-align: center">Your Finance Balance:</h4>
     <h4 style="font-weight: bold; text-align: center">
-      3820.00 PLN<br>
+      {{ balance_load.final_balance }} PLN<br>
     </h4>
-    <h4 class="summary-text">
+    {% if balance_load.final_balance >= 0 %}
+    <h4 class="summary-text-success">
       Congratulations! You manage your finances very well.
     </h4>
+    {% else %}
+    <h4 class="summary-text-failure">
+      You don't manage your finances very well. You need to make changes to your budget.
+    </h4>
   </div>
-  </div>
+  {% endif %}
+  {% endif %}
 
   </main>
 </section>

@@ -4,12 +4,14 @@ namespace App\Models;
 
 use PDO;
 
+use \AllowDynamicProperties;
+
 /**
  * User incomes & expenses table
  * 
  * PHP version 8.2.6
  */
-
+#[AllowDynamicProperties]
 class BalanceSummary extends \Core\Model
 {
     /**
@@ -31,6 +33,21 @@ class BalanceSummary extends \Core\Model
      * Total amount for each expense category in selected period
      */
     public $expense_category_total_amount = [];
+
+    /**
+     * Total sum of income amounts in selected period
+     */
+    public $total_incomes;
+
+    /**
+     * Total sum of expense amounts in selected period
+     */
+    public $total_expenses;
+
+    /**
+     * Final balance of incomes and expenses in selected period
+     */
+    public $final_balance;
 
     /**
      * Current month and year
@@ -161,8 +178,56 @@ class BalanceSummary extends \Core\Model
     }
 
     /**
-     * Get total sum of user incomes in selected period of time
+     * Get total sum of user income amounts in selected period of time
      * 
-     * @return 
+     * @return array
      */
+    public static function getTotalSumOfIncomesInSelectedPeriod($userID, $date_begin, $date_end) {
+        $sql = 'SELECT  
+                    SUM(incomes.amount) AS amount
+                FROM incomes
+                WHERE incomes.user_id = :userID AND incomes.date_of_income BETWEEN :date_begin AND :date_end';
+
+        $db = static::getDB();
+        $stmt = $db->prepare($sql);
+
+        $stmt->bindValue(':userID', $userID, PDO::PARAM_INT);
+        $stmt->bindValue(':date_begin', $date_begin, PDO::PARAM_STR);
+        $stmt->bindValue(':date_end', $date_end, PDO::PARAM_STR);
+
+        //$stmt->setFetchMode(PDO::FETCH_CLASS, get_called_class());
+        //$stmt->execute();
+        //return $stmt->fetchAll(PDO::FETCH_CLASS);
+
+        $stmt->execute();
+
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
+    /**
+     * Get total sum of user expense amounts in selected period of time
+     * 
+     * @return array
+     */
+    public static function getTotalSumOfExpensesInSelectedPeriod($userID, $date_begin, $date_end) {
+        $sql = 'SELECT  
+                    SUM(expenses.amount) AS amount
+                FROM expenses
+                WHERE expenses.user_id = :userID AND expenses.date_of_expense BETWEEN :date_begin AND :date_end';
+
+        $db = static::getDB();
+        $stmt = $db->prepare($sql);
+
+        $stmt->bindValue(':userID', $userID, PDO::PARAM_INT);
+        $stmt->bindValue(':date_begin', $date_begin, PDO::PARAM_STR);
+        $stmt->bindValue(':date_end', $date_end, PDO::PARAM_STR);
+
+        //$stmt->setFetchMode(PDO::FETCH_CLASS, get_called_class());
+        //$stmt->execute();
+        //return $stmt->fetchAll(PDO::FETCH_CLASS);
+
+        $stmt->execute();
+
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
 }
