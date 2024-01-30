@@ -144,4 +144,13 @@ class Settings
         return date('F Y');
     }
 
+    /**
+     * Download current month and year
+     * 
+     * @return string Month and year
+     */
+    public static function downloadPreviousMonthWithYear() {
+
+        return date('F Y', strtotime('-1 month'));
+    }
 }

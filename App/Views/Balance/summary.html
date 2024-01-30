@@ -25,10 +25,10 @@
     </button>
     <ul class="dropdown-menu">
       <li>
-        <a class="dropdown-item active" href="#current-month">Current month</a>
+        <a class="dropdown-item active" href="/balance/summary">Current month</a>
       </li>
       <li>
-        <a class="dropdown-item" href="#previous-month">Previous month</a>
+        <a class="dropdown-item" href="/balance/summary-previous-month">Previous month</a>
       </li>
       <li>
         <a class="dropdown-item" href="#current-year">Current year</a>
@@ -57,9 +57,9 @@
       <!-- Modal body -->
       <div class="modal-body">
         Range from:
-        <input type="date" class="form-control data-form" value="" min="2000-01-01">
+        <input type="date" class="form-control data-form" value="{{ currentDate }}" min="2000-01-01" max="{{ currentDate }}">
         To:
-        <input type="date" class="form-control data-form" value="" min="2000-01-01">
+        <input type="date" class="form-control data-form" value="{{ currentDate }}" min="2000-01-01" max="{{ currentDate }}">
       </div>
 
       <!-- Modal footer -->
@@ -76,7 +76,7 @@
   <main>
     <div class="container mt-3 action-container">
       <h3 class="title-action">View balance</h3>
-      <h4>{{ current_month_and_year }}</h4>
+      <h4>{{ period_with_month_and_year }}</h4>
       <p class="table-description">
         The tables show, respectively, the income and expenses of the
         selected period and a summary in the form of a balance sheet.
@@ -140,16 +140,23 @@
         {% endfor %}
         {% endif %}
 
-        {% if balance_load.total_incomes is not empty %}
+        {% if balance_load.income_data is not empty %}
         <tfoot>
           <tr class="row-sum" style="border: solid green 2px;">
             <td class="total-sum" style="color: green">Total Incomes</td>
             <td class="total-sum" style="color: green"></td>
-            <td class="total-sum text-to-right" style="color: green">{{ balance_load.total_incomes }} PLN</td>
-            <td class="total-sum" style="color: green"></td>
+            <td class="total-sum text-to-right" style="color: green">
+              {% if balance_load.total_incomes is not empty %}
+                {{ balance_load.total_incomes }} PLN</td>
+              {% else %}
+                0 PLN</td>
+              {% endif %}
+              <td class="total-sum" style="color: green"></td>
             <td class="total-sum" style="color: green"></td>
           </tr>
         </tfoot>
+        {% else %}
+        
         {% endif %}
       </table>
     </div>
@@ -197,12 +204,17 @@
         {% endfor %}
         {% endif %}
 
-        {% if balance_load.total_expenses is not empty %}
+        {% if balance_load.income_data is not empty %}
         <tfoot>
           <tr class="row-sum" style="border: solid red 2px;">
             <td class="total-sum" style="color: red">Total Expenses</td>
             <td class="total-sum" style="color: red"></td>
-            <td class="total-sum text-to-right" style="color: red">{{ balance_load.total_expenses }} PLN</td>
+            <td class="total-sum text-to-right" style="color: red">
+            {% if balance_load.total_expenses is not empty %}
+              {{ balance_load.total_expenses }} PLN</td>
+            {% else %}
+              0 PLN</td>
+            {% endif %}
             <td class="total-sum" style="color: red"></td>
             <td class="total-sum" style="color: red"></td>
           </tr>
@@ -212,7 +224,7 @@
     </div>
   </div>
 
-  {% if balance_load.total_incomes is not null and balance_load.total_expenses is not null %}
+  {% if balance_load.income_data is not null and balance_load.expense_data is not null %}
   <h4 class="table-title">
     <i class="fa-solid fa-scroll"></i> Summary
   </h4>
