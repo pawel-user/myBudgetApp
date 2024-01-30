@@ -427,6 +427,18 @@ th {
   margin: 0 0 2rem;
 }
 
+.success-container.summary-container {
+  background-color: limegreen;
+}
+
+.warning-container.summary-container {
+  background-color: orangered;
+}
+
+.failure-container.summary-container {
+  background-color: pink;
+}
+
 .summary-text-success {
   color: green;
   font-weight: bold;
@@ -438,6 +450,13 @@ th {
   color: red;
   font-weight: bold;
   text-align: center;
+}
+
+.summary-text-warning {
+  color: orange;
+  font-weight: bold;
+  text-align: center;
+  margin: 1rem auto;
 }
 
 .summary-table {

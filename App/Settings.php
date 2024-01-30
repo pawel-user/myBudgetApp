@@ -126,6 +126,9 @@ class Settings
 
             $balance->final_balance = $balance->total_incomes - $balance->total_expenses;
 
+            if (!$balance->final_balance) {
+                Flash::addMessage('No data to display.', Flash::WARNING);
+            }
         }
 
         return $balance;

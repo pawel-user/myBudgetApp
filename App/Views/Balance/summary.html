@@ -111,7 +111,7 @@
             <th class="icons-table-field"></th>
           </tr>
         </thead>
-        {% if balance_load.finalbalance is not empty %}
+        {% if balance_load is not empty %}
         {% for incomeItem in balance_load.income_data %}
         <tbody>
           <tr>
@@ -138,6 +138,9 @@
           <td class="total-cell"></td>
         </tr>
         {% endfor %}
+        {% endif %}
+
+        {% if balance_load.total_incomes is not empty %}
         <tfoot>
           <tr class="row-sum" style="border: solid green 2px;">
             <td class="total-sum" style="color: green">Total Incomes</td>
@@ -165,7 +168,7 @@
             <th class="icons-table-field"></th>
           </tr>
         </thead>
-        {% if balance_load.finalbalance is not empty %}
+        {% if balance_load is not empty %}
         {% for expenseItem in balance_load.expense_data %}
         <tbody>
           <tr>
@@ -192,6 +195,9 @@
           <td class="total-cell"></td>
         </tr>
         {% endfor %}
+        {% endif %}
+
+        {% if balance_load.total_expenses is not empty %}
         <tfoot>
           <tr class="row-sum" style="border: solid red 2px;">
             <td class="total-sum" style="color: red">Total Expenses</td>
@@ -206,11 +212,11 @@
     </div>
   </div>
 
-  {% if balance_load.final_balance is not empty %}
+  {% if balance_load.final_balance == '' %}
   <h4 class="table-title">
     <i class="fa-solid fa-scroll"></i> Summary
   </h4>
-  <div class="summary-container">
+  <div class="summary-container ">
     <h4 style="text-align: center; margin-top: 1rem;">Your Finance Balance:</h4>
     <h4 style="font-weight: bold; text-align: center">
       {{ balance_load.final_balance }} PLN<br>
@@ -225,8 +231,13 @@
     </h4>
     {% endif %}
   </div>
+  {# <!-- {% else %}
+  <div class="summary-container">
+    <h4 class="summary-text-warning">
+      No data to display.
+    </h4>
+  </div> -->#}
   {% endif %}
-
   </main>
 </section>
 {% endblock %}
