@@ -212,7 +212,7 @@
     </div>
   </div>
 
-  {% if balance_load.final_balance == '' %}
+  {% if balance_load.total_incomes is not null and balance_load.total_expenses is not null %}
   <h4 class="table-title">
     <i class="fa-solid fa-scroll"></i> Summary
   </h4>

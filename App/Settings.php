@@ -125,8 +125,8 @@ class Settings
             $balance->total_expenses = BalanceSummary::getTotalSumOfExpensesInSelectedPeriod($user->id, $date_begin, $date_end)["amount"];
 
             $balance->final_balance = $balance->total_incomes - $balance->total_expenses;
-
-            if (!$balance->final_balance) {
+            
+            if ($balance->total_incomes == 0 && $balance->total_expenses == 0) {
                 Flash::addMessage('No data to display.', Flash::WARNING);
             }
         }
