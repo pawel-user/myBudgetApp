@@ -125,6 +125,7 @@ class Settings
             $balance->total_expenses = BalanceSummary::getTotalSumOfExpensesInSelectedPeriod($user->id, $date_begin, $date_end)["amount"];
 
             $balance->final_balance = $balance->total_incomes - $balance->total_expenses;
+
         }
 
         return $balance;

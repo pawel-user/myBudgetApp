@@ -431,6 +431,7 @@ th {
   color: green;
   font-weight: bold;
   text-align: center;
+  margin-bottom: 1rem;
 }
 
 .summary-text-failure {

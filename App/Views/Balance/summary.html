@@ -111,7 +111,7 @@
             <th class="icons-table-field"></th>
           </tr>
         </thead>
-        {% if balance_load is not empty %}
+        {% if balance_load.finalbalance is not empty %}
         {% for incomeItem in balance_load.income_data %}
         <tbody>
           <tr>
@@ -165,7 +165,7 @@
             <th class="icons-table-field"></th>
           </tr>
         </thead>
-        {% if balance_load is not empty %}
+        {% if balance_load.finalbalance is not empty %}
         {% for expenseItem in balance_load.expense_data %}
         <tbody>
           <tr>
@@ -206,12 +206,12 @@
     </div>
   </div>
 
-  {% if balance_load is not empty %}
+  {% if balance_load.final_balance is not empty %}
   <h4 class="table-title">
     <i class="fa-solid fa-scroll"></i> Summary
   </h4>
   <div class="summary-container">
-    <h4 style="text-align: center">Your Finance Balance:</h4>
+    <h4 style="text-align: center; margin-top: 1rem;">Your Finance Balance:</h4>
     <h4 style="font-weight: bold; text-align: center">
       {{ balance_load.final_balance }} PLN<br>
     </h4>
@@ -223,8 +223,8 @@
     <h4 class="summary-text-failure">
       You don't manage your finances very well. You need to make changes to your budget.
     </h4>
+    {% endif %}
   </div>
-  {% endif %}
   {% endif %}
 
   </main>
