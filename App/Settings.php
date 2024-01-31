@@ -135,22 +135,42 @@ class Settings
     }
 
     /**
-     * Download current month and year
+     * Download current month with year
      * 
      * @return string Month and year
      */
-    public static function downloadCurrentMonthAndYear() {
+    public static function downloadCurrentMonthWithYear() {
 
         return date('F Y');
     }
 
     /**
-     * Download current month and year
+     * Download previous month with year
      * 
      * @return string Month and year
      */
     public static function downloadPreviousMonthWithYear() {
 
         return date('F Y', strtotime('-1 month'));
+    }
+
+    /**
+     * Download current year
+     * 
+     * @return string Month and year
+     */
+    public static function downloadPeriodForCurrentYear() {
+
+        $first_day_and_month = '1 January';
+        $current_month = date('F');
+        $current_year = date('Y');
+        $current_month_and_year = date('F Y');
+
+        if ($current_month != 'January') {
+            $period = $first_day_and_month . ' ' . $current_year . ' - ' . $current_month_and_year;
+        } else {
+            $period = $first_day_and_month . ' ' . $current_year . ' - ' . 'now';
+        }
+        return $period;
     }
 }
