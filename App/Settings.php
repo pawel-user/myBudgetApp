@@ -173,4 +173,16 @@ class Settings
         }
         return $period;
     }
+
+    /**
+     * Download custom period
+     * 
+     * @return string Month and year
+     */
+    public static function downloadCustomPeriod($date_begin, $date_end) {
+
+        $period = $date_begin . ' - ' . $date_end;
+        
+        return $period;
+    }
 }

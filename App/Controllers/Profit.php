@@ -111,6 +111,9 @@ class Profit extends Authenticated
         $categoryID = intval($_POST['categoryID']);
         $newCategoryName = $_POST['changed-name'];
 
+        var_dump($_POST['changed-name']);
+        exit;
+
         switch ($_REQUEST['action']) {
             case 'cancel': //action for cancel edit income category and return to previous page
                 Flash::addMessage('Editing of income category cancelled.', Flash::DANGER);

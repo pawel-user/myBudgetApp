@@ -55,19 +55,23 @@
       </div>
 
       <!-- Modal body -->
-      <div class="modal-body">
-        Range from:
-        <input type="date" class="form-control data-form" value="{{ currentDate }}" min="2000-01-01" max="{{ currentDate }}">
-        To:
-        <input type="date" class="form-control data-form" value="{{ currentDate }}" min="2000-01-01" max="{{ currentDate }}">
-      </div>
+      <form method="post" action="/balance/summary-selected-period">
+        <div class="modal-body">
+          Range from:
+          <input type="date" name="date-begin" class="form-control data-form" value="{{ currentDate }}" min="2000-01-01"
+            max="{{ currentDate }}">
+          To:
+          <input type="date" name="date-end" class="form-control data-form" value="{{ currentDate }}" min="2000-01-01"
+            max="{{ currentDate }}">
+        </div>
 
-      <!-- Modal footer -->
-      <div class="modal-footer">
-        <button type="button" class="btn btn-success" data-bs-dismiss="modal">
-          Confirm
-        </button>
-      </div>
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-success" data-bs-dismiss="modal">
+            Confirm
+          </button>
+        </div>
+      </form>
     </div>
   </div>
 </div>
@@ -147,16 +151,16 @@
             <td class="total-sum" style="color: green"></td>
             <td class="total-sum text-to-right" style="color: green">
               {% if balance_load.total_incomes is not empty %}
-                {{ balance_load.total_incomes }} PLN</td>
-              {% else %}
-                0 PLN</td>
-              {% endif %}
-              <td class="total-sum" style="color: green"></td>
+              {{ balance_load.total_incomes }} PLN</td>
+            {% else %}
+            0 PLN</td>
+            {% endif %}
+            <td class="total-sum" style="color: green"></td>
             <td class="total-sum" style="color: green"></td>
           </tr>
         </tfoot>
         {% else %}
-        
+
         {% endif %}
       </table>
     </div>
@@ -210,10 +214,10 @@
             <td class="total-sum" style="color: red">Total Expenses</td>
             <td class="total-sum" style="color: red"></td>
             <td class="total-sum text-to-right" style="color: red">
-            {% if balance_load.total_expenses is not empty %}
+              {% if balance_load.total_expenses is not empty %}
               {{ balance_load.total_expenses }} PLN</td>
             {% else %}
-              0 PLN</td>
+            0 PLN</td>
             {% endif %}
             <td class="total-sum" style="color: red"></td>
             <td class="total-sum" style="color: red"></td>

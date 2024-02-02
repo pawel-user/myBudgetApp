@@ -8,6 +8,7 @@ use App\Models\BalanceSummary;
 use App\Auth;
 
 class Balance extends Authenticated {
+    
     /**
      * Show summary all incomes and expenses in the form of tables and a pie chart
      * 
@@ -57,5 +58,28 @@ class Balance extends Authenticated {
         $date_end = date('Y-m-t');
         
         View::renderTemplate('Balance/summary.html', ['balance_load' => Settings::loadBalanceDataOfIncomesAndExpensesInSelectedPeriod($balance, $user, $date_begin, $date_end),'period_with_month_and_year' => Settings::downloadPeriodForCurrentYear()]);
+    }
+
+    /**
+     * Show summary all incomes and expenses in the form of tables and a pie chart
+     * 
+     * @return void
+     */
+    public function summarySelectedPeriodAction()
+    {
+        $balance = new BalanceSummary();
+
+        $user = Auth::getUser();
+
+        $index = 0;
+
+        foreach ($_POST as $row) {
+            $date[$index++] = $row;
+        }
+
+        $date_begin = $date[0];
+        $date_end = $date[1];
+        
+        View::renderTemplate('Balance/summary.html', ['balance_load' => Settings::loadBalanceDataOfIncomesAndExpensesInSelectedPeriod($balance, $user, $date_begin, $date_end),'period_with_month_and_year' => Settings::downloadCustomPeriod($date_begin, $date_end)]);
     }
 }
