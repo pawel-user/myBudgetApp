@@ -77,6 +77,7 @@ class BalanceSummary extends \Core\Model
         $sql = 'SELECT 
                     incomes_category_assigned_to_users.name AS category,
                     incomes.amount AS amount,
+                    incomes.id AS id,
                     incomes.date_of_income,
                     incomes.income_comment
                 FROM incomes_category_assigned_to_users
@@ -105,8 +106,9 @@ class BalanceSummary extends \Core\Model
         $sql = 'SELECT 
                     expenses_category_assigned_to_users.name AS category,
                     expenses.amount AS amount,
+                    expenses.id AS id,
                     expenses.date_of_expense,
-                    expenses.expense_comment AS comment
+                    expenses.expense_comment
                 FROM expenses_category_assigned_to_users
                     INNER JOIN expenses ON expenses.expense_category_assigned_to_user_id = expenses_category_assigned_to_users.id
                 WHERE expenses.user_id = :userID AND expenses.date_of_expense BETWEEN :date_begin AND :date_end

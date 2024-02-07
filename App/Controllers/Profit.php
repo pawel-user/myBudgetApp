@@ -8,6 +8,7 @@ use App\Models\IncomeCategory;
 use App\Flash;
 use App\Auth;
 use App\Settings;
+use App\DataSetup;
 
 /**
  * Add & edit income controller
@@ -70,7 +71,7 @@ class Profit extends Authenticated
     }
 
     /**
-     * Select a button to perform a specific action 
+     * Select a button to perform a specific action for income category
      * 
      * @return void
      */
@@ -136,7 +137,7 @@ class Profit extends Authenticated
      * 
      * @return void
      */
-    public function removeAction()
+    public function removeCategoryAction()
     {
         $userID = intval($_GET['userID']);
         $categoryID = intval($_GET['categoryID']);
@@ -156,5 +157,24 @@ class Profit extends Authenticated
                 break;
         }
         $this->redirect(Auth::getReturnToPage());
+    }
+
+    /**
+     * Remove an existing user income item
+     * 
+     * @return void
+     */
+    public function removeIncomeAction()
+    {
+        $incomeID = $_POST["incomeID"];
+
+        Income::removeUserIncomeSavedInDatabase($incomeID);
+
+        DataSetup::orderIncomeTableItems(); 
+
+        Auth::getPreviousPage();
+
+        //$this->redirect($url);
+        Flash::addMessage('Successfully removed income item.');
     }
 }

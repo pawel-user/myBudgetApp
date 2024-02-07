@@ -155,4 +155,19 @@ class Income extends \Core\Model
 
         $stmt->fetch();
     }*/
+
+    /**
+     * Remove user income item from database
+     */
+    public static function removeUserIncomeSavedInDatabase($incomeID) {
+        $sql = 'DELETE FROM incomes 
+                WHERE id = :incomeID';
+
+        $db = static::getDB();
+        $stmt = $db->prepare($sql);
+
+        $stmt->bindValue(':incomeID', $incomeID, PDO::PARAM_INT);
+
+        $stmt->execute();
+    }
 }

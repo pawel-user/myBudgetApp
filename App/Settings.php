@@ -99,6 +99,8 @@ class Settings
             foreach ($all_incomes_stmt as $row) {
                 $balance->income_data[] = $row;
             }
+            //var_dump($all_incomes_stmt);
+            //exit;
 
             $all_expenses_stmt = BalanceSummary::getAllUserExpensesForSelectedPeriod($user->id, $date_begin, $date_end);
 
@@ -164,10 +166,10 @@ class Settings
         $first_day_and_month = '1 January';
         $current_month = date('F');
         $current_year = date('Y');
-        $current_month_and_year = date('F Y');
+        $current_day_month_and_year = date('d F Y');
 
         if ($current_month != 'January') {
-            $period = $first_day_and_month . ' ' . $current_year . ' - ' . $current_month_and_year;
+            $period = $first_day_and_month . ' ' . $current_year . ' - ' . $current_day_month_and_year;
         } else {
             $period = $first_day_and_month . ' ' . $current_year . ' - ' . 'now';
         }
@@ -177,12 +179,12 @@ class Settings
     /**
      * Download custom period
      * 
-     * @return string Month and year
+     * @return string Day, month in words and year
      */
     public static function downloadCustomPeriod($date_begin, $date_end) {
 
-        $period = $date_begin . ' - ' . $date_end;
-        
+        $period = date("d F Y", strtotime($date_begin)) . ' - ' . date("d F Y", strtotime($date_end));
+
         return $period;
     }
 }

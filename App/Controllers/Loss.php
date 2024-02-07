@@ -8,6 +8,7 @@ use App\Models\ExpenseCategory;
 use App\Models\PaymentMethod;
 use App\Flash;
 use App\Auth;
+use App\DataSetup;
 use App\Settings;
 
 /**
@@ -261,5 +262,23 @@ class Loss extends Authenticated {
                 break;
         }
         $this->redirect(Auth::getReturnToPage());
+    }
+
+    /**
+     * Remove an existing user expense item
+     * 
+     * @return void
+     */
+    public function removeExpenseAction()
+    {
+        $expenseID = $_POST["expenseID"];
+
+        Expense::removeUserExpenseSavedInDatabase($expenseID);
+
+        DataSetup::orderExpenseTableItems();
+
+        Auth::getPreviousPage();
+
+        Flash::addMessage('Successfully removed expense item.');
     }
 }

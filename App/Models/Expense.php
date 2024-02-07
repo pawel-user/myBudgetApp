@@ -161,4 +161,19 @@ use \AllowDynamicProperties;
             $this->errors[] = 'Selecting one of the given payment methods is required';
         }
     }
+
+    /**
+     * Remove user expense item from database
+     */
+    public static function removeUserExpenseSavedInDatabase($expenseID) {
+        $sql = 'DELETE FROM expenses 
+                WHERE id = :expenseID';
+
+        $db = static::getDB();
+        $stmt = $db->prepare($sql);
+
+        $stmt->bindValue(':expenseID', $expenseID, PDO::PARAM_INT);
+
+        $stmt->execute();
+    }
  }

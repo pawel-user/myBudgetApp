@@ -2,6 +2,48 @@
 
 {% block title %}Balance sheet{% endblock %}
 
+{% block footer %}
+<script>
+  $('#removalIncomeItemConfirmationModal').on('show.bs.modal', function (e) {
+    var incomeID = $(e.relatedTarget).data('income-id');
+    var incomeCategory = $(e.relatedTarget).data('income-category');
+    var incomeAmount = $(e.relatedTarget).data('income-amount');
+    var incomeDate = $(e.relatedTarget).data('income-date');
+    if ($(e.relatedTarget).data('income-comment') == '') {
+      var incomeComment = "-";
+    } else {
+      var incomeComment = $(e.relatedTarget).data('income-comment');
+    }
+    document.getElementById("income-id").innerHTML = incomeID;
+    $(e.currentTarget).find('input[name="incomeID"]').val(incomeID);
+    $(e.currentTarget).find('input[name="incomeCategory"]').val(incomeCategory);
+    $(e.currentTarget).find('input[name="incomeAmount"]').val(incomeAmount);
+    $(e.currentTarget).find('input[name="incomeDate"]').val(incomeDate);
+    $(e.currentTarget).find('input[name="incomeComment"]').val(incomeComment);
+    document.getElementById("incomeID-number").innerHTML = incomeID;
+  });
+
+  $('#removalExpenseItemConfirmationModal').on('show.bs.modal', function (e) {
+    var expenseID = $(e.relatedTarget).data('expense-id');
+    var expenseCategory = $(e.relatedTarget).data('expense-category');
+    var expenseAmount = $(e.relatedTarget).data('expense-amount');
+    var expenseDate = $(e.relatedTarget).data('expense-date');
+    if ($(e.relatedTarget).data('expense-comment') == '') {
+      var expenseComment = "-";
+    } else {
+      var expenseComment = $(e.relatedTarget).data('expense-comment');
+    }
+    document.getElementById("expense-id").innerHTML = expenseID;
+    $(e.currentTarget).find('input[name="expenseID"]').val(expenseID);
+    $(e.currentTarget).find('input[name="expenseCategory"]').val(expenseCategory);
+    $(e.currentTarget).find('input[name="expenseAmount"]').val(expenseAmount);
+    $(e.currentTarget).find('input[name="expenseDate"]').val(expenseDate);
+    $(e.currentTarget).find('input[name="expenseComment"]').val(expenseComment);
+    document.getElementById("expenseID-number").innerHTML = expenseID;
+  });
+</script>
+{% endblock %}
+
 {% block navigation %}
 
 <li class="nav-item">
@@ -43,38 +85,6 @@
   </div>
 </section>
 
-<!-- Modal -->
-<div class="modal" id="rangeTimeModal">
-  <div class="modal-dialog">
-    <div class="modal-content">
-
-      <!-- Modal Header -->
-      <div class="modal-header">
-        <h4 class="modal-title">Select date range:</h4>
-        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-      </div>
-
-      <!-- Modal body -->
-      <form method="post" action="/balance/summary-selected-period">
-        <div class="modal-body">
-          Range from:
-          <input type="date" name="date-begin" class="form-control data-form" value="{{ currentDate }}" min="2000-01-01"
-            max="{{ currentDate }}">
-          To:
-          <input type="date" name="date-end" class="form-control data-form" value="{{ currentDate }}" min="2000-01-01"
-            max="{{ currentDate }}">
-        </div>
-
-        <!-- Modal footer -->
-        <div class="modal-footer">
-          <button type="submit" class="btn btn-success" data-bs-dismiss="modal">
-            Confirm
-          </button>
-        </div>
-      </form>
-    </div>
-  </div>
-</div>
 
 <section class="view-balance-section">
   <main>
@@ -118,18 +128,23 @@
         {% if balance_load is not empty %}
         {% for incomeItem in balance_load.income_data %}
         <tbody>
-          <tr>
-            <td>{{ incomeItem.category }}</td>
-            <td>
-              {{ incomeItem.date_of_income }}
-            </td>
-            <td class="text-to-right">{{ incomeItem.amount }} PLN</td>
-            <td>
-              {{ incomeItem.income_comment}}
-            </td>
-            <td> <a href="#"><i class="fa-solid fa-pencil table-icon"></i></a> <a href="#"><i
-                  class="fa-solid fa-trash table-icon"></i></a>
-            </td>
+          <td>{{ incomeItem.category }}</td>
+          <td>
+            {{ incomeItem.date_of_income }}
+          </td>
+          <td class="text-to-right">{{ incomeItem.amount }} PLN</td>
+          <td>
+            {{ incomeItem.income_comment}}
+          </td>
+          <td>
+            <a href="/profit/edit-income" type="submit" value="{{ incomeItem.id }}"><i
+                class="fa-solid fa-pencil table-icon"></i></a>
+            <a href="#removalIncomeItemConfirmationModal" data-bs-toggle="modal" data-income-id="{{ incomeItem.id }}"
+              data-income-category="{{ incomeItem.category }}" data-income-amount="{{ incomeItem.amount }}"
+              data-income-date="{{ incomeItem.date_of_income }}"
+              data-income-comment="{{ incomeItem.income_comment }}"><i class="fa-solid fa-trash table-icon"></i></a>
+            {{ dump(incomeItem.id) }}
+          </td>
           </tr>
         </tbody>
         {% endfor %}
@@ -191,8 +206,15 @@
             <td>
               {{ expenseItem.expense_comment}}
             </td>
-            <td> <a href="#"><i class="fa-solid fa-pencil table-icon"></i></a> <a href="#"><i
+            <td>
+              <a href="/profit/edit-expense" type="submit" value="{{ expenseItem.id }}"><i
+                  class="fa-solid fa-pencil table-icon"></i></a>
+              <a href="#removalExpenseItemConfirmationModal" data-bs-toggle="modal"
+                data-expense-id="{{ expenseItem.id }}" data-expense-category="{{ expenseItem.category }}"
+                data-expense-amount="{{ expenseItem.amount }}" data-expense-date="{{ expenseItem.date_of_expense }}"
+                data-expense-comment="{{ expenseItem.expense_comment }}"><i
                   class="fa-solid fa-trash table-icon"></i></a>
+              {{ dump(expenseItem.id) }}
             </td>
           </tr>
         </tbody>
@@ -228,7 +250,7 @@
     </div>
   </div>
 
-  {% if balance_load.income_data is not null and balance_load.expense_data is not null %}
+  {% if balance_load.income_data is not empty or balance_load.expense_data is not empty %}
   <h4 class="table-title">
     <i class="fa-solid fa-scroll"></i> Summary
   </h4>
@@ -256,4 +278,171 @@
   {% endif %}
   </main>
 </section>
+
+<!-- Modal for range time -->
+<div class="modal" id="rangeTimeModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Select date range:</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <!-- Modal body -->
+      <form method="post" action="/balance/summary-selected-period">
+        <div class="modal-body">
+          Range from:
+          <input type="date" name="date-begin" class="form-control data-form" value="{{ currentDate }}" min="2000-01-01"
+            max="{{ currentDate }}">
+          To:
+          <input type="date" name="date-end" class="form-control data-form" value="{{ currentDate }}" min="2000-01-01"
+            max="{{ currentDate }}">
+        </div>
+
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-success" data-bs-dismiss="modal">
+            Confirm
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Modal for removal income item confirmation -->
+<div class="modal" id="removalIncomeItemConfirmationModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title fs-5 settings-title">Confirmation removal of income item</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <!-- Modal body -->
+      <form method="post" action="/profit/remove-income">
+        <div class="modal-body modal-parent">
+          <div class="modal-question">
+            <span class="modal-text">Are you sure to delete</span>
+            <span class="modal-text">this income item nr</span>
+            <span id="income-id" class="modal-text"></span>
+            <span class="modal-text">?</span>
+          </div>
+          <input type="hidden" id="incomeID-number" name="incomeID" class="form-control modal-form"><br>
+          <div class="form-group row">
+            <label class="col-sm-6 col-form-label">Category </label>
+            <div class="col-sm-6">
+              <input type="text" name="incomeCategory" class="form-control modal-form" disabled><br>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-6 col-form-label">Amount </label>
+            <div class="col-sm-6">
+              <input type="text" name="incomeAmount" class="form-control modal-form" disabled><br>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-6 col-form-label">Date of income </label>
+            <div class="col-sm-6">
+              <input type="text" name="incomeDate" class="form-control modal-form" disabled><br>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-6 col-form-label">Comment </label>
+            <div class="col-sm-6">
+              <input type="text" name="incomeComment" class="form-control modal-form" disabled>
+            </div>
+          </div>
+        </div>
+
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <div class="row">
+            <div class="col-lg-6">
+              <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
+                <i class="fa-solid fa-rectangle-xmark icon"></i> Cancel
+              </button>
+            </div>
+            <div class="col-lg-6">
+              <button type="submit" class="btn btn-success" data-bs-dismiss="modal">
+                <i class="fa-solid fa-square-check icon"></i> Confirm
+              </button>
+            </div>
+          </div>
+        </div>
+    </div>
+    </form>
+  </div>
+</div>
+
+<!-- Modal for removal expense item confirmation -->
+<div class="modal" id="removalExpenseItemConfirmationModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title fs-5 settings-title">Confirmation removal of expense item</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <!-- Modal body -->
+      <form method="post" action="/loss/remove-expense">
+        <div class="modal-body modal-parent">
+          <div class="modal-question">
+            <span class="modal-text">Are you sure to delete</span>
+            <span class="modal-text">this expense item nr</span>
+            <span id="expense-id" class="modal-text"></span>
+            <span class="modal-text">?</span>
+          </div>
+          <input type="hidden" id="expenseID-number" name="expenseID" class="form-control modal-form"><br>
+          <div class="form-group row">
+            <label class="col-sm-6 col-form-label">Category </label>
+            <div class="col-sm-6">
+              <input type="text" name="expenseCategory" class="form-control modal-form" disabled><br>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-6 col-form-label">Amount </label>
+            <div class="col-sm-6">
+              <input type="text" name="expenseAmount" class="form-control modal-form" disabled><br>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-6 col-form-label">Date of expense </label>
+            <div class="col-sm-6">
+              <input type="text" name="expenseDate" class="form-control modal-form" disabled><br>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-6 col-form-label">Comment </label>
+            <div class="col-sm-6">
+              <input type="text" name="expenseComment" class="form-control modal-form" disabled>
+            </div>
+          </div>
+        </div>
+
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <div class="row">
+            <div class="col-lg-6">
+              <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
+                <i class="fa-solid fa-rectangle-xmark icon"></i> Cancel
+              </button>
+            </div>
+            <div class="col-lg-6">
+              <button type="submit" class="btn btn-success" data-bs-dismiss="modal">
+                <i class="fa-solid fa-square-check icon"></i> Confirm
+              </button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
 {% endblock %}

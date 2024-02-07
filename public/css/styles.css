@@ -85,7 +85,7 @@ th {
 /*.amount-table-field {
 }*/
 
-.category-table-field .details-table-field {
+.category-table-field, .details-table-field {
   width: 10rem;
 }
 
@@ -139,6 +139,34 @@ th {
   display: flex;
   float: left;
   width: 100%;
+}
+
+.modal-parent {
+  display: inline-block;
+  width:100%;
+}
+
+.modal-question {
+  display: flex;
+  justify-items: center;
+  margin-bottom: 1rem;
+}
+.modal-label {
+  display: inline-block;
+}
+
+.modal-form {
+  display: inline-block;
+  margin-bottom: 1rem;
+}
+
+.modal-text {
+  float: left;
+  padding-right: 0.5rem;
+}
+
+.modal-id {
+  float: left;
 }
 
 
@@ -478,7 +506,7 @@ th {
 }
 
 .profile-element {
-  margin-left: 0%;
+  margin-left: 10px;
 }
 
 .profile-container {
