@@ -55,7 +55,7 @@
             style="color: #7c7c82;"></i>
         </label>
         <select class="form-control data-form" id="inputCategory" name="incomeCategory" required>
-          <option value="" selected>Choose category...</option>
+          <option value="{{ incomeCategory }}" selected>{{ incomeCategory }} {set default value}</option>
           <option value="" disabled="disabled">───────────────────────────────────────</option>
           {% if setIncomeCategories is not empty %}
           {% set otherIncomeName = "" %}

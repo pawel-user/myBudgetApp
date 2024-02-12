@@ -80,7 +80,7 @@
             style="color: #7c7c82;"></i>
         </label>
         <select class="form-control data-form" id="inputCategory" name="expensePaymentMethod" required>
-          <option value="{{ expensePaymentMethod }}" selected>{{ expensePaymentMethod }}</option>
+          <option value="{{ expensePaymentMethod }}" selected>{{ expensePaymentMethod }}  {set default value}</option>
           <option value="" disabled="disabled">───────────────────────────────────────</option>
           {% if setPaymentMethods is not empty %}
           {% for paymentName in setPaymentMethods %}
@@ -96,7 +96,7 @@
             style="color: #7c7c82;"></i>
         </label>
         <select class="form-control data-form" id="inputCategory" name="expenseCategory" required>
-          <option value="{{ expenseCategory }}" selected>{{ expenseCategory }}</option>
+          <option value="{{ expenseCategory }}" selected>{{ expenseCategory }}  {set default value}</option>
           <option value="" disabled="disabled">───────────────────────────────────────</option>
           {% if setExpenseCategories is not empty %}
           {% set otherExpenseName = "" %}
