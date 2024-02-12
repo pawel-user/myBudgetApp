@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}Adding expenses{% endblock %}
+{% block title %}Editing expenses{% endblock %}
 
 {% block footer %}
 <!-- <script>
@@ -56,39 +56,35 @@
     </ul>
     {% endif %}
 
-    <h3 class="title-action">Enter expenses data:</h3>
-    <form method="post" action="/loss/add" id="formAddExpense">
+    <h3 class="title-action">Edit expense item data:</h3>
+    <form method="post" action="/loss/edit-expense" id="formAddExpense">
+      <input class="form-control data-form" type="hidden" name="expenseID" value="{{ expenseID }}">
       <div class="input-group mb-3 data-container">
         <span class="input-group-text data-form" id="basic-addon1"><i class="fa-solid fa-coins"
             style="color: #7c7c82;"></i>
         </span>
-        <input class="form-control data-form" type="number" id="inputAmount" name="amount" placeholder="Amount (PLN)"
-          aria-label="Amount (PLN)" min="0.01" step="0.01" value="{{ expense.amount }}">
+        <input class="form-control data-form" type="number" id="inputAmount" name="expenseAmount" placeholder="Amount (PLN)"
+          aria-label="Amount (PLN)" min="0.01" step="0.01"  value="{{ expenseAmount }}" required">
       </div>
 
       <div class="input-group mb-3 data-container">
-        <span class="input-group-text data-form" for="inputDate"><i class="fa-sharp fa-regular fa-calendar"
-            style="color: #7c7c82;"></i>
-        </span>
-        {% if expense.date_of_expense is not empty %}
-        <input class="form-control data-form" type="date" id="inputDate" name="date_of_expense" aria-label="Date"
-          value="{{ expense.date_of_expense }}" min="2000-01-01" max="{{ currentDate }}">
-        {% else %}
-        <input class="form-control data-form" type="date" id="inputDate" name="date_of_expense" aria-label="Date"
-          value="{{ currentDate }}" min="2000-01-01" max="{{ currentDate }}">
-        {% endif %}
-      </div>
-
-      <div class="input-group mb-3 data-container">
-        <label class="input-group-text data-form" for="inputPaymentMethod"><i class="fa-solid fa-caret-down"
+        <label class="input-group-text data-form" for="inputDate"><i class="fa-sharp fa-regular fa-calendar"
             style="color: #7c7c82;"></i>
         </label>
-        <select class="form-control data-form" id="inputPaymentMethod" name="method">
-          <option value="" selected>Choose payment method...</option>
+        <input class="form-control data-form" type="date" id="inputDate" name="expenseDate" aria-label="Date"
+          value="{{ expenseDate }}" min="2000-01-01" max="{{ currentDate }}" required>
+      </div>
+
+      <div class="input-group mb-3 data-container">
+        <label class="input-group-text data-form" for="inputCategory"><i class="fa-solid fa-caret-down"
+            style="color: #7c7c82;"></i>
+        </label>
+        <select class="form-control data-form" id="inputCategory" name="expensePaymentMethod" required>
+          <option value="{{ expensePaymentMethod }}" selected>{{ expensePaymentMethod }}  {set default value}</option>
           <option value="" disabled="disabled">───────────────────────────────────────</option>
-          {% if payment_load.payment_methods is not empty %}
-          {% for paymentMethod in payment_load.payment_methods %}
-          <option value="{{ paymentMethod }}">{{ paymentMethod }}</option>
+          {% if setPaymentMethods is not empty %}
+          {% for paymentName in setPaymentMethods %}
+          <option value="{{ paymentName }}">{{ paymentName }}</option>
           {% endfor %}
           <option value="" disabled="disabled">───────────────────────────────────────</option>
           {% endif %}
@@ -96,16 +92,16 @@
       </div>
 
       <div class="input-group mb-3 data-container">
-        <label class="input-group-text data-form" id="basic-addon4"><i class="fa-solid fa-caret-down"
+        <label class="input-group-text data-form" for="inputCategory"><i class="fa-solid fa-caret-down"
             style="color: #7c7c82;"></i>
         </label>
-        <select class="form-control data-form" id="inputCategory" name="name">
-          <option value="" selected>Choose category...</option>
+        <select class="form-control data-form" id="inputCategory" name="expenseCategory" required>
+          <option value="{{ expenseCategory }}" selected>{{ expenseCategory }}  {set default value}</option>
           <option value="" disabled="disabled">───────────────────────────────────────</option>
-          {% if expense_load.expense_names is not empty %}
+          {% if setExpenseCategories is not empty %}
           {% set otherExpenseName = "" %}
-          {% for expenseName in expense_load.expense_names %}
-          {% if expenseName != "Other expenses" %}
+          {% for expenseName in setExpenseCategories %}
+          {% if expenseName != "Other incomes" %}
           <option value="{{ expenseName }}">{{ expenseName }}</option>
           {% else %}
           {% set otherExpenseName = expenseName %}
@@ -116,17 +112,14 @@
           {% endif %}
         </select>
       </div>
+
       <div class="input-group mb-3 data-container">
         <label class="input-group-text data-form" for="inputTextComment"><i class="fa-solid fa-pencil"
             style="color: #7c7c82;"></i></label>
-        {% if expense.expense_comment is not empty %}
-        <textarea class="form-control data-form" id="inputTextComment" name="expense_comment" rows="3"
-          placeholder="Type a comment..." resize="none">{{ expense.expense_comment }}</textarea>
-        {% else %}
-        <textarea class="form-control data-form" id="inputTextComment" name="expense_comment" rows="3"
-          placeholder="Type a comment..." resize="none"></textarea>
-        {% endif %}
+        <textarea class="form-control data-form" id="inputTextComment" name="expenseComment" rows="3"
+          placeholder="Type a comment..." resize="none">{{ expenseComment }}</textarea>
       </div>
+
       <div class="input-group mb-3 data-container">
         <div class="button-container">
           <button type="reset" class="btn btn-lg btn-danger sign-up-button">

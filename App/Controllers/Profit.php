@@ -8,6 +8,7 @@ use App\Models\IncomeCategory;
 use App\Flash;
 use App\Auth;
 use App\Settings;
+use App\DataSetup;
 
 /**
  * Add & edit income controller
@@ -70,7 +71,7 @@ class Profit extends Authenticated
     }
 
     /**
-     * Select a button to perform a specific action 
+     * Select a button to perform a specific action for income category
      * 
      * @return void
      */
@@ -111,6 +112,9 @@ class Profit extends Authenticated
         $categoryID = intval($_POST['categoryID']);
         $newCategoryName = $_POST['changed-name'];
 
+        //var_dump($_POST['changed-name']);
+        //exit;
+
         switch ($_REQUEST['action']) {
             case 'cancel': //action for cancel edit income category and return to previous page
                 Flash::addMessage('Editing of income category cancelled.', Flash::DANGER);
@@ -133,7 +137,7 @@ class Profit extends Authenticated
      * 
      * @return void
      */
-    public function removeAction()
+    public function removeCategoryAction()
     {
         $userID = intval($_GET['userID']);
         $categoryID = intval($_GET['categoryID']);
@@ -153,5 +157,78 @@ class Profit extends Authenticated
                 break;
         }
         $this->redirect(Auth::getReturnToPage());
+    }
+
+    /**
+     * Remove an existing user income item
+     * 
+     * @return void
+     */
+    public function removeIncomeAction()
+    {
+        $incomeID = $_POST["incomeID"];
+
+        Income::removeUserIncomeSavedInDatabase($incomeID);
+
+        DataSetup::orderIncomeTableItems(); 
+
+        Auth::getPreviousPage();
+
+        //$this->redirect($url);
+        Flash::addMessage('Successfully removed income item.');
+    }
+
+    /**
+     * Display of the income data editing form
+     * 
+     * @return void
+     */
+    public function editItemAction() {
+
+        if ($_POST == NULL) {
+            $this->redirect('/balance/summary');
+            Flash::addMessage('You need to mark income item that you want edit.', Flash::WARNING);
+            exit;
+            }
+        
+        $userID = $_SESSION['user_id'];
+
+        $incomeID = intval($_POST['incomeID']);
+        $incomeCategory = $_POST['incomeCategory'];
+        $incomeAmount = $_POST['incomeAmount'];
+        $incomeDate = $_POST['incomeDate'];
+        $incomeComment = $_POST['incomeComment'];
+
+        $incomeColletionCategories_stmt = IncomeCategory::getUserIncomeCategories($userID);
+
+        foreach($incomeColletionCategories_stmt as $row) {
+            $incomeCategories[] = $row['name'];
+        }
+
+        View::renderTemplate('Profit/edit_item.html', ['incomeID' => $incomeID, 'incomeCategory' => $incomeCategory, 'incomeAmount' => $incomeAmount, 'incomeDate' => $incomeDate, 'incomeComment' => $incomeComment, 'setIncomeCategories' => $incomeCategories]); 
+
+    }
+
+    /** 
+     * Edit an existing user income item
+     * 
+     * @return void
+     */
+    public function editIncomeAction() {
+
+        $userID = $_SESSION['user_id'];
+        
+        $incomeCategory = $_POST['incomeCategory'];
+        $incomeID = intval($_POST['incomeID']);
+        $incomeAmount = floatval($_POST['incomeAmount']);
+        $incomeDate = date('Y-m-d', strtotime($_POST['incomeDate']));
+        $incomeComment = $_POST['incomeComment'];
+        $incomeCategoryAssignedToUsersID = Income::getIncomeIdAssignedToUser($userID, $incomeCategory)['id'];
+
+        Income::editUserIncomeSavedInDatabase($incomeID, $incomeAmount, $incomeDate, $incomeComment, $incomeCategoryAssignedToUsersID);
+
+        $this->redirect('/balance/summary');
+
+        Flash::addMessage('Successfully edited income item.');
     }
 }

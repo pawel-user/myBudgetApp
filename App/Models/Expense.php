@@ -5,6 +5,7 @@ namespace App\Models;
 use PDO;
 
 use \AllowDynamicProperties;
+use ReflectionUnionType;
 
 /**
  * User expense model
@@ -116,6 +117,50 @@ use \AllowDynamicProperties;
     }
 
     /**
+     * Get user's expense ID by expense category name
+     * 
+     * @return array
+     */
+    public static function getExpenseIdAssignedToUser($userID, $expenseCategory)
+    {
+        $sql = 'SELECT (id) FROM expenses_category_assigned_to_users
+                    WHERE user_id = :userID 
+                    AND name = :expenseCategory';
+
+        $db = static::getDB();
+        $stmt = $db->prepare($sql);
+
+        $stmt->bindValue(':userID', $userID, PDO::PARAM_INT);
+        $stmt->bindValue(':expenseCategory', $expenseCategory, PDO::PARAM_STR);
+
+        $stmt->execute();
+
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
+    /**
+     * Get user's payment method ID by payment method name
+     * 
+     * @return array
+     */
+    public static function getPaymentMethodIdAssignedToUser($userID, $expensePaymentMethod)
+    {
+        $sql = 'SELECT (id) FROM payment_methods_assigned_to_users
+                    WHERE user_id = :userID 
+                    AND name = :expensePaymentMethod';
+
+        $db = static::getDB();
+        $stmt = $db->prepare($sql);
+
+        $stmt->bindValue(':userID', $userID, PDO::PARAM_INT);
+        $stmt->bindValue(':expensePaymentMethod', $expensePaymentMethod, PDO::PARAM_STR);
+
+        $stmt->execute();
+
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
+    /**
      * Get user's payment method ID by user_id
      * 
      * @return array
@@ -160,5 +205,45 @@ use \AllowDynamicProperties;
         if ($this->method == '') {
             $this->errors[] = 'Selecting one of the given payment methods is required';
         }
+    }
+
+    /**
+     * Remove user expense item from database
+     */
+    public static function removeUserExpenseSavedInDatabase($expenseID) {
+        $sql = 'DELETE FROM expenses 
+                WHERE id = :expenseID';
+
+        $db = static::getDB();
+        $stmt = $db->prepare($sql);
+
+        $stmt->bindValue(':expenseID', $expenseID, PDO::PARAM_INT);
+
+        $stmt->execute();
+    }
+
+    /**
+     * Update user expense item in database
+     * 
+     * @return void
+     */
+    public static function editUserExpenseSavedInDatabase($expenseID, $expenseAmount, $expenseDate, $expenseComment, $expenseCategoryAssignedToUsersID, $expensePaymentMethodAssignedToUsersID) {
+
+        
+        $sql = 'UPDATE expenses
+                    SET expenses.amount = :expenseAmount, expenses.date_of_expense = :expenseDate, expenses.expense_comment = :expenseComment, expenses.expense_category_assigned_to_user_id = :expenseCategoryAssignedToUsersID, expenses.payment_method_assigned_to_user_id = :expensePaymentMethodAssignedToUsersID
+                    WHERE expenses.id = :expenseID';
+
+        $db = static::getDB();
+        $stmt = $db->prepare($sql);
+
+        $stmt->bindValue(':expenseAmount', $expenseAmount, PDO::PARAM_STR);
+        $stmt->bindValue(':expenseDate', $expenseDate, PDO::PARAM_STR);
+        $stmt->bindValue(':expenseComment', $expenseComment, PDO::PARAM_STR);
+        $stmt->bindValue(':expenseID', $expenseID, PDO::PARAM_INT);
+        $stmt->bindValue(':expenseCategoryAssignedToUsersID', $expenseCategoryAssignedToUsersID, PDO::PARAM_INT);
+        $stmt->bindValue(':expensePaymentMethodAssignedToUsersID', $expensePaymentMethodAssignedToUsersID, PDO::PARAM_INT);
+
+        $stmt->execute();
     }
  }

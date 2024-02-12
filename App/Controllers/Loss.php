@@ -8,6 +8,7 @@ use App\Models\ExpenseCategory;
 use App\Models\PaymentMethod;
 use App\Flash;
 use App\Auth;
+use App\DataSetup;
 use App\Settings;
 
 /**
@@ -261,5 +262,87 @@ class Loss extends Authenticated {
                 break;
         }
         $this->redirect(Auth::getReturnToPage());
+    }
+
+    /**
+     * Remove an existing user expense item
+     * 
+     * @return void
+     */
+    public function removeExpenseAction()
+    {
+        $expenseID = $_POST["expenseID"];
+
+        Expense::removeUserExpenseSavedInDatabase($expenseID);
+
+        DataSetup::orderExpenseTableItems();
+
+        Auth::getPreviousPage();
+
+        Flash::addMessage('Successfully removed expense item.');
+    }
+
+    /**
+     * Display of the expense data editing form
+     * 
+     * @return void
+     */
+    public function editItemAction() {
+
+        if ($_POST == NULL) {
+            $this->redirect('/balance/summary');
+            Flash::addMessage('You need to mark expense item that you want edit.', Flash::WARNING);
+            exit;
+            }
+        
+        $userID = $_SESSION['user_id'];
+
+        $expenseID = intval($_POST['expenseID']);
+        $expenseCategory = $_POST['expenseCategory'];
+        $expensePaymentMethod = $_POST['expensePaymentMethod'];
+        $expenseAmount = $_POST['expenseAmount'];
+        $expenseDate = $_POST['expenseDate'];
+        $expenseComment = $_POST['expenseComment'];
+
+        $expenseCategories_stmt = ExpenseCategory::getUserExpenseCategories($userID);
+
+        foreach($expenseCategories_stmt as $row) {
+            $expenseCategories[] = $row['name'];
+        }
+
+        $expensePaymentMethods_stmt = PaymentMethod::getUserPaymentMethods($userID);
+
+        foreach($expensePaymentMethods_stmt as $row) {
+            $paymentMethods[] = $row['name'];
+        }
+
+        View::renderTemplate('Loss/edit_item.html', ['expenseID' => $expenseID, 'expenseCategory' => $expenseCategory, 'expensePaymentMethod' => $expensePaymentMethod, 'expenseAmount' => $expenseAmount, 'expenseDate' => $expenseDate, 'expenseComment' => $expenseComment, 'setExpenseCategories' => $expenseCategories, 'setPaymentMethods' => $paymentMethods]); 
+
+    }
+
+    /** 
+     * Edit an existing user expense item
+     * 
+     * @return void
+     */
+    public function editExpenseAction() {
+
+        $userID = $_SESSION['user_id'];
+        
+        $expenseCategory = $_POST['expenseCategory'];
+        $expensePaymentMethod = $_POST['expensePaymentMethod'];
+        $expenseID = intval($_POST['expenseID']);
+        $expenseAmount = floatval($_POST['expenseAmount']);
+        $expenseDate = date('Y-m-d', strtotime($_POST['expenseDate']));
+        $expenseComment = $_POST['expenseComment'];
+        $expenseCategoryAssignedToUsersID = Expense::getExpenseIdAssignedToUser($userID, $expenseCategory)['id'];
+        $expensePaymentMethodAssignedToUsersID = Expense::getPaymentMethodIdAssignedToUser($userID, $expensePaymentMethod)['id'];
+
+        Expense::editUserExpenseSavedInDatabase($expenseID, $expenseAmount, $expenseDate, $expenseComment, $expenseCategoryAssignedToUsersID, $expensePaymentMethodAssignedToUsersID);
+
+        //Auth::getPreviousPage();
+        $this->redirect('/balance/summary');
+
+        Flash::addMessage('Successfully edited expense item.');
     }
 }

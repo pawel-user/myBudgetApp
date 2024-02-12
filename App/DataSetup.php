@@ -9,23 +9,25 @@ use PDO;
  * 
  * PHP version 8.2.6 */
 
- class DataSetup extends \Core\Model {
+class DataSetup extends \Core\Model
+{
     /**
      * Ordering of data identifiers and setting auto-incrementing 'expenses_category_assigned_to_users' table items from database
      * 
      * @return void
      */
 
-    public static function orderExpenseCategoryTableItems() {
+    public static function orderExpenseCategoryTableItems()
+    {
         $sql = 'SELECT * FROM expenses_category_assigned_to_users ORDER BY id;
         SET @count = 0;
         UPDATE expenses_category_assigned_to_users SET id = @count:= @count + 1;
         ALTER TABLE expenses_category_assigned_to_users AUTO_INCREMENT = 1';
 
-    $db = static::getDB();
-    $stmt = $db->prepare($sql);
+        $db = static::getDB();
+        $stmt = $db->prepare($sql);
 
-    $stmt->execute();
+        $stmt->execute();
     }
 
     /*public static function orderTableItems($tableName) {
@@ -58,16 +60,17 @@ use PDO;
      * @return void
      */
 
-     public static function orderIncomeCategoryTableItems() {
+    public static function orderIncomeCategoryTableItems()
+    {
         $sql = 'SELECT * FROM incomes_category_assigned_to_users ORDER BY id;
         SET @count = 0;
         UPDATE incomes_category_assigned_to_users SET id = @count:= @count + 1;
         ALTER TABLE incomes_category_assigned_to_users AUTO_INCREMENT = 1';
 
-    $db = static::getDB();
-    $stmt = $db->prepare($sql);
+        $db = static::getDB();
+        $stmt = $db->prepare($sql);
 
-    $stmt->execute();
+        $stmt->execute();
     }
 
     /**
@@ -76,15 +79,54 @@ use PDO;
      * @return void
      */
 
-     public static function orderPaymentMethodsTableItems() {
+    public static function orderPaymentMethodsTableItems()
+    {
         $sql = 'SELECT * FROM payment_methods_assigned_to_users ORDER BY id;
         SET @count = 0;
         UPDATE payment_methods_assigned_to_users SET id = @count:= @count + 1;
         ALTER TABLE payment_methods_assigned_to_users AUTO_INCREMENT = 1';
 
-    $db = static::getDB();
-    $stmt = $db->prepare($sql);
+        $db = static::getDB();
+        $stmt = $db->prepare($sql);
 
-    $stmt->execute();
+        $stmt->execute();
     }
+
+    /**
+     * Ordering of data identifiers and setting auto-incrementing 'incomes' table items from database
+     * 
+     * @return void
+     */
+
+     public static function orderIncomeTableItems()
+     {
+         $sql = 'SELECT * FROM incomes ORDER BY id;
+         SET @count = 0;
+         UPDATE incomes SET id = @count:= @count + 1;
+         ALTER TABLE incomes AUTO_INCREMENT = 1';
+ 
+         $db = static::getDB();
+         $stmt = $db->prepare($sql);
+ 
+         $stmt->execute();
+     }
+
+    /**
+     * Ordering of data identifiers and setting auto-incrementing 'incomes' table items from database
+     * 
+     * @return void
+     */
+
+     public static function orderExpenseTableItems()
+     {
+         $sql = 'SELECT * FROM expenses ORDER BY id;
+         SET @count = 0;
+         UPDATE expenses SET id = @count:= @count + 1;
+         ALTER TABLE expenses AUTO_INCREMENT = 1';
+ 
+         $db = static::getDB();
+         $stmt = $db->prepare($sql);
+ 
+         $stmt->execute();
+     }
  }

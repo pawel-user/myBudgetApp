@@ -16,6 +16,10 @@ class Date {
      */
     public static function getCurrentDate() {
         $currentDate = date('Y-m-d');
+        //$currentDate = strtotime($currentDate);
+        
+        //var_dump($currentDate);
+        //exit;
 
         return $currentDate;
     }

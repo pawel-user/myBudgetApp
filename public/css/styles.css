@@ -35,6 +35,15 @@ hr {
   opacity: 1;
 }
 
+td {
+  font-size: 0.8rem;
+
+}
+
+th {
+  font-size: 0.9rem;
+  text-align: center;
+}
 
 /* Headings */
 
@@ -71,6 +80,47 @@ hr {
   font-weight: 300;
 }
 
+/* Tables */
+
+/*.amount-table-field {
+}*/
+
+.category-table-field, .details-table-field {
+  width: 10rem;
+}
+
+.date-table-field {
+  width: 6rem;
+}
+
+.icons-table-field {
+  width: 5rem;
+}
+
+.table-icon {
+  margin: 0 0.5rem;
+}
+
+.hover-icon {
+  display: none;
+}
+
+.link {
+  display: none;
+}
+
+.link:hover {
+  visibility: visible;
+}
+
+.text-to-right {
+  text-align: right;
+}
+
+.text-to-center {
+  text-align: center;
+}
+
 /* Modals */
 
 .modal-body, .modal-header {
@@ -89,6 +139,34 @@ hr {
   display: flex;
   float: left;
   width: 100%;
+}
+
+.modal-parent {
+  display: inline-block;
+  width:100%;
+}
+
+.modal-question {
+  display: flex;
+  justify-items: center;
+  margin-bottom: 1rem;
+}
+.modal-label {
+  display: inline-block;
+}
+
+.modal-form {
+  display: inline-block;
+  margin-bottom: 1rem;
+}
+
+.modal-text {
+  float: left;
+  padding-right: 0.5rem;
+}
+
+.modal-id {
+  float: left;
 }
 
 
@@ -348,7 +426,7 @@ hr {
 .total-cell, .total-sum {
   background-color: #ffea9e !important;
   color: #8c52ff;
-  font-size: 1.2rem;
+  font-size: 0.9rem;
   font-weight: 700;
 }
 
@@ -361,11 +439,10 @@ hr {
 }
 
 .piechart-container {
-  position: relative;
   display: flex;
   justify-content: center;  
   align-items: center;
-  margin: 0 2% 5%;
+  margin: 0 0 2rem;
 }
 
 .summary-container {
@@ -375,13 +452,39 @@ hr {
   color: #545454 !important;
   display: block;
   line-height: 1.5;
-  margin: 0;
+  margin: 0 0 2rem;
 }
 
-.summary-text {
+.success-container.summary-container {
+  background-color: limegreen;
+}
+
+.warning-container.summary-container {
+  background-color: orangered;
+}
+
+.failure-container.summary-container {
+  background-color: pink;
+}
+
+.summary-text-success {
   color: green;
   font-weight: bold;
   text-align: center;
+  margin-bottom: 1rem;
+}
+
+.summary-text-failure {
+  color: red;
+  font-weight: bold;
+  text-align: center;
+}
+
+.summary-text-warning {
+  color: orange;
+  font-weight: bold;
+  text-align: center;
+  margin: 1rem auto;
 }
 
 .summary-table {
@@ -573,12 +676,12 @@ hr {
 /* Add Income$Expense Section and View Balance Section */
 
 .title-action {
-  margin: 5% auto 2%;
+  margin: 2% auto 2%;
 }
 
 .table-description {
   color: #c6d0ed;
-  text-align: justify;
+  text-align: center;
 }
 
 .table-title {
@@ -727,7 +830,7 @@ hr {
   }
 
   .summary-container {
-    margin: 0 5%;
+    margin: 0 0 2rem;
   }
 
   .enter-gif {

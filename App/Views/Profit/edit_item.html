@@ -3,32 +3,6 @@
 {% block title %}Adding incomes{% endblock %}
 
 {% block footer %}
-<!-- <script>
-  $(document).ready(function () {
-    /**
-     * Validate the form
-     */
-    $('#formAddIncome').validate({
-      rules: {
-        name: 'required',
-        amount: {
-          required: true,
-        },
-        name: {
-          required: true,
-        }
-      },
-      messages: {
-        amount: {
-          remote: 'Amount is required'
-        },
-        name: {
-          remote: 'Selecting one of the categories is required'
-        }
-      }
-    });
-  });
-</script> -->
 {% endblock %}
 
 {% block navigation %}
@@ -56,35 +30,36 @@
     </ul>
     {% endif %}
 
-    <h3 class="title-action">Enter incomes data:</h3>
+    <h3 class="title-action">Edit selected income data:</h3>
 
-    <form method="post" action="/profit/add" id="formAddIncome">
+    <form method="post" action="/profit/edit-income" id="formEditIncome">
+      <input class="form-control data-form" type="hidden" name="incomeID" value="{{ incomeID }}">
       <div class="input-group mb-3 data-container">
         <label class="input-group-text data-form" for="inputAmount"><i class="fa-solid fa-coins"
             style="color: #7c7c82;"></i>
         </label>
-        <input class="form-control data-form" type="number" id="inputAmount" name="amount" placeholder="Amount (PLN)"
-          aria-label="Amount (PLN)" min="0.01" step="0.01" value="{{ income.amount }}">
+        <input class="form-control data-form" type="number" id="inputAmount" name="incomeAmount" placeholder="Amount (PLN)"
+          aria-label="Amount (PLN)" min="0.01" step="0.01" value="{{ incomeAmount }}" required>
       </div>
 
       <div class="input-group mb-3 data-container">
         <label class="input-group-text data-form" for="inputDate"><i class="fa-sharp fa-regular fa-calendar"
             style="color: #7c7c82;"></i>
         </label>
-        <input class="form-control data-form" type="date" id="inputDate" name="date_of_income" aria-label="Date"
-          value="{{ currentDate }}" min="2000-01-01" max="{{ currentDate }}">
+        <input class="form-control data-form" type="date" id="inputDate" name="incomeDate" aria-label="Date"
+          value="{{ incomeDate }}" min="2000-01-01" max="{{ currentDate }}" required>
       </div>
 
       <div class="input-group mb-3 data-container">
         <label class="input-group-text data-form" for="inputCategory"><i class="fa-solid fa-caret-down"
             style="color: #7c7c82;"></i>
         </label>
-        <select class="form-control data-form" id="inputCategory" name="name">
-          <option value="" selected>Choose category...</option>
+        <select class="form-control data-form" id="inputCategory" name="incomeCategory" required>
+          <option value="{{ incomeCategory }}" selected>{{ incomeCategory }} {set default value}</option>
           <option value="" disabled="disabled">───────────────────────────────────────</option>
-          {% if income_load.income_names is not empty %}
+          {% if setIncomeCategories is not empty %}
           {% set otherIncomeName = "" %}
-          {% for incomeName in income_load.income_names %}
+          {% for incomeName in setIncomeCategories %}
           {% if incomeName != "Other incomes" %}
           <option value="{{ incomeName }}">{{ incomeName }}</option>
           {% else %}
@@ -95,23 +70,20 @@
           <option value="{{ otherIncomeName }}">{{ otherIncomeName }}</option>
           {% endif %}
         </select>
+        <!-- <input class="form-control data-form" type="text" name="name" value="{{ incomeCategory }}"> -->
       </div>
 
       <div class="input-group mb-3 data-container">
         <label class="input-group-text data-form" for="inputTextComment"><i class="fa-solid fa-pencil"
             style="color: #7c7c82;"></i></label>
-        {% if income.income_comment is not empty %}
-        <textarea class="form-control data-form" id="inputTextComment" name="income_comment" rows="3"
-          placeholder="Type a comment..." resize="none">{{ income.income_comment }}</textarea>
-        {% else %}
-        <textarea class="form-control data-form" id="inputTextComment" name="income_comment" rows="3"
-          placeholder="Type a comment..." resize="none"></textarea>
-        {% endif %}
+        <textarea class="form-control data-form" id="inputTextComment" name="incomeComment" rows="3"
+          placeholder="Type a comment..." resize="none">{{ incomeComment }}</textarea>
       </div>
+
       <div class="input-group mb-3 data-container">
         <div class="button-container">
           <button type="reset" class="btn btn-lg btn-danger sign-up-button">
-            <i class="fa-solid fa-rectangle-xmark icon"></i>Clear
+            <i class="fa-solid fa-trash-arrow-up icon"></i>Restore
           </button>
         </div>
         <div class="button-container">

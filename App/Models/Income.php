@@ -116,6 +116,28 @@ class Income extends \Core\Model
     }
 
     /**
+     * Get user's income ID by income category name
+     * 
+     * @return array
+     */
+    public static function getIncomeIdAssignedToUser($userID, $incomeCategory)
+    {
+        $sql = 'SELECT (id) FROM incomes_category_assigned_to_users
+                    WHERE user_id = :userID 
+                    AND name = :incomeCategory';
+
+        $db = static::getDB();
+        $stmt = $db->prepare($sql);
+
+        $stmt->bindValue(':userID', $userID, PDO::PARAM_INT);
+        $stmt->bindValue(':incomeCategory', $incomeCategory, PDO::PARAM_STR);
+
+        $stmt->execute();
+
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
+    /**
      * Validate current property values, adding validation error messages to the errors array property for Income object
      * 
      * @return void
@@ -155,4 +177,42 @@ class Income extends \Core\Model
 
         $stmt->fetch();
     }*/
+
+    /**
+     * Remove user income item from database
+     */
+    public static function removeUserIncomeSavedInDatabase($incomeID) {
+        $sql = 'DELETE FROM incomes 
+                WHERE id = :incomeID';
+
+        $db = static::getDB();
+        $stmt = $db->prepare($sql);
+
+        $stmt->bindValue(':incomeID', $incomeID, PDO::PARAM_INT);
+
+        $stmt->execute();
+    }
+
+    /**
+     * Update user income item in database
+     * 
+     * @return void
+     */
+    public static function editUserIncomeSavedInDatabase($incomeID, $incomeAmount, $incomeDate, $incomeComment, $incomeCategoryAssignedToUsersID) {
+
+        $sql = 'UPDATE incomes
+                    SET incomes.amount = :incomeAmount, incomes.date_of_income = :incomeDate, incomes.income_comment = :incomeComment, incomes.income_category_assigned_to_user_id = :incomeCategoryAssignedToUsersID
+                    WHERE incomes.id = :incomeID';
+
+        $db = static::getDB();
+        $stmt = $db->prepare($sql);
+
+        $stmt->bindValue(':incomeAmount', $incomeAmount, PDO::PARAM_STR);
+        $stmt->bindValue(':incomeDate', $incomeDate, PDO::PARAM_STR);
+        $stmt->bindValue(':incomeComment', $incomeComment, PDO::PARAM_STR);
+        $stmt->bindValue(':incomeID', $incomeID, PDO::PARAM_INT);
+        $stmt->bindValue(':incomeCategoryAssignedToUsersID', $incomeCategoryAssignedToUsersID, PDO::PARAM_INT);
+
+        $stmt->execute();
+    }
 }

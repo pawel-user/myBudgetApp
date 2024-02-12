@@ -8,11 +8,11 @@
 {% block navigation %}
 
 <li class="nav-item">
-  <a class="nav-link" href="/expenses"><i class="fa-solid fa-sack-xmark"></i> Add expense</a>
+  <a class="nav-link" href="/loss/new"><i class="fa-solid fa-sack-xmark"></i> Add expense</a>
 </li>
 
 <li class="nav-item">
-  <a class="nav-link" href="/balance"><i class="fa-solid fa-scale-balanced"></i> View balance</a>
+  <a class="nav-link" href="/balance/summary"><i class="fa-solid fa-scale-balanced"></i> View balance</a>
 </li>
 
 {% endblock %}
@@ -32,7 +32,7 @@
 
     <h3 class="title-action">Confirmation income category delete:</h3><br>
 
-    <form method="get" action="/profit/remove">
+    <form method="get" action="/profit/remove-category">
       <div class="input-group mb-4 data-container">
         <p class="question-confirmation">Are you sure to delete <span class="highlighted-text">{{ selected_income_name }}</span> income category?</p>
         <input type="hidden" name="userID" value="{{ userID }}">

@@ -84,9 +84,49 @@ class Auth
      */
     public static function getReturnToPage()
     {
-        return $_SESSION['return_to'] ?? '/start';
+        $_SESSION['return_to'] ?? '/start';
     }
 
+    /**
+     * Keep history visited pages
+     * 
+     * @return array History of session
+     */
+    /*public static function keepHistory()
+    {
+        $_SESSION["history"] = header('Location: http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
+        $history=$_SESSION["history"];
+    
+        $history[]=$_SERVER["PHP_SELF"];
+    
+        $_SESSION["history"]=$history;
+    
+        return $_SESSION["history"];
+    }*/
+
+    /**
+     * Get the previous page to return to after requiring login, or default to the homepage
+     *
+     * @return void
+     */
+    /*public static function getTwoPagesBack()
+    {
+        $history = static::keepHistory();
+        var_dump($history);
+        exit;
+        header("Location : $history[2]", TRUE, 307);
+    }*/
+
+    /**
+     * Get the previous page to return to after requiring login, or default to the homepage
+     *
+     * @return void
+     */
+    public static function getPreviousPage()
+    {
+        header('Location:' . $_SERVER['HTTP_REFERER'], TRUE, 307);
+    }
+    
     /**
      * Get the current logged-in user, from the session or the remember-me cookie
      *
