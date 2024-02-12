@@ -184,6 +184,12 @@ class Profit extends Authenticated
      * @return void
      */
     public function editItemAction() {
+
+        if ($_POST == NULL) {
+            $this->redirect('/balance/summary');
+            Flash::addMessage('You need to mark income item that you want edit.', Flash::WARNING);
+            exit;
+            }
         
         $userID = $_SESSION['user_id'];
 
