@@ -137,15 +137,22 @@
             {{ incomeItem.income_comment}}
           </td>
           <td>
-            <a href="/profit/edit-income" type="submit" value="{{ incomeItem.id }}"><i
-                class="fa-solid fa-pencil table-icon"></i></a>
-            <a href="#removalIncomeItemConfirmationModal" data-bs-toggle="modal" data-income-id="{{ incomeItem.id }}"
-              data-income-category="{{ incomeItem.category }}" data-income-amount="{{ incomeItem.amount }}"
-              data-income-date="{{ incomeItem.date_of_income }}"
-              data-income-comment="{{ incomeItem.income_comment }}"><i class="fa-solid fa-trash table-icon"></i></a>
-            {{ dump(incomeItem.id) }}
+            <form method="post" action="/profit/edit-item">
+              <input type="hidden" name="incomeID" value="{{ incomeItem.id }}">
+              <input type="hidden" name="incomeAmount" value="{{ incomeItem.amount }}">
+              <input type="hidden" name="incomeDate" value="{{ incomeItem.date_of_income }}">
+              <input type="hidden" name="incomeComment" value="{{ incomeItem.income_comment }}">
+              <input type="hidden" name="incomeCategory" value="{{ incomeItem.category }}">
+              <a href="" onclick="this.closest('form').submit();return false;"><i
+                  class="fa-solid fa-pencil table-icon"></i></a>
+              </a>
+              <a href="#removalIncomeItemConfirmationModal" data-bs-toggle="modal" data-income-id="{{ incomeItem.id }}"
+                data-income-category="{{ incomeItem.category }}" data-income-amount="{{ incomeItem.amount }}"
+                data-income-date="{{ incomeItem.date_of_income }}"
+                data-income-comment="{{ incomeItem.income_comment }}"><i class="fa-solid fa-trash table-icon"></i></a>
+              {{ dump(incomeItem.id) }}
+            </form>
           </td>
-          </tr>
         </tbody>
         {% endfor %}
         {% for totalIncomeItem in balance_load.income_category_total_amount %}
@@ -207,14 +214,23 @@
               {{ expenseItem.expense_comment}}
             </td>
             <td>
-              <a href="/profit/edit-expense" type="submit" value="{{ expenseItem.id }}"><i
-                  class="fa-solid fa-pencil table-icon"></i></a>
-              <a href="#removalExpenseItemConfirmationModal" data-bs-toggle="modal"
-                data-expense-id="{{ expenseItem.id }}" data-expense-category="{{ expenseItem.category }}"
-                data-expense-amount="{{ expenseItem.amount }}" data-expense-date="{{ expenseItem.date_of_expense }}"
-                data-expense-comment="{{ expenseItem.expense_comment }}"><i
-                  class="fa-solid fa-trash table-icon"></i></a>
-              {{ dump(expenseItem.id) }}
+              <form method="post" action="/loss/edit-item">
+                <input type="hidden" name="expenseID" value="{{ expenseItem.id }}">
+                <input type="hidden" name="expenseAmount" value="{{ expenseItem.amount }}">
+                <input type="hidden" name="expenseDate" value="{{ expenseItem.date_of_expense }}">
+                <input type="hidden" name="expenseComment" value="{{expenseItem.expense_comment }}">
+                <input type="hidden" name="expenseCategory" value="{{ expenseItem.category }}">
+                <input type="hidden" name="expensePaymentMethod" value="{{ expenseItem.payment_method }}">
+                <a href="" onclick="this.closest('form').submit();return false;"><i
+                    class="fa-solid fa-pencil table-icon"></i></a>
+                </a>
+                <a href="#removalExpenseItemConfirmationModal" data-bs-toggle="modal"
+                  data-expense-id="{{ expenseItem.id }}" data-expense-category="{{ expenseItem.category }}"
+                  data-expense-amount="{{ expenseItem.amount }}" data-expense-date="{{ expenseItem.date_of_expense }}"
+                  data-expense-comment="{{ expenseItem.expense_comment }}"><i
+                    class="fa-solid fa-trash table-icon"></i></a>
+                {{ dump(expenseItem.id) }}
+              </form>
             </td>
           </tr>
         </tbody>

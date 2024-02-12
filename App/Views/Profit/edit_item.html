@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+
+{% block title %}Adding incomes{% endblock %}
+
+{% block footer %}
+{% endblock %}
+
+{% block navigation %}
+
+<li class="nav-item">
+  <a class="nav-link" href="/loss/new"><i class="fa-solid fa-sack-xmark"></i> Add expense</a>
+</li>
+
+<li class="nav-item">
+  <a class="nav-link" href="/balance/summary"><i class="fa-solid fa-scale-balanced"></i> View balance</a>
+</li>
+
+{% endblock %}
+
+{% block body %}
+<main>
+  <section class="add-income-section">
+
+    {% if income.errors is not empty %}
+    <p class="error-message">Errors:</p>
+    <ul>
+      {% for error in income.errors %}
+      <li class="error-message">{{ error }}</li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+
+    <h3 class="title-action">Edit selected income data:</h3>
+
+    <form method="post" action="/profit/edit-income" id="formEditIncome">
+      <input class="form-control data-form" type="hidden" name="incomeID" value="{{ incomeID }}">
+      <div class="input-group mb-3 data-container">
+        <label class="input-group-text data-form" for="inputAmount"><i class="fa-solid fa-coins"
+            style="color: #7c7c82;"></i>
+        </label>
+        <input class="form-control data-form" type="number" id="inputAmount" name="incomeAmount" placeholder="Amount (PLN)"
+          aria-label="Amount (PLN)" min="0.01" step="0.01" value="{{ incomeAmount }}" required>
+      </div>
+
+      <div class="input-group mb-3 data-container">
+        <label class="input-group-text data-form" for="inputDate"><i class="fa-sharp fa-regular fa-calendar"
+            style="color: #7c7c82;"></i>
+        </label>
+        <input class="form-control data-form" type="date" id="inputDate" name="incomeDate" aria-label="Date"
+          value="{{ incomeDate }}" min="2000-01-01" max="{{ currentDate }}" required>
+      </div>
+
+      <div class="input-group mb-3 data-container">
+        <label class="input-group-text data-form" for="inputCategory"><i class="fa-solid fa-caret-down"
+            style="color: #7c7c82;"></i>
+        </label>
+        <select class="form-control data-form" id="inputCategory" name="incomeCategory" required>
+          <option value="" selected>Choose category...</option>
+          <option value="" disabled="disabled">───────────────────────────────────────</option>
+          {% if setIncomeCategories is not empty %}
+          {% set otherIncomeName = "" %}
+          {% for incomeName in setIncomeCategories %}
+          {% if incomeName != "Other incomes" %}
+          <option value="{{ incomeName }}">{{ incomeName }}</option>
+          {% else %}
+          {% set otherIncomeName = incomeName %}
+          {% endif %}
+          {% endfor %}
+          <option value="" disabled="disabled">───────────────────────────────────────</option>
+          <option value="{{ otherIncomeName }}">{{ otherIncomeName }}</option>
+          {% endif %}
+        </select>
+        <!-- <input class="form-control data-form" type="text" name="name" value="{{ incomeCategory }}"> -->
+      </div>
+
+      <div class="input-group mb-3 data-container">
+        <label class="input-group-text data-form" for="inputTextComment"><i class="fa-solid fa-pencil"
+            style="color: #7c7c82;"></i></label>
+        <textarea class="form-control data-form" id="inputTextComment" name="incomeComment" rows="3"
+          placeholder="Type a comment..." resize="none">{{ incomeComment }}</textarea>
+      </div>
+
+      <div class="input-group mb-3 data-container">
+        <div class="button-container">
+          <button type="reset" class="btn btn-lg btn-danger sign-up-button">
+            <i class="fa-solid fa-trash-arrow-up icon"></i>Restore
+          </button>
+        </div>
+        <div class="button-container">
+          <button type="submit" class="btn btn-lg btn-success sign-up-button">
+            <i class="fa-solid fa-square-check icon"></i>Confirm
+          </button>
+        </div>
+      </div>
+    </form>
+
+  </section>
+</main>
+{% endblock %}

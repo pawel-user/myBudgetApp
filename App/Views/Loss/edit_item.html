@@ -1,0 +1,138 @@
+{% extends "base.html" %}
+
+{% block title %}Editing expenses{% endblock %}
+
+{% block footer %}
+<!-- <script>
+  $(document).ready(function () {
+    /**
+     * Validate the form
+     */
+    $('#formAddExpense').validate({
+      rules: {
+        name: 'required',
+        amount: {
+          required: true,
+        },
+        name: {
+          required: true,
+        }
+      },
+      messages: {
+        amount: {
+          remote: 'Amount is required'
+        },
+        name: {
+          remote: 'Selecting one of the categories is required'
+        }
+      }
+    });
+  });
+</script> -->
+{% endblock %}
+
+{% block navigation %}
+
+<li class="nav-item">
+  <a class="nav-link" href="/profit/new"><i class="fa-solid fa-piggy-bank"></i> Add income</a>
+</li>
+
+<li class="nav-item">
+  <a class="nav-link" href="/balance/summary"><i class="fa-solid fa-scale-balanced"></i> View balance</a>
+</li>
+
+{% endblock %}
+
+{% block body %}
+<main>
+  <section class="add-expense-section">
+
+    {% if expense.errors is not empty %}
+    <p class="error-message">Errors:</p>
+    <ul>
+      {% for error in expense.errors %}
+      <li class="error-message">{{ error }}</li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+
+    <h3 class="title-action">Edit expense item data:</h3>
+    <form method="post" action="/loss/edit-expense" id="formAddExpense">
+      <input class="form-control data-form" type="hidden" name="expenseID" value="{{ expenseID }}">
+      <div class="input-group mb-3 data-container">
+        <span class="input-group-text data-form" id="basic-addon1"><i class="fa-solid fa-coins"
+            style="color: #7c7c82;"></i>
+        </span>
+        <input class="form-control data-form" type="number" id="inputAmount" name="expenseAmount" placeholder="Amount (PLN)"
+          aria-label="Amount (PLN)" min="0.01" step="0.01"  value="{{ expenseAmount }}" required">
+      </div>
+
+      <div class="input-group mb-3 data-container">
+        <label class="input-group-text data-form" for="inputDate"><i class="fa-sharp fa-regular fa-calendar"
+            style="color: #7c7c82;"></i>
+        </label>
+        <input class="form-control data-form" type="date" id="inputDate" name="expenseDate" aria-label="Date"
+          value="{{ expenseDate }}" min="2000-01-01" max="{{ currentDate }}" required>
+      </div>
+
+      <div class="input-group mb-3 data-container">
+        <label class="input-group-text data-form" for="inputCategory"><i class="fa-solid fa-caret-down"
+            style="color: #7c7c82;"></i>
+        </label>
+        <select class="form-control data-form" id="inputCategory" name="expensePaymentMethod" required>
+          <option value="{{ expensePaymentMethod }}" selected>{{ expensePaymentMethod }}</option>
+          <option value="" disabled="disabled">───────────────────────────────────────</option>
+          {% if setPaymentMethods is not empty %}
+          {% for paymentName in setPaymentMethods %}
+          <option value="{{ paymentName }}">{{ paymentName }}</option>
+          {% endfor %}
+          <option value="" disabled="disabled">───────────────────────────────────────</option>
+          {% endif %}
+        </select>
+      </div>
+
+      <div class="input-group mb-3 data-container">
+        <label class="input-group-text data-form" for="inputCategory"><i class="fa-solid fa-caret-down"
+            style="color: #7c7c82;"></i>
+        </label>
+        <select class="form-control data-form" id="inputCategory" name="expenseCategory" required>
+          <option value="{{ expenseCategory }}" selected>{{ expenseCategory }}</option>
+          <option value="" disabled="disabled">───────────────────────────────────────</option>
+          {% if setExpenseCategories is not empty %}
+          {% set otherExpenseName = "" %}
+          {% for expenseName in setExpenseCategories %}
+          {% if expenseName != "Other incomes" %}
+          <option value="{{ expenseName }}">{{ expenseName }}</option>
+          {% else %}
+          {% set otherExpenseName = expenseName %}
+          {% endif %}
+          {% endfor %}
+          <option value="" disabled="disabled">───────────────────────────────────────</option>
+          <option value="{{ otherExpenseName }}">{{ otherExpenseName }}</option>
+          {% endif %}
+        </select>
+      </div>
+
+      <div class="input-group mb-3 data-container">
+        <label class="input-group-text data-form" for="inputTextComment"><i class="fa-solid fa-pencil"
+            style="color: #7c7c82;"></i></label>
+        <textarea class="form-control data-form" id="inputTextComment" name="expenseComment" rows="3"
+          placeholder="Type a comment..." resize="none">{{ expenseComment }}</textarea>
+      </div>
+
+      <div class="input-group mb-3 data-container">
+        <div class="button-container">
+          <button type="reset" class="btn btn-lg btn-danger sign-up-button">
+            <i class="fa-solid fa-rectangle-xmark icon"></i>Clear
+          </button>
+        </div>
+        <div class="button-container">
+          <button type="submit" class="btn btn-lg btn-success sign-up-button">
+            <i class="fa-solid fa-square-check icon"></i>Confirm
+          </button>
+        </div>
+      </div>
+    </form>
+  </section>
+</main>
+{% endblock %}

@@ -112,8 +112,8 @@ class Profit extends Authenticated
         $categoryID = intval($_POST['categoryID']);
         $newCategoryName = $_POST['changed-name'];
 
-        var_dump($_POST['changed-name']);
-        exit;
+        //var_dump($_POST['changed-name']);
+        //exit;
 
         switch ($_REQUEST['action']) {
             case 'cancel': //action for cancel edit income category and return to previous page
@@ -176,5 +176,53 @@ class Profit extends Authenticated
 
         //$this->redirect($url);
         Flash::addMessage('Successfully removed income item.');
+    }
+
+    /**
+     * Display of the income data editing form
+     * 
+     * @return void
+     */
+    public function editItemAction() {
+        
+        $userID = $_SESSION['user_id'];
+
+        $incomeID = intval($_POST['incomeID']);
+        $incomeCategory = $_POST['incomeCategory'];
+        $incomeAmount = $_POST['incomeAmount'];
+        $incomeDate = $_POST['incomeDate'];
+        $incomeComment = $_POST['incomeComment'];
+
+        $incomeColletionCategories_stmt = IncomeCategory::getUserIncomeCategories($userID);
+
+        foreach($incomeColletionCategories_stmt as $row) {
+            $incomeCategories[] = $row['name'];
+        }
+
+        View::renderTemplate('Profit/edit_item.html', ['incomeID' => $incomeID, 'incomeCategory' => $incomeCategory, 'incomeAmount' => $incomeAmount, 'incomeDate' => $incomeDate, 'incomeComment' => $incomeComment, 'setIncomeCategories' => $incomeCategories]); 
+
+    }
+
+    /** 
+     * Edit an existing user income item
+     * 
+     * @return void
+     */
+    public function editIncomeAction() {
+
+        $userID = $_SESSION['user_id'];
+        
+        $incomeCategory = $_POST['incomeCategory'];
+        $incomeID = intval($_POST['incomeID']);
+        $incomeAmount = floatval($_POST['incomeAmount']);
+        $incomeDate = date('Y-m-d', strtotime($_POST['incomeDate']));
+        $incomeComment = $_POST['incomeComment'];
+        $incomeCategoryAssignedToUsersID = Income::getIncomeIdAssignedToUser($userID, $incomeCategory)['id'];
+
+        Income::editUserIncomeSavedInDatabase($incomeID, $incomeAmount, $incomeDate, $incomeComment, $incomeCategoryAssignedToUsersID);
+
+        $this->redirect('/balance/summary');
+
+        Flash::addMessage('Successfully edited income item.');
     }
 }

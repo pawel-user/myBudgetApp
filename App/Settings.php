@@ -99,8 +99,6 @@ class Settings
             foreach ($all_incomes_stmt as $row) {
                 $balance->income_data[] = $row;
             }
-            //var_dump($all_incomes_stmt);
-            //exit;
 
             $all_expenses_stmt = BalanceSummary::getAllUserExpensesForSelectedPeriod($user->id, $date_begin, $date_end);
 
@@ -187,4 +185,5 @@ class Settings
 
         return $period;
     }
+
 }

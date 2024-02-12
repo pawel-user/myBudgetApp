@@ -105,12 +105,14 @@ class BalanceSummary extends \Core\Model
     {
         $sql = 'SELECT 
                     expenses_category_assigned_to_users.name AS category,
+                    payment_methods_assigned_to_users.name AS payment_method,
                     expenses.amount AS amount,
                     expenses.id AS id,
                     expenses.date_of_expense,
                     expenses.expense_comment
                 FROM expenses_category_assigned_to_users
                     INNER JOIN expenses ON expenses.expense_category_assigned_to_user_id = expenses_category_assigned_to_users.id
+                    INNER JOIN payment_methods_assigned_to_users ON expenses.payment_method_assigned_to_user_id = payment_methods_assigned_to_users.id
                 WHERE expenses.user_id = :userID AND expenses.date_of_expense BETWEEN :date_begin AND :date_end
                 ORDER BY expenses.date_of_expense DESC';
 
