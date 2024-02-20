@@ -235,7 +235,7 @@ th {
 
 
 .icon {
-  margin-right: 3%;
+  margin-right: 1rem;
 }
 
 
@@ -434,7 +434,16 @@ th {
   border: solid red 2px;
 }
 
+.piechart-box {
+  display: flex;
+  justify-self: center;
+  margin-bottom: 3%;
+}
+
 .piechart-image {
+  display: flex;
+  justify-content: center;
+  height: 25rem;
   width: 100%;
 }
 
@@ -442,7 +451,15 @@ th {
   display: flex;
   justify-content: center;  
   align-items: center;
-  margin: 0 0 2rem;
+  margin: 0 0 0rem;
+}
+
+#piechart_3d_incomes {
+  margin-right: 1rem;
+}
+
+#piechart_3d_expenses {
+  margin-left: 1rem;
 }
 
 .summary-container {
