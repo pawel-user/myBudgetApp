@@ -68,6 +68,7 @@ class View
             ]);
             $twig->addExtension(new \Twig\Extension\DebugExtension());
             $twig->addGlobal('current_user', \App\Auth::getUser());
+            $twig->addGlobal('current_url', \App\Auth::rememberRequestedPage());
             $twig->addGlobal('flash_messages', \App\Flash::getMessages());
             $twig->addGlobal('currentDate', \App\Date::getCurrentDate());
             $twig->addGlobal('income', \App\Settings::loadUserIncomeNames());
