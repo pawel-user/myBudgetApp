@@ -75,6 +75,8 @@ class Auth
     public static function rememberRequestedPage()
     {
         $_SESSION['return_to'] = $_SERVER['REQUEST_URI'];
+        
+        return $_SESSION['return_to'];
     }
 
     /**
