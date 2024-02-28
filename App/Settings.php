@@ -144,9 +144,6 @@ class Settings
     {
         if ($user) {
 
-            //var_dump(SearchResults::searchIncomeTermsFromDatabase($user->id, $keyword));
-            //exit;
-            
             [$search_income_results_stmt, $counter] = SearchResults::searchIncomeTermsFromDatabase($user->id, $keyword);
 
             foreach ($search_income_results_stmt as $row) {
@@ -168,13 +165,7 @@ class Settings
     {
         if ($user) {
 
-            //var_dump(SearchResults::searchExpenseTermsFromDatabase($user->id, $keyword));
-            //exit;
-
             list($search_expense_results_stmt, $counter) = SearchResults::searchExpenseTermsFromDatabase($user->id, $keyword);
-
-            //var_dump($search_expense_results_stmt);
-            //exit;
 
             foreach ($search_expense_results_stmt as $row) {
                 $search->search_expense_data[] = $row;
@@ -190,7 +181,8 @@ class Settings
         return $search;
     }
 
-    public static function sumAllSearchResults($search) {
+    public static function sumAllSearchResults($search)
+    {
         $counter = $search->income_counter + $search->expense_counter;
 
         return $counter;
@@ -203,7 +195,6 @@ class Settings
      */
     public static function downloadCurrentMonthWithYear()
     {
-
         return date('F Y');
     }
 
@@ -214,7 +205,6 @@ class Settings
      */
     public static function downloadPreviousMonthWithYear()
     {
-
         return date('F Y', strtotime('-1 month'));
     }
 

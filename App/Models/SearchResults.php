@@ -36,11 +36,6 @@ class SearchResults extends \Core\Model
     public $expense_counter;
     
     /**
-     * Number of all search results
-     */
-    //public $search_counter;
-    
-    /**
      * Class constructor
      * 
      * @param array $data Initial property values

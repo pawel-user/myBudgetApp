@@ -33,14 +33,5 @@ class Search extends \Core\Controller
 
         View::renderTemplate('Search/results.html', ['search_income_results' => Settings::loadIncomeItemSearchResults($search, $user, $keyword), 'search_expense_results' => Settings::loadExpenseItemSearchResults($search, $user, $keyword), 'search_counter' => Settings::sumAllSearchResults($search)]);
 
-        //var_dump($search);
-        //exit;
-
-        /*if ($search->search_income_data == null && $search->search_expense_data == null) {
-            Auth::getPreviousPage();
-            //Flash::addMessage('No results was found!', Flash::DANGER);
-            //Auth::getReturnToPage();
-        }*/
-
     }
 }
