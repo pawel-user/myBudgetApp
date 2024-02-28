@@ -9,6 +9,7 @@ use App\Models\ExpenseCategory;
 use App\Models\PaymentMethod;
 use App\Models\BalanceSummary;
 use App\Auth;
+use App\Models\SearchResults;
 
 /**
  * Getting current income, expense categories and payment category methods for registered user
@@ -125,7 +126,7 @@ class Settings
             $balance->total_expenses = BalanceSummary::getTotalSumOfExpensesInSelectedPeriod($user->id, $date_begin, $date_end)["amount"];
 
             $balance->final_balance = $balance->total_incomes - $balance->total_expenses;
-            
+
             if ($balance->total_incomes == 0 && $balance->total_expenses == 0) {
                 Flash::addMessage('No data to display.', Flash::WARNING);
             }
@@ -135,12 +136,65 @@ class Settings
     }
 
     /**
+     * Load income and expense search results matching the search term
+     * 
+     * @return mixed Search object with incomes & expenses associative arrays
+     */
+    public static function loadIncomeItemSearchResults($search, $user, $keyword)
+    {
+        if ($user) {
+
+            [$search_income_results_stmt, $counter] = SearchResults::searchIncomeTermsFromDatabase($user->id, $keyword);
+
+            foreach ($search_income_results_stmt as $row) {
+                $search->search_income_data[] = $row;
+            }
+
+            $search->income_counter = $counter;
+        }
+
+        return $search;
+    }
+
+    /**
+     * Load income and expense search results matching the search term
+     * 
+     * @return mixed Search object with incomes & expenses associative arrays
+     */
+    public static function loadExpenseItemSearchResults($search, $user, $keyword)
+    {
+        if ($user) {
+
+            list($search_expense_results_stmt, $counter) = SearchResults::searchExpenseTermsFromDatabase($user->id, $keyword);
+
+            foreach ($search_expense_results_stmt as $row) {
+                $search->search_expense_data[] = $row;
+            }
+
+            $search->expense_counter = $counter;
+
+            if ($search->search_income_data == null && $search->search_expense_data == null) {
+                Flash::addMessage('No results was found!', Flash::DANGER);
+            }
+        }
+
+        return $search;
+    }
+
+    public static function sumAllSearchResults($search)
+    {
+        $counter = $search->income_counter + $search->expense_counter;
+
+        return $counter;
+    }
+
+    /**
      * Download current month with year
      * 
      * @return string Month and year
      */
-    public static function downloadCurrentMonthWithYear() {
-
+    public static function downloadCurrentMonthWithYear()
+    {
         return date('F Y');
     }
 
@@ -149,8 +203,8 @@ class Settings
      * 
      * @return string Month and year
      */
-    public static function downloadPreviousMonthWithYear() {
-
+    public static function downloadPreviousMonthWithYear()
+    {
         return date('F Y', strtotime('-1 month'));
     }
 
@@ -159,7 +213,8 @@ class Settings
      * 
      * @return string Month and year
      */
-    public static function downloadPeriodForCurrentYear() {
+    public static function downloadPeriodForCurrentYear()
+    {
 
         $first_day_and_month = '1 January';
         $current_month = date('F');
@@ -179,11 +234,11 @@ class Settings
      * 
      * @return string Day, month in words and year
      */
-    public static function downloadCustomPeriod($date_begin, $date_end) {
+    public static function downloadCustomPeriod($date_begin, $date_end)
+    {
 
         $period = date("d F Y", strtotime($date_begin)) . ' - ' . date("d F Y", strtotime($date_end));
 
         return $period;
     }
-
 }

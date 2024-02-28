@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block title %}Search results{% endblock %}
+
+{% block body %}
+
+<section class="view-balance-section">
+    <main>
+        <div class="container mt-3 action-container">
+            <h3 class="title-action">Your search results</h3>
+            <p class="table-description">
+                The table displays all records with the search term.
+            </p>
+        </div>
+</section>
+
+<section class="template-section">
+    <div class="row justify-content-center">
+        <div class="col-lg-6">
+            {% if search_counter != 0 %}
+            <p class="search-results">Found {{ search_counter }} search results.</p>
+            {% endif %}
+
+            <table class="table table-info">
+                <thead>
+                    <tr>
+                        <th class="category-table-field">Category</th>
+                        <th class="date-table-field">Date</th>
+                        <th class="amount-table-field">Amount</th>
+                        <th class="details-table-field">Details</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for searchItem in search_income_results.search_income_data %}
+                    <tr>
+                        <td>{{ searchItem.name }}</td>
+                        <td>
+                            {{ searchItem.date_of_income }}
+                        </td>
+                        <td class="text-to-right">{{ searchItem.amount }} PLN</td>
+                        <td>
+                            {{ searchItem.income_comment}}
+                        </td>
+                    </tr>
+                    {% endfor %}
+
+                    {% for searchItem in search_expense_results.search_expense_data %}
+                    <tr>
+                        <td>{{ searchItem.name }}</td>
+                        <td>
+                            {{ searchItem.date_of_expense }}
+                        </td>
+                        <td class="text-to-right">{{ searchItem.amount }} PLN</td>
+                        <td>
+                            {{ searchItem.expense_comment}}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+{% endblock %}
