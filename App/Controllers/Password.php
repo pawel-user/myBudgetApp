@@ -44,7 +44,6 @@ class Password extends \Core\Controller
         View::renderTemplate('Password/reset_requested.html');
     }
 
-
     /**
      * Show the reset password form
      * 

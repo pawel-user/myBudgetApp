@@ -3,7 +3,6 @@
 namespace App\Controllers;
 
 use Core\View;
-use \App\Models\User;
 
 /**
  * Home controller
@@ -11,6 +10,7 @@ use \App\Models\User;
  * PHP version 7.4
  */
 class Home extends \Core\Controller {
+
     /**
      * Before filter
      * 
@@ -46,5 +46,4 @@ class Home extends \Core\Controller {
     public function contactAction() {
         View::renderTemplate('Home/contact.html');
     }
-
 }
