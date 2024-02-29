@@ -72,6 +72,7 @@ th {
   font-family: "Ubuntu";
   font-size: 2.5rem;
   font-weight: bold;
+  /*margin-right: 5%;*/
 }
 
 .nav-link {
@@ -543,6 +544,7 @@ th {
   color: #fff;
   text-align: center;
 }
+
 
 /* Register Section */
 
