@@ -6,7 +6,7 @@
 
 <!-- Example Google pie-chart -->
 
-<head>
+<!-- <head>
   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
   <script type="text/javascript">
     google.charts.load('current', { 'packages': ['corechart'] });
@@ -32,68 +32,11 @@
       chart.draw(data, options);
     }
   </script>
-</head>
+</head> -->
 
 <!-- Google pie-chart -->
 <!-- {{ dump(balance_load.income_data) }} -->
 <!-- {{ dump(balance_load.expense_data) }} -->
-{% if balance_load.income_data is not empty and balance_load.expense_data is not empty %}
-<!-- <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-<script type="text/javascript">
-  google.charts.load("current", { packages: ["corechart"] });
-  google.charts.setOnLoadCallback(drawChart);
-  function drawChart() {
-    var income_data = google.visualization.arrayToDataTable([
-      ['Income Category', 'Amount'],
-      {% for incomeItem in balance_load.income_data %}
-        ['{{ incomeItem.category }}', {{ incomeItem.amount }}],
-      {% endfor %}
-    ]);
-
-  var expense_data = google.visualization.arrayToDataTable([
-    ['Expense Category', 'Amount'],
-    {% for expenseItem in balance_load.expense_data %}
-      ['{{ expenseItem.category }}', {{ expenseItem.amount }}],
-    {% endfor %}
-    ]);
-
-  var income_options = {
-    backgroundColor: '#dff0d8',
-    legend: { textStyle: { fontSize: '0.5rem', fontName: 'Montserrat' } },
-    title: 'Your incomes over a selected period',
-    titleTextStyle: {
-      color: 'black',
-      fontName: 'Montserrat',
-      fontSize: '1rem',
-      bold: true,
-      italic: false
-    },
-    is3D: true,
-    /*chartArea:{left:20,top:50,bottom:10,width:'100%',height:'100%'}*/
-    /*chartArea: {width: 500, height: 500}*/
-  };
-
-  var expense_options = {
-    backgroundColor: '#f2dede',
-    legend: { textStyle: { fontSize: '0.5rem', fontName: 'Montserrat' } },
-    title: 'Your expenses over a selected period',
-    titleTextStyle: {
-      color: 'black',
-      fontName: 'Montserrat',
-      fontSize: '1rem',
-      bold: true,
-      italic: false
-    },
-    is3D: true,
-  };
-
-  var chart = new google.visualization.PieChart(document.getElementById('piechart_3d_incomes'));
-  chart.draw(income_data, income_options);
-  var chart = new google.visualization.PieChart(document.getElementById('piechart_3d_expenses'));
-  chart.draw(expense_data, expense_options);
-  }
-</script> -->
-{% endif %}
 
 <script>
   $('#removalIncomeItemConfirmationModal').on('show.bs.modal', function (e) {
@@ -163,25 +106,25 @@
   </section>
 
   <!-- {{ dump(balance_load.income_data) }} -->
-  <section class="template-section">
-    <div class="piechart-container">
+  {% if balance_load.income_data is not empty and balance_load.expense_data is not empty %}
+    <section class="template-section">
+    <div class="row">
       <div class="col-lg-12">
         <h4 class="table-title">
           <i class="fa-solid fa-chart-pie icon"></i>Pie-Chart
         </h4>
       </div>
-    </div>
-    <div class="row">
-      <div class="col-lg-6 piechart-box">
-        <!-- <div id="piechart_3d_incomes" class="piechart-image"></div> -->
-        <div id="piechart_3d"></div>
+      <div class="piechart-container">
+        <div class="col-lg-6 piechart-box">
+          <div id="piechart_3d_incomes" class="piechart-image"></div>
+        </div>
+        <div class="col-lg-6 piechart-box">
+          <div id="piechart_3d_expenses" class="piechart-image"></div>
+        </div>
       </div>
-      <div class="col-lg-6 piechart-box">
-        <!-- <div id="piechart_3d_expenses" class="piechart-image"></div> -->
-        <div id="piechart_3d"></div>
-      </div>
-    </div>
+    </div>  
   </section>
+  {% endif %}
 
   <section class="template-section">
     <!-- {% if balance_load.income_data is not empty and balance.load.expense_data is not empty %} -->
