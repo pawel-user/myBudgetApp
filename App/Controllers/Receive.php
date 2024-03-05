@@ -2,6 +2,8 @@
 
 namespace App\Controllers;
 
+ob_start();
+
 use \App\Mail;
 use \App\Flash;
 use \App\Auth;
