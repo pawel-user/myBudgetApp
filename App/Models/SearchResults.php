@@ -64,10 +64,10 @@ class SearchResults extends \Core\Model
                 FROM incomes_category_assigned_to_users
                     INNER JOIN incomes ON incomes.income_category_assigned_to_user_id = incomes_category_assigned_to_users.id
                 WHERE incomes.user_id = :userID AND
-                    incomes_category_assigned_to_users.name LIKE :keyword OR
+                    (incomes_category_assigned_to_users.name LIKE :keyword OR
                     incomes.amount LIKE :keyword OR
                     incomes.date_of_income LIKE :keyword OR
-                    incomes.income_comment LIKE :keyword
+                    incomes.income_comment LIKE :keyword)
                 ORDER BY incomes_category_assigned_to_users.name DESC';
 
         $db = static::getDB();
@@ -104,10 +104,10 @@ class SearchResults extends \Core\Model
                 FROM expenses_category_assigned_to_users
                     INNER JOIN expenses ON expenses.expense_category_assigned_to_user_id = expenses_category_assigned_to_users.id
                 WHERE expenses.user_id = :userID AND
-                    expenses_category_assigned_to_users.name LIKE :keyword OR
+                    (expenses_category_assigned_to_users.name LIKE :keyword OR
                     expenses.amount LIKE :keyword OR
                     expenses.date_of_expense LIKE :keyword OR
-                    expenses.expense_comment LIKE :keyword
+                    expenses.expense_comment LIKE :keyword)
                 ORDER BY expenses_category_assigned_to_users.name  DESC';
 
         $db = static::getDB();

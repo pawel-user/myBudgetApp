@@ -29,6 +29,9 @@ class Search extends \Core\Controller
 
         $user = Auth::getUser();
 
+        //var_dump($user->id);
+        //exit;
+
         $keyword = $_POST['keyword'];
 
         View::renderTemplate('Search/results.html', ['search_income_results' => Settings::loadIncomeItemSearchResults($search, $user, $keyword), 'search_expense_results' => Settings::loadExpenseItemSearchResults($search, $user, $keyword), 'search_counter' => Settings::sumAllSearchResults($search)]);
