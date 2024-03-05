@@ -3,7 +3,7 @@ body {
   color: #fff;
   font-family: "Montserrat";
   opacity: 1;
-  /*min-height: 100vh;*/
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
 }

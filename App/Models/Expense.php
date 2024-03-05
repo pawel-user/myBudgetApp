@@ -3,9 +3,10 @@
 namespace App\Models;
 
 use PDO;
+use \App\DataSetup;
 
 use \AllowDynamicProperties;
-use ReflectionUnionType;
+//use ReflectionUnionType;
 
 /**
  * User expense model
@@ -220,6 +221,8 @@ use ReflectionUnionType;
         $stmt->bindValue(':expenseID', $expenseID, PDO::PARAM_INT);
 
         $stmt->execute();
+
+        DataSetup::orderExpenseTableItems();
     }
 
     /**

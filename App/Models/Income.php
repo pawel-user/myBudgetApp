@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use PDO;
+use \App\DataSetup;
 
 use \AllowDynamicProperties;
 
@@ -191,6 +192,10 @@ class Income extends \Core\Model
         $stmt->bindValue(':incomeID', $incomeID, PDO::PARAM_INT);
 
         $stmt->execute();
+
+        DataSetup::orderIncomeTableItems(); 
+        //$tableName = "incomes";
+        //DataSetup::orderTableItems($tableName);
     }
 
     /**

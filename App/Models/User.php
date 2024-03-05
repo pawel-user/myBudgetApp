@@ -238,7 +238,7 @@ class User extends \Core\Model
      * 
      * @param string $email The email address
      * 
-     * @return void
+     * @return boolean
      */
     public static function sendPasswordReset($email) {
         $user = static::findByEmail($email);
@@ -248,8 +248,10 @@ class User extends \Core\Model
             if ($user->startPasswordReset()) {
 
                 $user->sendPasswordResetEmail();
+                return true;
             }
         }
+        return false;
     }
 
     /**

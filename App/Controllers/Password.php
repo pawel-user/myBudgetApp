@@ -2,6 +2,8 @@
 
 namespace App\Controllers;
 
+ob_start();        
+
 use \Core\View;
 use \App\Models\User;
 use \App\Flash;
@@ -31,10 +33,13 @@ class Password extends \Core\Controller
      */
     public function requestResetAction()
     {
-        User::sendPasswordReset($_POST['email']);
-
-        $this->redirect('/password/show-send-email-message');
-
+        if (User::sendPasswordReset($_POST['email'])) {
+            $this->redirect('/password/show-send-email-message');
+        } else {
+            Flash::addMessage('Sending link to change password failed', Flash::DANGER);
+            Flash::addMessage('There is no registered user with the email address provided.', Flash::INFO);
+            $this->redirect('/password/forgot');
+        }
     }
 
     public function showSendEmailMessageAction()
